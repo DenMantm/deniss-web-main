@@ -2,7 +2,6 @@ var auth = require('./auth'),
   path = require('path');
 
 var fs = require('fs');
-var db = require('./database/database-simulator');
 
 var dbIO = require('./service/database-io.service');
 
@@ -39,6 +38,12 @@ module.exports = function(app) {
     app.post('/api/saveSnippetGroup', dbIO.saveSnippetGroup);
     app.get('/api/getSnippetGroupList', dbIO.getSnippetGroupList);
     app.get('/api/getSnippetGroup', dbIO.getSnippetGroup);
+    
+    
+    //page templates and related
+    app.get('/api/getTemplateItemList', dbIO.getTemplateItemList);
+    app.get('/api/getPageData', dbIO.getSnippetGroup);
+    app.post('/api/savePageData', dbIO.savePageData);
   
   
 
@@ -50,7 +55,7 @@ module.exports = function(app) {
     res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
   
-    app.get('/home', function(req, res) {
+    app.get('/title-page', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
 
@@ -68,9 +73,6 @@ module.exports = function(app) {
     res.end();
   });
 
-  //GETING DATA FROM THE db
-  app.get('/api/snippets', db.readSnippets);
-  app.post('/api/snippets',db.writeSnippets);
 
   app.get('/app/*', function(req, res) {
     res.sendStatus(404);

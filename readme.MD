@@ -20,3 +20,6 @@ mongolab: personal-blog-page
 Colors:
 top line, nice blue:
 #298cad
+
+==========================
+home - element for the title page

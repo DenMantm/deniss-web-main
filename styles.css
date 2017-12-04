@@ -2,7 +2,7 @@ body{
     font-family: proxima-nova,"Tangerine",Helvetica,Arial,sans-serif;
     background-color:#f4f5f9;
 }
-.hand { cursor: pointer; cursor: hand; }
+.hand { cursor: pointer; cursor: hand;}
 .error{
   color:rgb(165, 8, 8);
 }

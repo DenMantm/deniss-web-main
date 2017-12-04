@@ -5,7 +5,7 @@ import { Error404Component } from './errors/404.component';
 import { SnippetRepository,SnippetRepResolverService, SnippetListResolverService } from './snippet-rep/index';
 import { ProjectsPageComponent } from './projects/index';
 import { BlogPostsComponent,BlogPostListResolverService, BlogPostInstanceComponent, BlogPostInstanceResolverService } from './blog-posts/index';
-import { HomeComponent } from './home/index';
+import { TitlePageComponent, TitlePageResolverService } from './title-page/index';
 
 import {FirstPageGuard,LoggedInGuard, CanDeactivateGuard } from './common/index';
 
@@ -35,7 +35,9 @@ export const appRoutes:Routes = [
                  currentSgroup:SnippetRepResolverService,
                  User:UserLoggedInResolver
     }},
-    //{path:'home',component:HomeComponent,canActivate:[LoggedInGuard]},
+    {path:'title-page',component:TitlePageComponent,canActivate:[LoggedInGuard],resolve:{User:UserLoggedInResolver,
+                                                                                         titlePageModel:TitlePageResolverService
+    }},
     { path: '404', component: Error404Component },
-    {path:'', redirectTo:'/projects', pathMatch:'full'}
+    {path:'', redirectTo:'/title-page', pathMatch:'full'}
     ];

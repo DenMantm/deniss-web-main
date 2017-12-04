@@ -28,4 +28,4 @@ blogPost.methods.nextId = function(obj) {
 };
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('BlogCollection', blogPost);
+module.exports = mongoose.model(process.env.DATABASE_ID+'BlogCollection', blogPost);

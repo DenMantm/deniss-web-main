@@ -1,0 +1,97 @@
+.scale-off{
+        zoom: 0.2;
+    -moz-transform: scale(0.2);
+    
+}
+
+.btn-circle.btn-xl {
+    z-index:1000;
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+.btn-circle.cover-xl {
+    z-index:900;
+    width: 260px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+.edit-layout{
+    position: absolute;
+    top:80px;
+    left:10px;
+}
+
+
+.portfolio-modal {
+  padding-right: 0px !important; }
+  .portfolio-modal .modal-dialog {
+    margin: 1rem;
+    max-width: 100vw; }
+  .portfolio-modal .modal-content {
+    padding: 100px 0;
+    text-align: center; }
+    .portfolio-modal .modal-content h2 {
+      font-size: 3em;
+      margin-bottom: 15px; }
+    .portfolio-modal .modal-content p {
+      margin-bottom: 30px; }
+    .portfolio-modal .modal-content p.item-intro {
+      font-size: 16px;
+      font-style: italic;
+      margin: 20px 0 30px;
+      font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    .portfolio-modal .modal-content ul.list-inline {
+      margin-top: 0;
+      margin-bottom: 30px; }
+    .portfolio-modal .modal-content img {
+      margin-bottom: 30px; }
+    .portfolio-modal .modal-content button {
+      cursor: pointer; }
+  .portfolio-modal .close-modal {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+    background-color: transparent; }
+    .portfolio-modal .close-modal:hover {
+      opacity: 0.3; }
+    .portfolio-modal .close-modal .lr {
+      /* Safari and Chrome */
+      z-index: 1051;
+      width: 1px;
+      height: 75px;
+      margin-left: 35px;
+      /* IE 9 */
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      background-color: #212529; }
+      .portfolio-modal .close-modal .lr .rl {
+        /* Safari and Chrome */
+        z-index: 1052;
+        width: 1px;
+        height: 75px;
+        /* IE 9 */
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        background-color: #212529; }

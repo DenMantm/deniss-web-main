@@ -1,5 +1,6 @@
 var blogPost = require('../database/models/blog-post');
 var snippetGroup = require('../database/models/snippet-group')
+var templateItemList = require('../database/models/template-item-list')
 
 
 
@@ -63,9 +64,8 @@ exports.editBlogPost = function(req,res){
 
 blogPost.findOneAndUpdate(query, req.body, {upsert:true}, function(err, doc){
     if (err) 
-        return res.send(2, { error: err });
+        return res.send({ error: err });
     else if(!doc) {
-            res.status(1);
             res.send('Error, blog post does not exist');
             }
     else return res.send("succesfully saved");
@@ -126,9 +126,8 @@ exports.saveSnippetGroup = function(req,res){
     
 snippetGroup.findOneAndUpdate(query, req.body, {upsert:true}, function(err, doc){
     if (err) 
-        return res.send(2, { error: err });
+        return res.send({ error: err });
     else if(!doc) {
-            res.status(1);
             res.send('Error, blog post does not exist');
             }
     else return res.send(doc);
@@ -142,7 +141,7 @@ exports.getSnippetGroup = function(req,res){
             snippetGroup.findOne({ 'id' :  req.query.snippetId }, function(err, sGroup) {
             
             if(err) {
-                return res.send(2, { error: err });
+                return res.send({ error: err });
             }
             else if(!sGroup) {
                // res.status(404)
@@ -160,3 +159,37 @@ exports.deleteSnippetGroup = function(req,res){};
 exports.moveUpSnippetGroup = function(req,res){};
 exports.moveDownSnippetGroup = function(req,res){};
 
+
+
+//Page templating, get items depending on category??
+
+exports.getTemplateItemList = function(req,res){
+        
+        snippetGroup.find({'itemType':req.query.type}).exec(function(err,templateItemList){
+            if(!err)
+                res.json(templateItemList);
+            else {
+                return res.send(500, { error: err });
+            }
+        });
+}
+
+exports.getPageData = function(req,res){
+                snippetGroup.findOne({ 'itemPage' :  req.query.itemPage }, function(err, itemPage) {
+            
+            if(err) {
+                return res.send({ error: err });
+            }
+            else if(!itemPage) {
+               // res.status(404)
+               // res.send('Error, blog post does not exist');
+                  res.send({});
+            }
+            else res.json(itemPage);
+           
+        });
+    
+}
+exports.savePageData = function(req,res){
+    
+}

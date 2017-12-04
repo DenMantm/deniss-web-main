@@ -99,8 +99,8 @@ export class SaveObjectService{
         let options = new RequestOptions({headers:headers});
 
         return this.http.post('/api/createSnippetGroup',JSON.stringify(newSnippetGroup),options);
-        
     }
+    
     editSnippetGroup(sGroup){
         
                 //spin authentication here and if succesfull
@@ -125,7 +125,7 @@ export class SaveObjectService{
     }
     loadSnippetGroup(snippetId){
         
-                 let params: URLSearchParams = new URLSearchParams();
+         let params: URLSearchParams = new URLSearchParams();
          params.set('snippetId', snippetId);
         
         
@@ -140,6 +140,27 @@ export class SaveObjectService{
         
         
     }
+    
+    
+    // Title Page manipulations...
+    loadTitlePageModel(){
+         let params: URLSearchParams = new URLSearchParams();
+         params.set('itemPage', 'title');
+
+        return this.http.get('/api/getPageData',{search: params}).do(res => {
+                //error handling
+        });
+    }
+    
+    saveTitlePageModel(titlePageModel){
+                //spin authentication here and if succesfull
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new RequestOptions({headers:headers});
+
+        return this.http.post('/api/saveTitlePageModel',JSON.stringify(titlePageModel),options);
+    }
+    
+    
     
 
 

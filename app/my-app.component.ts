@@ -5,9 +5,10 @@ import { Component, HostListener, ElementRef, HostBinding,enableProdMode } from 
 
 @Component({
     selector:'body',
-    template:`<navbar-component></navbar-component>
+    template:`
               <router-outlet></router-outlet>
-              <footer-component></footer-component>`
+              
+              `
 })
 
 export class MyAppComponent {

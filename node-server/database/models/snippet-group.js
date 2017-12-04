@@ -46,4 +46,4 @@ snippetGroup.methods.nextGroup = function() {
 };
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('SnippetGroup', snippetGroup);
+module.exports = mongoose.model(process.env.DATABASE_ID+'SnippetGroup', snippetGroup);

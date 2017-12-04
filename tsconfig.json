@@ -10,7 +10,8 @@
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
     "typeRoots": [
-      "./node_modules/@types/"
+      "./node_modules/@types/",
+      "manualtype.d.ts"
     ]
   },
   "compileOnSave": true,
@@ -18,4 +19,5 @@
     "node_modules/*",
     "**/*-aot.ts"
   ]
+
 }

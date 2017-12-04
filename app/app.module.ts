@@ -6,11 +6,21 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 
-
 import { MyAppComponent} from './my-app.component';
-import { NavbarComponent } from './nav/navbar.component';
+import { AgencyNavComponent} from './nav/index';
 import { Error404Component } from './errors/404.component';
-import { HomeComponent } from './home/index';
+import { LayoutEditor } from './layout-editor/layout-editor.component'
+import { TitlePageComponent,
+        TitlePageResolverService,
+        AgencyService,
+        AgencyPortfolio,
+        AgencyHeadder,
+        AgencyAmazingTeam,
+        AgencyAbout,
+        CreativeHeadder,
+        CreativeService,
+        CreativePortfolio
+        } from './title-page/index';
 import { ProjectsPageComponent } from './projects/index';
 import {BlogPostsComponent, 
         BlogPostListResolverService, 
@@ -21,6 +31,7 @@ import {BlogPostsComponent,
 import { FooterComponent } from './footer/footer.component';
 import { LoginSignupComponent } from './footer/loginSignup/login-signup.component';
 import { ContentEditNav } from './content-edit-nav/content-edit-nav.component';
+import { ContentEditOptionNav } from './content-edit-option-nav/content-edit-option-nav.component';
 import {    SnippetRepository, 
             SnippetInstance,
             SnippetRepResolverService,
@@ -60,10 +71,10 @@ declare let moment:Object;
             FormsModule,
             ReactiveFormsModule,
             HttpModule],
-    declarations:[
-                    NavbarComponent,
+    declarations:[LayoutEditor,
+                    AgencyNavComponent,
                     Error404Component,
-                    HomeComponent,
+                    TitlePageComponent,
                     ProjectsPageComponent,
                     SnippetRepository,
                     SnippetInstance,
@@ -74,9 +85,18 @@ declare let moment:Object;
                     FooterComponent,
                     LoginSignupComponent,
                     ContentEditNav,
+                    ContentEditOptionNav,
                     BlogPostsComponent,
                     BlogPostInstanceComponent,
-                    BlogPostHeadderDescriptorComponent
+                    BlogPostHeadderDescriptorComponent,
+                    AgencyService,
+                    AgencyPortfolio,
+                    AgencyHeadder,
+                    AgencyAmazingTeam,
+                    AgencyAbout,
+                    CreativeHeadder,
+                    CreativeService,
+                    CreativePortfolio
                     ],
     providers: [AuthService,
                 FirstPageGuard,
@@ -94,7 +114,8 @@ declare let moment:Object;
                 ToastrNotifyService,
                 SnippetListResolverService,
                 CanDeactivateGuard,
-                {provide:JQUERY_TOKEN,useValue:jQuery}
+                {provide:JQUERY_TOKEN,useValue:jQuery},
+                TitlePageResolverService
     ],
     bootstrap:[MyAppComponent]
 })

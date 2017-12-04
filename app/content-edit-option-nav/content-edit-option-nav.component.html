@@ -1,0 +1,19 @@
+    <!--SECOND PART OF THE NAVIGATION-->
+<!--<button  (click)="isBarActivated=true" [ngClass]="{'hidden': isBarActivated }" type="button" class="btn btn-light" style="position:fixed;top:50px; z-index:1000"><span class="mif-apps icon"></span>Show Toolbar</button>-->
+
+
+<ul class="t-menu compact dracula editmenu">
+    <li><a href="#" class="dropdown-toggle"><span class="icon mif-pencil"></span></a>
+                <ul class="v-menu context block-shadow-impact" data-role="dropdown">
+                            <li><a (click)="add()" class="fontcolor hand"><span class="icon mif-cogs"></span> Add Element</a></li>
+                            <li><a (click)="style()" class="fontcolor hand"><span class="icon mif-cogs"></span> Change style</a></li>
+                            <li><a (click)="background()"  class="fontcolor hand"><span class="icon mif-cogs"></span> Change background</a></li>
+                            <li><a (click)="remove()" class="fontcolor hand"><span class="icon fa fa-lock"></span> Remove this Element</a></li>
+                            <li class="divider"></li>
+        </ul>
+    </li>
+</ul>
+
+
+
+
