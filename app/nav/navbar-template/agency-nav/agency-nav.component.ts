@@ -46,6 +46,7 @@ export class AgencyNavComponent {
     this.$(".navbar").removeClass("d-none");
   })
         
+        
     }
       // Collapse Navbar
   navbarCollapse() {
