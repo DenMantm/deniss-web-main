@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col">
       <h1 [ngClass]="{'border': loginCheck()&&showElementTools}" *ngIf="blogPost" class="title animated fadeIn">
-        <span [(contenteditableModelHtml)]="blogPost.title" class="editable"></span> 
+        <span [(contenteditableModelText)]="blogPost.title" class="editable"></span> 
         <span *ngIf='blogPost.isDraft' class='draft'> : draft</span>
       </h1>
       <hr class='style-one'/>

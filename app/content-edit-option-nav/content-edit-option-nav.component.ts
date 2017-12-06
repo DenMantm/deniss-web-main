@@ -5,15 +5,7 @@ declare var PR;
 @Component({
     selector: 'content-edit-option-nav',
     templateUrl: 'app/content-edit-option-nav/content-edit-option-nav.component.html',
-    styles: [`.fontcolor{color:#727272!important;}
-              .editmenu{
-                  position: absolute;
-                  left:50%;
-              }`]
-    //     styles: [`.nav.navbar-nav {font-size:15px;}
-    // #searchForm {margin-right: 100px;}
-    // @media (max-width:1200px){#searchForm {display:none} }
-    // li > a.active{color:red;}`]
+    styleUrls: [`app/content-edit-option-nav/content-edit-option-nav.component.css`]
 })
 
 export class ContentEditOptionNav {

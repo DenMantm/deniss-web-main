@@ -1,6 +1,0 @@
-NEED TO UPDATE ELEMENTS:
-
-1. CREATE SUB FOLDER FOR EXTRA PAGE in simple-pages....
-2. Add database entrie for simple tracking...
-2. Add script item under the routes
-3. Add newly created module under the app.modules

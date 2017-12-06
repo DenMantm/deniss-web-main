@@ -1,12 +1,12 @@
 <content-edit-nav *ngIf="loginCheck()" [editPressed]="showElementTools" (editClick)="editClick()" (disableClick)="disableClick()" (saveClick)="saveClick()"></content-edit-nav>
-<layout-editor *ngIf="loginCheck()" ></layout-editor>
+<layout-editor *ngIf="loginCheck() && showElementTools" ></layout-editor>
 <agency-nav></agency-nav>
 <creative-headder [showElementTools]="showElementTools"></creative-headder>
+<agency-service [showElementTools]="showElementTools"></agency-service>
 <creative-service [showElementTools]="showElementTools"></creative-service>
 <creative-portfolio [showElementTools]="showElementTools"></creative-portfolio>
 <agency-headder [showElementTools]="showElementTools" ></agency-headder>
 <agency-portfolio [showElementTools]="showElementTools" ></agency-portfolio>
-<agency-service [showElementTools]="showElementTools"></agency-service>
 <agency-amazing-team [showElementTools]="showElementTools" ></agency-amazing-team>
 <agency-about [showElementTools]="showElementTools"></agency-about>
 <footer-component></footer-component>

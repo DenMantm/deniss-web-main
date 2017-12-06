@@ -33,7 +33,7 @@
     line-height: 1.42857;
 }
 .edit-layout{
-    position: absolute;
+    position: fixed;
     top:80px;
     left:10px;
 }
