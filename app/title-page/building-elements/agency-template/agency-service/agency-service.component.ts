@@ -39,6 +39,26 @@ export class AgencyService {
         };
 
         }
+        ngAfterViewInit(){
+            this.$('.sortable-agency-service').sortable({cancel: ':input,button,.editable'});
+            this.$('.sortable-agency-service').sortable("disable");
+        }
+        ngOnChanges(){
+            console.log('DEBUG..');
+            console.log(this.showElementTools);
+            if(this.showElementTools != undefined){
+                if(this.showElementTools){
+                    this.$('.sortable-agency-service').sortable('enable');
+                    console.log('en');
+                }
+                else{
+                    this.$('.sortable-agency-service').sortable("disable");
+                    console.log('dis');
+                }
+            }
+            
+            
+        }
         
         add(){
             this.template.source = this.data.length;

@@ -46,6 +46,18 @@ export class CreativeService {
 
         }
         
+        ngAfterViewInit(){
+            this.$('.sortable-creative-service').sortable({cancel: ':input,button,.editable'});
+            this.$('.sortable-creative-service').sortable("disable");
+        }
+        ngOnChanges(){
+            if(this.showElementTools != undefined){
+                if(this.showElementTools)
+                    this.$('.sortable-creative-service').sortable('enable');
+                else
+                    this.$('.sortable-creative-service').sortable("disable");
+            }
+        }
     
     
             add(){

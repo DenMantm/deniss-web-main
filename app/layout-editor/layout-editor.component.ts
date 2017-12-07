@@ -16,15 +16,15 @@ export class LayoutEditor {
     }
     ngOnInit(){
         this.imageStructure = [
-        {img:'app/assets/images/templates/Page-elements/agency-nav.PNG', class :"disabled"},    
-        {img:'app/assets/images/templates/Page-elements/agency-headder.PNG',class :""},
-        {img:'app/assets/images/templates/Page-elements/agency-about.PNG',class :""},
-        {img:'app/assets/images/templates/Page-elements/agency-amazing-team.PNG',class :""},
-        {img:'app/assets/images/templates/Page-elements/agency-portfolio.PNG',class :""},
-        {img:'app/assets/images/templates/Page-elements/agency-service.PNG',class :""},
-        {img:'app/assets/images/templates/Page-elements/creative-headder.PNG',class :""},
-        {img:'app/assets/images/templates/Page-elements/creative-portfolio.PNG',class :""},
-        {img:'app/assets/images/templates/Page-elements/creative-service.PNG',class :""}];
+        {id:1,img:'app/assets/images/templates/Page-elements/agency-nav.PNG', class :"disabled"},    
+        {id:2,img:'app/assets/images/templates/Page-elements/agency-headder.PNG',class :""},
+        {id:3,img:'app/assets/images/templates/Page-elements/agency-about.PNG',class :""},
+        {id:4,img:'app/assets/images/templates/Page-elements/agency-amazing-team.PNG',class :""},
+        {id:5,img:'app/assets/images/templates/Page-elements/agency-portfolio.PNG',class :""},
+        {id:6,img:'app/assets/images/templates/Page-elements/agency-service.PNG',class :""},
+        {id:7,img:'app/assets/images/templates/Page-elements/creative-headder.PNG',class :""},
+        {id:8,img:'app/assets/images/templates/Page-elements/creative-portfolio.PNG',class :""},
+        {id:9,img:'app/assets/images/templates/Page-elements/creative-service.PNG',class :""}];
         
         
         }

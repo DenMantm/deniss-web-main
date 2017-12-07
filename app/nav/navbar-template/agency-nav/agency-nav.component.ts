@@ -23,7 +23,7 @@ export class AgencyNavComponent {
 
 
   // Closes responsive menu when a scroll trigger link is clicked
-  this.$('.js-scroll-trigger').click(function() {
+  this.$('.js-scroll-trigger').click(() => {
     this.$('.navbar-collapse').collapse('hide');
   });
 
@@ -45,7 +45,6 @@ export class AgencyNavComponent {
   this.$('.portfolio-modal').on('hidden.bs.modal', (e)=>  {
     this.$(".navbar").removeClass("d-none");
   })
-        
         
     }
       // Collapse Navbar
