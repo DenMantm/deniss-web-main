@@ -1,7 +1,8 @@
 var blogPost = require('../database/models/blog-post');
-var snippetGroup = require('../database/models/snippet-group')
-var templateItemList = require('../database/models/template-item-list')
-
+var snippetGroup = require('../database/models/snippet-group');
+var templateItemList = require('../database/models/page-item-list');
+var page = require('../database/models/page');
+var pageService = require('../service/page.service');
 
 
 // ~~~~~~~~~~~~~~~~~ BLOG POSTS SECTION
@@ -97,11 +98,7 @@ exports.createSnippetGroup = function(req,res){
                     else
                         res.json(blog);
                 });
-        
-        
-        
-        
-        
+
      });
 
 };
@@ -164,8 +161,7 @@ exports.moveDownSnippetGroup = function(req,res){};
 //Page templating, get items depending on category??
 
 exports.getTemplateItemList = function(req,res){
-        
-        snippetGroup.find({'itemType':req.query.type}).exec(function(err,templateItemList){
+        templateItemList.find({}).exec(function(err,templateItemList){
             if(!err)
                 res.json(templateItemList);
             else {
@@ -174,22 +170,209 @@ exports.getTemplateItemList = function(req,res){
         });
 }
 
+
+exports.createTemplateItemListItem = function(req,res){
+    var newTemplateItemList  = new templateItemList();
+        //mapping the values=
+        newTemplateItemList.itemName = "Name1";
+
+                newTemplateItemList.save(function(err,item) {
+                    if (err)
+                        return res.send(2, { error: err });
+                    else
+                        res.json(item);
+                });
+}
+
 exports.getPageData = function(req,res){
-                snippetGroup.findOne({ 'itemPage' :  req.query.itemPage }, function(err, itemPage) {
+                page.findOne({ 'pageType' :  req.query.pageType }, function(err, p) {
             
             if(err) {
                 return res.send({ error: err });
             }
-            else if(!itemPage) {
+            else if(!p) {
                // res.status(404)
                // res.send('Error, blog post does not exist');
-                  res.send({});
+                  res.send({error:"No page "+req.query.itemPage+" found..."});
             }
-            else res.json(itemPage);
-           
+            else res.json(p);
         });
+}
+exports.savePageModel = function(req,res){
     
 }
-exports.savePageData = function(req,res){
+
+exports.changeTitlePageAlignment = function(req,res){
+        //adding snippet counter here for convenience
+
     
+page.findOneAndUpdate({"pageType":"titlepage"}, {"pageData":req.body}, {upsert:true}, function(err, p){
+    if (err) 
+        return res.send({ error: err });
+    else if(!p) {
+            res.send('Error, no title page found');
+            }
+    else{ 
+                //assemble page from the model
+                p.pageData = req.body;
+        var pageTemplate = pageService.assembleTemplate(p);
+        //write the page content to the disk...
+        pageService.writeToDisk('/../../app/title-page/templates/generated-title-page.html',pageTemplate);
+        res.json(p);
+    };
+});
+
+//INITIALIZATION PART, WHERE WE CREATE NEW APPLICATION FOR THE USER....
+
 }
+
+
+exports.initializeTitlePage = function(req,res){
+
+                //producing template of the title page
+                  
+        let dataAgencyService = [{sequence:0,
+                     icon:'fa-shopping-cart',
+                     heading:'E-Commerce',
+                     text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. '
+        },{sequence:1,
+                     icon:'fa-laptop',
+                     heading:'Responsive Design',
+                     text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit. '
+        },
+        {sequence:2,
+                     icon:'fa-lock',
+                     heading:'Web Security',
+                     text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.'
+        }];
+        
+        let dataCreativeHeadder = {"title":"Your Favorite Source of Free Bootstrap Themes",
+                                   "subtitle":"Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!"};
+        
+        let dataCreativeService =  [{sequence:0,
+                                 icon:'fa-diamond',
+                                 heading:'Sturdy Templates',
+                                 text:'Our templates are updated regularly so they dont break.'},
+                                 {sequence:1,
+                                 icon:'fa-paper-plane',
+                                 heading:'Ready to Ship',
+                                 text:'You can use this theme as is, or you can make changes!'},
+                                {sequence:2,
+                                 icon:'fa-newspaper-o',
+                                 heading:'Up to Date',
+                                 text:'We update dependencies to keep things fresh.'},
+                                {sequence:3,
+                                 icon:'fa-heart',
+                                 heading:'Made with Love',
+                                 text:'You have to make your websites with love these days!'
+                                }];
+                                
+        let dataCreativePortfolio = [{sequence:0,
+                                 icon:'fa-diamond',
+                                 heading:'Sturdy Templates',
+                                 text:'Our templates are updated regularly so they dont break.'},
+                                 {sequence:1,
+                                 icon:'fa-paper-plane',
+                                 heading:'Ready to Ship',
+                                 text:'You can use this theme as is, or you can make changes!'},
+                                {sequence:2,
+                                 icon:'fa-newspaper-o',
+                                 heading:'Up to Date',
+                                 text:'We update dependencies to keep things fresh.'},
+                                {sequence:3,
+                                 icon:'fa-heart',
+                                 heading:'Made with Love',
+                                 text:'You have to make your websites with love these days!'
+                                }];
+        
+        let dataAgencyHeadder = "";
+        let dataAgencyPortfolio = "";
+        let dataAgencyAmazingTeam = "";
+        let dataAgencyAbout =  "";
+        let dataAgencyFooter  = "";
+        
+           
+        //     <layout-editor *ngIf="loginCheck() && showElementTools" ></layout-editor>
+        //     <agency-nav></agency-nav>
+        //     <creative-headder [showElementTools]="showElementTools"></creative-headder>
+        //     <agency-service [showElementTools]="showElementTools"></agency-service>
+        //     <creative-service [showElementTools]="showElementTools"></creative-service>
+        //     <creative-portfolio [showElementTools]="showElementTools"></creative-portfolio>
+        //     <agency-headder [showElementTools]="showElementTools" ></agency-headder>
+        //     <agency-portfolio [showElementTools]="showElementTools" ></agency-portfolio>
+        //     <agency-amazing-team [showElementTools]="showElementTools" ></agency-amazing-team>
+        //     <agency-about [showElementTools]="showElementTools"></agency-about>
+        //     <footer-component></footer-component>
+
+    var p  = new page();
+    p.pageName = "Title Page";
+    p.navbarElement = {"elementTmpName":"agency-nav",
+                                          "elementTmpType":"nav",
+                                          "elementSequence":'',
+                                          "title":'',
+                                          "data":dataAgencyFooter};
+    p.footer = {"elementTmpName":"agency-footer",
+                                          "elementTmpType":"footer",
+                                          "elementSequence":'',
+                                          "title":'',
+                                          "data":dataAgencyFooter};
+    p.pageType = "titlepage";
+    p.pageData = [{"elementTmpName":"creative-headder",
+                                          "elementTmpType":"headder",
+                                          "elementSequence":0,
+                                          "title":dataCreativeHeadder,
+                                          "data":''},
+                                         {"elementTmpName":"agency-service",
+                                          "elementTmpType":"service",
+                                          "elementSequence":1,
+                                          "title":{"title":"Services",
+                                                    "subtitle":"Lorem ipsum dolor sit amet consectetur."},
+                                          "data":dataAgencyService},
+                                         {"elementTmpName":"creative-service",
+                                          "elementTmpType":"service",
+                                          "title":{"title":"servicex"},
+                                          "elementSequence":2,
+                                          "data":dataCreativeService},
+                                        {"elementTmpName":"creative-portfolio",
+                                          "elementTmpType":"portfolio",
+                                          "elementSequence":3,
+                                          "title":null,
+                                          "data":dataCreativePortfolio},
+                                        {"elementTmpName":"agency-headder",
+                                          "elementTmpType":"headder",
+                                          "elementSequence":4,
+                                          "title":{"title":"titlex","subtitle":"saddsaew"},
+                                          "data":dataAgencyHeadder},
+                                        {"elementTmpName":"agency-portfolio",
+                                          "elementTmpType":"portfolio",
+                                          "elementSequence":5,
+                                          "title":null,
+                                          "data":dataAgencyPortfolio},
+                                        {"elementTmpName":"agency-amazing-team",
+                                          "elementTmpType":"team",
+                                          "elementSequence":6,
+                                          "title":null,
+                                          "data":dataAgencyAmazingTeam},
+                                        {"elementTmpName":"agency-about",
+                                          "elementTmpType":"about",
+                                          "elementSequence":7,
+                                          "title":null,
+                                          "data":dataAgencyAbout}
+                                          ];
+                
+                
+                
+                                         
+                    p.save(function(err,p) {
+                    if (err)
+                        return res.send({ error: err });
+                    else{
+                        //assemble page from the model
+                        var pageTemplate = pageService.assembleTemplate(p);
+                        //write the page content to the disk...
+                        pageService.writeToDisk('/../../app/title-page/generated-title-page.html',pageTemplate);
+                        res.json(p);
+                    }
+                });
+                                          
+    }//end of new title page generation block

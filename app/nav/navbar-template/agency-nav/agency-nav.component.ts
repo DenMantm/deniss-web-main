@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { JQUERY_TOKEN } from '../../../common/index';
 import { 
   Location //note: in newer angular2 versions this.location has been moved from router to common package
@@ -12,8 +12,9 @@ import {
 })
 
 export class AgencyNavComponent {
+   @Input() pageData:any;
     constructor(@Inject(JQUERY_TOKEN) private $,
-    private location:Location, 
+    private location:Location,
     ){
     }
     ngOnInit(){
@@ -45,7 +46,6 @@ export class AgencyNavComponent {
   this.$('.portfolio-modal').on('hidden.bs.modal', (e)=>  {
     this.$(".navbar").removeClass("d-none");
   })
-        
     }
       // Collapse Navbar
   navbarCollapse() {

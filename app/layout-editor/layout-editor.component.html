@@ -5,9 +5,6 @@
 </button>
 
 
-
-
-
     <!-- Modal 6 -->
     <div class="portfolio-modal modal fade" id="layout-modal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
@@ -18,20 +15,42 @@
             </div>
           </div>
           <div class="container">
-            <div class="row">
-              <div class="col-lg-12 mx-auto">
+            
+            
+            <!-- Button trigger modal -->
+
+            
+    <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<!-- Modal -->
+
+            <div class="row" id="testele">
+              <div class="col-lg-6 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
                   <h2 class="text-uppercase">Edit Layout</h2>
-                  <section class="sortable">
-                      
-                    <img id="{{item.id}}" *ngFor="let item of imageStructure" src="{{item.img}}" class={{item.class}}/>
+                                      <!--navbar-->
+                  <img id="{{'img-'+'mainNav'}}"/>
+                  <section  class="sortable">
+                    <!--<div *ngFor="let item of imageStructure">-->
+                    <!--  <layout-editor-option-nav></layout-editor-option-nav>-->
+                    <!--  <img id="{{item.id}}" src="{{item.img}}" class={{item.class}}/>-->
+                    <!--  <layout-editor-choice-modal></layout-editor-choice-modal>-->
+                    <!--</div>-->
 
-
+                    <div *ngFor="let item of pageData.pageData" id="{{item.elementSequence}}" >
+                      <layout-editor-option-nav></layout-editor-option-nav>
+                      <img id="{{'img-'+item.elementTmpName+item.elementSequence}}"/>
+                      <layout-editor-choice-modal></layout-editor-choice-modal>
+                    </div>
+                    
 	               </section>
+                                      <!--footer-->
+                    <img id="{{'img-'+pageData.footer.elementTmpName}}"/>
                   
-
                   <button class="btn btn-primary" data-dismiss="modal" type="button"><i class="fa fa-times"></i>Close</button>
+                  <button (click)="reorder()" class="btn btn-primary" type="button"><i class="fa fa-times"></i>Save</button>
                 </div>
               </div>
             </div>

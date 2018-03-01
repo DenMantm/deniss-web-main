@@ -95,3 +95,14 @@
         -ms-transform: rotate(90deg);
         transform: rotate(90deg);
         background-color: #212529; }
+        
+      
+.center-me {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*Buttons here...*/

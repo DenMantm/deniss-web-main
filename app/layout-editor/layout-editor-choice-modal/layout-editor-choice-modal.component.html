@@ -1,0 +1,12 @@
+ <!--Trigger/Open The Modal -->
+<button (click)="change($event.srcElement)">Open Modal</button>
+
+ <!--The Modal -->
+<div id="myModal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
+   Modal content 
+  <div class="modal-content" [style.top]="top">
+    <span class="close" (click)="change()">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+</div>
+ <!--Button trigger modal -->

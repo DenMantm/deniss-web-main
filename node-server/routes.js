@@ -5,17 +5,24 @@ var fs = require('fs');
 
 var dbIO = require('./service/database-io.service');
 
-
-
 module.exports = function(app) {
-
   //Custom paths
     app.get('/projects', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
   
+  //Title page API Here...
   
+  //Getting the list of avalible elements that we can put on the template...
+  app.get('/api/getTemplateItemList', dbIO.getTemplateItemList);
+  app.get('/api/createTemplateItemListItem', dbIO.createTemplateItemListItem);
   
+  //tittle page manipulations
+  app.post('/api/changeTitlePageAlignment', dbIO.changeTitlePageAlignment);
+  
+  app.get('/api/initializeTitlePage', dbIO.initializeTitlePage);
+  
+  //app.get('/api/getTitlePageData',dbIO.getTitlePageData);
   
   //Blog Post Section
   
@@ -41,9 +48,12 @@ module.exports = function(app) {
     
     
     //page templates and related
-    app.get('/api/getTemplateItemList', dbIO.getTemplateItemList);
-    app.get('/api/getPageData', dbIO.getSnippetGroup);
-    app.post('/api/savePageData', dbIO.savePageData);
+   // app.get('/api/getTemplateItemList', dbIO.getTemplateItemList);
+    app.get('/api/getPageData', dbIO.getPageData);
+    
+    //app.post('/api/savePageData', dbIO.savePageData);
+  
+  
   
   
 
@@ -95,7 +105,6 @@ module.exports = function(app) {
   app.get('/404', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
-
 
 
 }

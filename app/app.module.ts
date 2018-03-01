@@ -4,12 +4,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule,ActivatedRouteSnapshot} from '@angular/router'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import { SortablejsOptions, SortablejsModule } from 'angular-sortablejs';
 
 
 import { MyAppComponent} from './my-app.component';
 import { AgencyNavComponent} from './nav/index';
 import { Error404Component } from './errors/404.component';
-import { LayoutEditor } from './layout-editor/layout-editor.component'
+import { LayoutEditor,LayoutEditorService,LayoutEditorOptionNav,LayoutEditorChoiceModal,HtmlToCanvasService } from './layout-editor/index'
 import { TitlePageComponent,
         TitlePageResolverService,
         AgencyService,
@@ -67,7 +68,8 @@ declare let moment:Object;
 
 @NgModule({
     imports:[BrowserModule,
-            RouterModule.forRoot(appRoutes),           
+            RouterModule.forRoot(appRoutes),
+            SortablejsModule.forRoot({ animation: 150 }),
             FormsModule,
             ReactiveFormsModule,
             HttpModule],
@@ -96,7 +98,9 @@ declare let moment:Object;
                     AgencyAbout,
                     CreativeHeadder,
                     CreativeService,
-                    CreativePortfolio
+                    CreativePortfolio,
+                    LayoutEditorOptionNav,
+                    LayoutEditorChoiceModal
                     ],
     providers: [AuthService,
                 FirstPageGuard,
@@ -115,7 +119,9 @@ declare let moment:Object;
                 SnippetListResolverService,
                 CanDeactivateGuard,
                 {provide:JQUERY_TOKEN,useValue:jQuery},
-                TitlePageResolverService
+                TitlePageResolverService,
+                LayoutEditorService,
+                HtmlToCanvasService
     ],
     bootstrap:[MyAppComponent]
 })

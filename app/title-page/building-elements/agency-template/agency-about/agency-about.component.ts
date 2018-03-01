@@ -12,6 +12,7 @@ import { AuthService } from '../../../../user/index';
 
 export class AgencyAbout {
     @Input() showElementTools:boolean;
+    @Input() pageData:any;
     constructor(@Inject(JQUERY_TOKEN) private $,private auth:AuthService){
     }
     ngOnInit(){

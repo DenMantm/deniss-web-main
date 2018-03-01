@@ -24,6 +24,9 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
       '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
       '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
+      'angular-sortablejs': 'node_modules/angular-sortablejs/dist/',
+      'sortablejs/Sortable.min': 'node_modules/sortablejs/Sortable.min.js',
+
       // other libraries
       'rxjs':                       'npm:rxjs',
     },
@@ -33,6 +36,7 @@
         main: './main.js',
         defaultExtension: 'js'
       },
+      'angular-sortablejs': { main: 'index.js', defaultExtension: 'js' },
       rxjs: {
         defaultExtension: 'js'
       }

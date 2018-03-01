@@ -145,23 +145,27 @@ export class SaveObjectService{
     // Title Page manipulations...
     loadTitlePageModel(){
          let params: URLSearchParams = new URLSearchParams();
-         params.set('itemPage', 'title');
+         params.set('pageType', 'titlepage');
 
         return this.http.get('/api/getPageData',{search: params}).do(res => {
                 //error handling
         });
     }
     
-    saveTitlePageModel(titlePageModel){
+    savePageModel(titlePageModel){
                 //spin authentication here and if succesfull
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new RequestOptions({headers:headers});
 
         return this.http.post('/api/saveTitlePageModel',JSON.stringify(titlePageModel),options);
     }
-    
-    
-    
+    changeTitlePageAlignment(titlePageDataModel){
+        
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new RequestOptions({headers:headers});
 
+        return this.http.post('/api/changeTitlePageAlignment',JSON.stringify(titlePageDataModel),options);
+    }
+    
 
 }

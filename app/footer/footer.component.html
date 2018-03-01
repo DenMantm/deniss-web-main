@@ -7,7 +7,7 @@
 <hr/>
 <br/>
 
-<footer class='text-center'>
+<footer class='text-center' id="agency-footer">
     <a *ngIf="!loginCheck()"  class="hand" data-toggle="modal" data-target="#login-modal">Login</a>
     <a *ngIf="loginCheck()"  class="hand" (click)="logout()">Logout</a>
 </footer>

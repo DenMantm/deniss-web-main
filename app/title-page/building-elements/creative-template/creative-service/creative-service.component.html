@@ -1,10 +1,10 @@
   <content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
-  <section id="services">
+  <section id="{{pageData.elementTmpName+pageData.elementSequence}}">
    
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}">At Your Service</h2>
+            <h2 class="section-heading" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}"  [(contenteditableModelHtml)]="pageData.title.title">At Your Service</h2>
             <hr class="my-4">
           </div>
         </div>

@@ -16,4 +16,4 @@ templateItemPage.methods.nextId = function(obj) {
 };
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model(process.env.DATABASE_ID+'templateItemPage', templateItemPage);
+module.exports = mongoose.model(process.env.DATABASE_ID+'templateItem', templateItemPage);

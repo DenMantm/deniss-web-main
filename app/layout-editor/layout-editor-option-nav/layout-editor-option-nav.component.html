@@ -1,0 +1,38 @@
+    <!--SECOND PART OF THE NAVIGATION-->
+<!--<button  (click)="isBarActivated=true" [ngClass]="{'hidden': isBarActivated }" type="button" class="btn btn-light" style="position:fixed;top:50px; z-index:1000"><span class="mif-apps icon"></span>Show Toolbar</button>-->
+
+
+<!--<ul class="t-menu compact dracula editmenu">-->
+<!--    <li><a href="#" class="dropdown-toggle"><span class="icon mif-pencil"></span></a>-->
+<!--                <ul class="v-menu context block-shadow-impact" data-role="dropdown">-->
+<!--                            <li><a (click)="add()" class="fontcolor hand"><span class="icon mif-cogs"></span> Add Element</a></li>-->
+<!--                            <li><a (click)="style()" class="fontcolor hand"><span class="icon mif-cogs"></span> Change style</a></li>-->
+<!--                            <li><a (click)="background()"  class="fontcolor hand"><span class="icon mif-cogs"></span> Change background</a></li>-->
+<!--                            <li><a (click)="remove()" class="fontcolor hand"><span class="icon fa fa-lock"></span> Remove this Element</a></li>-->
+<!--                            <li class="divider"></li>-->
+<!--        </ul>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<div class="editmenu">
+<!--<div>-->
+<!--<button (click)="add()" (mouseenter) ="elementButton1=true"  (mouseleave)="elementButton1=false" type="button" class="btn btn-success btn-circle btn-xl edit-layout first"><i class="fa fa-plus"></i>-->
+<!--</button>-->
+<!--<button *ngIf="elementButton1" type="button" class="btn btn-success btn-circle cover-xl edit-layout first">Add aditional item-->
+<!--</button>-->
+<!--</div>-->
+<div>
+<button (click)="background()" (mouseenter) ="elementButton2=true"  (mouseleave)="elementButton2=false" type="button" class="btn btn-info btn-circle btn-xl edit-layout second"><i class="fa fa-pencil-square-o"></i>
+</button>
+<button *ngIf="elementButton2" type="button" class="btn btn-info btn-circle cover-xl edit-layout second">Change background
+</button>
+</div>
+<!--<div>-->
+<!--<button (click)="remove()" (mouseenter) ="elementButton3=true"  (mouseleave)="elementButton3=false" type="button" class="btn btn-danger btn-circle btn-xl edit-layout third"><i class="fa fa-trash"></i>-->
+<!--</button>-->
+<!--<button *ngIf="elementButton3" type="button" class="btn btn-danger btn-circle cover-xl edit-layout third">Remove Element-->
+<!--</button>-->
+<!--</div>-->
+</div>
+
+

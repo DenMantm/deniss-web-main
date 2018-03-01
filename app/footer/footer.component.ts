@@ -1,10 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { JQUERY_TOKEN } from '../common/index';
 import { AuthService } from '../user/auth.service';
 
 
 @Component({
-    selector: 'footer-component',
+    selector: 'agency-footer',
     templateUrl: 'app/footer/footer.component.html',
     styles: [``]
     //     styles: [`.nav.navbar-nav {font-size:15px;}
@@ -14,7 +14,7 @@ import { AuthService } from '../user/auth.service';
 })
 
 export class FooterComponent {
-    
+    @Input() pageData:any;
     constructor(@Inject(JQUERY_TOKEN) private $,
                 private auth:AuthService){
     }
