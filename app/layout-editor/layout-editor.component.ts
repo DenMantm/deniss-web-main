@@ -18,6 +18,7 @@ export class LayoutEditor {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
     imageStructure:any;
+    itemList:any;
     constructor(@Inject(JQUERY_TOKEN) private $,
                 private auth:AuthService,
                 private ls:LayoutEditorService,
@@ -26,7 +27,6 @@ export class LayoutEditor {
                 ){
     }
     ngOnInit(){
-        
         this.imageStructure = [
         {id:1,img:'app/assets/images/templates/Page-elements/agency-nav.PNG', class :"disabled"},
         {id:2,img:'app/assets/images/templates/Page-elements/agency-headder.PNG',class :""},
@@ -37,7 +37,20 @@ export class LayoutEditor {
         {id:7,img:'app/assets/images/templates/Page-elements/creative-headder.PNG',class :""},
         {id:8,img:'app/assets/images/templates/Page-elements/creative-portfolio.PNG',class :""},
         {id:9,img:'app/assets/images/templates/Page-elements/creative-service.PNG',class :""}];
+        
+        
+        
+                this.ls.getTemplateItemList().subscribe((e:any)=>{
+            this.itemList = JSON.parse(e._body)
+            console.log(this.itemList)
+        })
+        
+        
         }
+        
+
+        
+        
         
     ngAfterViewInit(){
         

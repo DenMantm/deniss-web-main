@@ -10,7 +10,7 @@ export class LayoutEditorService{
   //Getting elements to build the page...
     getTemplateItemList(){
          let params: URLSearchParams = new URLSearchParams();
-         params.set('itemPage', 'title');
+         params.set('pageType', 'title');
 
         return this.http.get('/api/getTemplateItemList',{search: params}).do(res => {
                 //error handling

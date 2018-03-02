@@ -40,9 +40,9 @@
                     <!--</div>-->
 
                     <div *ngFor="let item of pageData.pageData" id="{{item.elementSequence}}" >
-                      <layout-editor-option-nav></layout-editor-option-nav>
+                      <layout-editor-option-nav [item]="item" [itemList]="itemList"></layout-editor-option-nav>
                       <img id="{{'img-'+item.elementTmpName+item.elementSequence}}"/>
-                      <layout-editor-choice-modal></layout-editor-choice-modal>
+                      
                     </div>
                     
 	               </section>

@@ -1,12 +1,13 @@
  <!--Trigger/Open The Modal -->
-<button (click)="change($event.srcElement)">Open Modal</button>
+<button (click)="change($event.srcElement)" class="btn btn-info btn-circle btn-xl edit-layout second"><i class="fa fa-pencil-square-o"></i>Change theme</button>
+
 
  <!--The Modal -->
 <div id="myModal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
    Modal content 
   <div class="modal-content" [style.top]="top">
     <span class="close" (click)="change()">&times;</span>
-    <p>Some text in the Modal..</p>
+    <p>{{item.elementTmpType}}</p>
   </div>
 </div>
  <!--Button trigger modal -->
