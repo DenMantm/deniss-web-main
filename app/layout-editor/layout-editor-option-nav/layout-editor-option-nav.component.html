@@ -35,4 +35,4 @@
 </div>
 </div>
 
-<layout-editor-choice-modal [item]="item" [itemList]="itemList" ></layout-editor-choice-modal>
+<layout-editor-choice-modal (changeItem)="change($event)" [item]="item" [itemList]="itemList" ></layout-editor-choice-modal>

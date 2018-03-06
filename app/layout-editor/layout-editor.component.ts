@@ -19,6 +19,7 @@ export class LayoutEditor {
     @Input() pageData:any;
     imageStructure:any;
     itemList:any;
+    
     constructor(@Inject(JQUERY_TOKEN) private $,
                 private auth:AuthService,
                 private ls:LayoutEditorService,
@@ -26,33 +27,28 @@ export class LayoutEditor {
                 private sv:SaveObjectService
                 ){
     }
+    // ngOnInit(){
+    //     this.imageStructure = [
+    //     {id:1,img:'app/assets/images/templates/Page-elements/agency-nav.PNG', class :"disabled"},
+    //     {id:2,img:'app/assets/images/templates/Page-elements/agency-headder.PNG',class :""},
+    //     {id:3,img:'app/assets/images/templates/Page-elements/agency-about.PNG',class :""},
+    //     {id:4,img:'app/assets/images/templates/Page-elements/agency-amazing-team.PNG',class :""},
+    //     {id:5,img:'app/assets/images/templates/Page-elements/agency-portfolio.PNG',class :""},
+    //     {id:6,img:'app/assets/images/templates/Page-elements/agency-service.PNG',class :""},
+    //     {id:7,img:'app/assets/images/templates/Page-elements/creative-headder.PNG',class :""},
+    //     {id:8,img:'app/assets/images/templates/Page-elements/creative-portfolio.PNG',class :""},
+    //     {id:9,img:'app/assets/images/templates/Page-elements/creative-service.PNG',class :""}];
+        
+        
+    //     }
+        
+        
     ngOnInit(){
-        this.imageStructure = [
-        {id:1,img:'app/assets/images/templates/Page-elements/agency-nav.PNG', class :"disabled"},
-        {id:2,img:'app/assets/images/templates/Page-elements/agency-headder.PNG',class :""},
-        {id:3,img:'app/assets/images/templates/Page-elements/agency-about.PNG',class :""},
-        {id:4,img:'app/assets/images/templates/Page-elements/agency-amazing-team.PNG',class :""},
-        {id:5,img:'app/assets/images/templates/Page-elements/agency-portfolio.PNG',class :""},
-        {id:6,img:'app/assets/images/templates/Page-elements/agency-service.PNG',class :""},
-        {id:7,img:'app/assets/images/templates/Page-elements/creative-headder.PNG',class :""},
-        {id:8,img:'app/assets/images/templates/Page-elements/creative-portfolio.PNG',class :""},
-        {id:9,img:'app/assets/images/templates/Page-elements/creative-service.PNG',class :""}];
         
-        
-        
-                this.ls.getTemplateItemList().subscribe((e:any)=>{
+                        this.ls.getTemplateItemList().subscribe((e:any)=>{
             this.itemList = JSON.parse(e._body)
             console.log(this.itemList)
         })
-        
-        
-        }
-        
-
-        
-        
-        
-    ngAfterViewInit(){
         
         //Add some sort of the loading symbol here after....
         //create image representation of the page here.....
@@ -121,6 +117,13 @@ export class LayoutEditor {
           window.location.reload();
       });
        console.log(tmpArray);
+   }
+   change(item){
+       console.log("Item to be changed...");
+       
+       this.$("#"+'img-'+item.b.elementTmpName+item.b.elementSequence).attr("src", 'app/assets/images/templates/Page-elements/'+item.a.itemName+'.PNG');
+      
+       console.log(item);
    }
    
    //checking the sorta ble allignment

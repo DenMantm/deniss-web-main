@@ -16,12 +16,6 @@
           </div>
           <div class="container">
             
-            
-            <!-- Button trigger modal -->
-
-            
-    <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <!-- Modal -->
 
@@ -40,17 +34,16 @@
                     <!--</div>-->
 
                     <div *ngFor="let item of pageData.pageData" id="{{item.elementSequence}}" >
-                      <layout-editor-option-nav [item]="item" [itemList]="itemList"></layout-editor-option-nav>
+                      <layout-editor-option-nav (changeItem)="change($event)" [item]="item" [itemList]="itemList"></layout-editor-option-nav>
                       <img id="{{'img-'+item.elementTmpName+item.elementSequence}}"/>
-                      
                     </div>
                     
 	               </section>
                                       <!--footer-->
                     <img id="{{'img-'+pageData.footer.elementTmpName}}"/>
                   
-                  <button class="btn btn-primary" data-dismiss="modal" type="button"><i class="fa fa-times"></i>Close</button>
-                  <button (click)="reorder()" class="btn btn-primary" type="button"><i class="fa fa-times"></i>Save</button>
+                  <button class="btn btn-warning" data-dismiss="modal" type="button"><i class="fa fa-times"></i> Close</button>
+                  <button (click)="reorder()" class="btn btn-primary" type="button"><span class="mif-floppy-disk"></span> Save</button>
                 </div>
               </div>
             </div>

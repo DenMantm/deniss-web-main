@@ -1,13 +1,33 @@
  <!--Trigger/Open The Modal -->
-<button (click)="change($event.srcElement)" class="btn btn-info btn-circle btn-xl edit-layout second"><i class="fa fa-pencil-square-o"></i>Change theme</button>
-
+<button (click)="toggleModal($event.srcElement)" class="btn btn-info btn-circle btn-xl edit-layout second"><i class="fa fa-pencil-square-o"></i>Change theme</button>
 
  <!--The Modal -->
 <div id="myModal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
-   Modal content 
+  
   <div class="modal-content" [style.top]="top">
-    <span class="close" (click)="change()">&times;</span>
-    <p>{{item.elementTmpType}}</p>
+    <span (click)="toggleModal()" class="close" style="text-align: right !important" >&times;</span>
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-1">
+       <button [disabled]="selectedIndex==0" (click)="back()" class="button cycle-button primary"><<</button>
+       </div>
+       <div class="col-md-10">
+        <img src="{{currentImage}}" style="height:100%">
+            <!--Control buttons in order to select the items-->
+          <button (click)="toggleModal()" class="button warning"><i class="fa fa-times"></i> Close</button>
+          <button (click)="change()" class="button success"><span class="mif-pencil"></span> Select Item</button>
+       </div>
+       <div class="col-sm-1">
+       <button [disabled]="selectedIndex==filteredItemList?.length-1" (click)="forward()" class="button cycle-button primary">>></button>
+       </div>
+      
+     </div>
+     </div>
+    
+
+    
+    
+    
   </div>
 </div>
  <!--Button trigger modal -->

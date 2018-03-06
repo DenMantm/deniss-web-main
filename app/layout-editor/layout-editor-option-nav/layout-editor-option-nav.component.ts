@@ -14,6 +14,9 @@ export class LayoutEditorOptionNav {
         @Output() styleClick = new EventEmitter();
         @Output() backgroundClick = new EventEmitter();
         @Output() removeClick = new EventEmitter();
+        
+        @Output() changeItem = new EventEmitter();
+        
         @Input() item:any;
         @Input() itemList:any;
         constructor(private auth:AuthService){
@@ -29,6 +32,11 @@ export class LayoutEditorOptionNav {
         }
         remove(){
             this.removeClick.emit();
+        }
+        
+        change(item){
+            //a is the changed item with different structure, b is the current item...
+            this.changeItem.emit({a:item,b:this.item});
         }
         
         
