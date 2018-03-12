@@ -5,26 +5,23 @@ import { LayoutEditorService } from '../services/layout-editor.service';
 declare var PR;
 declare var $;
 @Component({
-    selector: 'layout-editor-choice-modal',
-    templateUrl: 'app/layout-editor/layout-editor-choice-modal/layout-editor-choice-modal.component.html',
-    styleUrls: [`app/layout-editor/layout-editor-choice-modal/layout-editor-choice-modal.component.css`]
+    selector: 'layout-editor-add-new-item',
+    templateUrl: 'app/layout-editor/layout-editor-add-new-item/layout-editor-add-new-item.component.html',
+    styleUrls: ['app/layout-editor/layout-editor-add-new-item/layout-editor-add-new-item.component.css']
 })
 
-export class LayoutEditorChoiceModal {
+export class LayoutEditorAddNewItem {
 
     constructor(private auth:AuthService,private le:LayoutEditorService){
-            this.prefix = "app/assets/images/templates/Page-elements/";
-            this.sufix = ".PNG"
         //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
         }
     modalActive:boolean;
     top:string;
     @Input() item:any
     @Input() itemList:any
-    @Output() changeItem = new EventEmitter();
+    @Output() addItem = new EventEmitter();
     filteredItemList:any
-    prefix:any
-    sufix:any
+    
     currentElement:any
     currentImage:string
     
@@ -52,12 +49,13 @@ export class LayoutEditorChoiceModal {
             }
             console.log(this.item);
         }
+        
     }
     
     toggleModal(element){
         if(element){
         console.log($(element).position());
-        this.top = $(element).position().top-150 + "px";
+        this.top = $(element).position().top + "px";
         }
         this.modalActive = !this.modalActive;
     }
@@ -76,8 +74,7 @@ export class LayoutEditorChoiceModal {
     }
     
     change(){
-        this.changeItem.emit({a:this.currentElement,b:this.item});
-        //this.changeItem.emit(this.currentElement);
+        this.addItem.emit(this.currentElement);
         this.toggleModal(null);
     }
     

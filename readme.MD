@@ -11,6 +11,18 @@ Outstanding ITems:
 1. Title page generation and editing:
 ** Pulling from the database avalible elements
 ** Rewritting the template of the title page based on the selection made by user..
+** Adding new elements, removing old elements
+** Saving model of the title page...
+
+2. Changing Background of the elements
+** Upload images
+** settings of the background in the database schema
+** continou further with expansion of the editability of the title page elements....
+
+3. Add additional pages and putting them into the link repository
+
+4. Navigation bar create repository of valid links in the database.
+
 
 
 style outside border..

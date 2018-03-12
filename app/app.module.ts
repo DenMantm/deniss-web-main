@@ -10,7 +10,7 @@ import { SortablejsOptions, SortablejsModule } from 'angular-sortablejs';
 import { MyAppComponent} from './my-app.component';
 import { AgencyNavComponent} from './nav/index';
 import { Error404Component } from './errors/404.component';
-import { LayoutEditor,LayoutEditorService,LayoutEditorOptionNav,LayoutEditorChoiceModal,HtmlToCanvasService } from './layout-editor/index'
+import { LayoutEditor,LayoutEditorService,LayoutEditorOptionNav,LayoutEditorChoiceModal,HtmlToCanvasService,LayoutEditorAddNewItem } from './layout-editor/index'
 import { TitlePageComponent,
         TitlePageResolverService,
         AgencyService,
@@ -39,7 +39,6 @@ import {    SnippetRepository,
             SnippetRepSidebar,
             SnippetListResolverService,
         } from './snippet-rep/index';
-
 
 //service
 import { AuthService, UserLoggedInResolver } from './user/index';
@@ -100,7 +99,8 @@ declare let moment:Object;
                     CreativeService,
                     CreativePortfolio,
                     LayoutEditorOptionNav,
-                    LayoutEditorChoiceModal
+                    LayoutEditorChoiceModal,
+                    LayoutEditorAddNewItem
                     ],
     providers: [AuthService,
                 FirstPageGuard,

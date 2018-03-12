@@ -1,3 +1,7 @@
+.border{
+    padding-top: 13px;
+}
+
 .scale-off{
         zoom: 0.2;
     -moz-transform: scale(0.2);

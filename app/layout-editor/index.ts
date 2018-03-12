@@ -3,3 +3,4 @@ export * from './services/layout-editor.service';
 export * from './services/html-to-canvas.service';
 export * from './layout-editor-option-nav/layout-editor-option-nav.component';
 export * from './layout-editor-choice-modal/layout-editor-choice-modal.component';
+export * from './layout-editor-add-new-item/layout-editor-add-new-item.componenet';
