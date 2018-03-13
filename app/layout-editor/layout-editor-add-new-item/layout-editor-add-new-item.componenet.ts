@@ -13,6 +13,8 @@ declare var $;
 export class LayoutEditorAddNewItem {
 
     constructor(private auth:AuthService,private le:LayoutEditorService){
+            this.prefix = "app/assets/images/templates/Page-elements/";
+            this.sufix = ".PNG"
         //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
         }
     modalActive:boolean;
@@ -21,36 +23,54 @@ export class LayoutEditorAddNewItem {
     @Input() itemList:any
     @Output() addItem = new EventEmitter();
     filteredItemList:any
+    itemGroupList:any
+    prefix:any
+    sufix:any
     
     currentElement:any
     currentImage:string
     
     selectedIndex:any
     
-    
     ngOnChanges(){
         if(this.itemList){
+            
+            //create list of the item groups here...
+            console.log(this.itemList);
+            this.itemGroupList = [];
+            
+            this.itemList.forEach( e=> this.itemGroupList.indexOf(e.itemGroup) == -1 && e.itemGroup != 'nav' && e.itemGroup != 'footer' ? this.itemGroupList.push(e.itemGroup):null );
+            
+            console.log(this.itemGroupList);
+            
             if(!this.filteredItemList){
-                this.filteredItemList = this.itemList.filter(i=>i.itemGroup == this.item.elementTmpType);
                 
+                this.filteredItemList = this.itemList.filter(i=>i.itemGroup == this.itemList[0].itemGroup);
+
                 
                 //initialize the selected element...
-                for(let i = 0; i < this.filteredItemList.length;i++){
-                    if(this.filteredItemList[i].itemName==this.item.elementTmpName){
-                        this.selectedIndex = i;
-                        this.currentElement = this.filteredItemList[i];
+                        this.selectedIndex = 0;
+                        this.currentElement = this.filteredItemList[0];
                         this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
-                        break;
-                    }
-                    
-                }
 
-                console.log(this.filteredItemList);
+                //console.log(this.filteredItemList);
             }
-            console.log(this.item);
+            //console.log(this.item);
         }
         
     }
+    
+    changeItemGroup(group){
+                        this.filteredItemList = this.itemList.filter(i=>i.itemGroup == group);
+                //initialize the selected element...
+
+                        this.selectedIndex = 0;
+                        this.currentElement = this.filteredItemList[0];
+                        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+
+                console.log(this.filteredItemList);
+    }
+    
     
     toggleModal(element){
         if(element){
@@ -76,6 +96,11 @@ export class LayoutEditorAddNewItem {
     change(){
         this.addItem.emit(this.currentElement);
         this.toggleModal(null);
+    }
+    changeTroughPicture(item){
+        this.selectedIndex = this.filteredItemList.indexOf(item);
+        this.currentElement = item;
+        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
     }
     
         

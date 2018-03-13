@@ -1,22 +1,50 @@
  <!--Trigger/Open The Modal -->
 <!--<button (click)="toggleModal($event.srcElement)" class="btn btn-info btn-circle btn-xl edit-layout second"><i class="fa fa-pencil-square-o"></i>Change theme</button>-->
 
-<button (click)="toggleModal($event.srcElement)" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>
 
-<!--The Modal -->
+<!--<button (click)="remove()"  type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-trash"></i></button>-->
+<button (click)="toggleModal($event.srcElement)"  type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>
+<!--<button (click)="toggleModal($event.srcElement)"  type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-pencil-square-o"></i></button>-->
+
+
+
+ <!--The Modal -->
 <div id="myModal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
   
   <div class="modal-content" [style.top]="top">
     <span (click)="toggleModal()" class="close" style="text-align: right !important" >&times;</span>
     <div class="container">
+     
+
+          <div class="row">
+          <div class="col-md-12">
+            <h3>Adding new item:</h3>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col-md-12">
+                 <div class="btn-group" role="group" aria-label="...">
+                  <button (click)="changeItemGroup(item)" *ngFor="let item of itemGroupList" type="button" class="btn btn-default">{{item}}</button>
+                </div>
+          </div>
+          </div>
+     
+     
      <div class="row">
       <div class="col-sm-1">
        <button [disabled]="selectedIndex==0" (click)="back()" class="button cycle-button primary"><<</button>
        </div>
        <div class="col-md-10">
-        <img src="{{currentImage}}" style="height:100%">
-            <!--Control buttons in order to select the items-->
+         <div id="car_m_2_thumbs" class="padding20 bg-grayLighter align-center">
 
+                         <!--[ngStyle]="{ 'background-image': 'url('+prefix+ item.itemName+ sufix+';);' }"-->
+                         <img class="shadow hand" (click)="changeTroughPicture(item)" *ngFor="let item of filteredItemList" src="{{prefix+ item.itemName+ sufix}}" style="width: 20%; height: 20%;display:inline;margin-left:5px;">
+
+   
+         </div>
+        
+            <!--Control buttons in order to select the items-->
        </div>
        <div class="col-sm-1">
        <button [disabled]="selectedIndex==filteredItemList?.length-1" (click)="forward()" class="button cycle-button primary">>></button>
@@ -24,12 +52,25 @@
       
      </div>
      <div class="row">
+        <div class="col-md-12">
+        <img src="{{currentImage}}" style="height:100%">
+            <!--Control buttons in order to select the items-->
+       </div>
+      
+     </div>
+     
+          <div class="row">
           <div class="col-md-12">
            <button (click)="toggleModal()" class="button warning"><i class="fa fa-times"></i> Close</button>
-          <button (click)="change()" class="button success"><span class="mif-pencil"></span> Select Item</button>
+           <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>
           </div>
      </div>
      </div>
+    
+
+    
+    
+    
   </div>
 </div>
  <!--Button trigger modal -->

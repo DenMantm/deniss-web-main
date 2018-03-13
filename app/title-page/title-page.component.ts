@@ -44,6 +44,7 @@ onWindowScroll(event) {
       @ViewChild('placeholder', {read: ViewContainerRef}) viewContainerRef;
       private componentFactory: ComponentFactory<any>;
       pageData:any;
+      clonedPageData:any
 
     
 		ngOnInit(): void {
@@ -53,6 +54,7 @@ onWindowScroll(event) {
 		       
            this.pageData =  JSON.parse(res['titlePageModel']._body);
            this.lastStateTitlePageModel = JSON.parse(res['titlePageModel']._body);
+           this.clonedPageData = JSON.parse(res['titlePageModel']._body);
 
 
        })

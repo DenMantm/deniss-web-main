@@ -22,9 +22,11 @@ export class LayoutEditorChoiceModal {
     @Input() item:any
     @Input() itemList:any
     @Output() changeItem = new EventEmitter();
+    @Output() removeItem = new EventEmitter();
     filteredItemList:any
     prefix:any
     sufix:any
+    
     currentElement:any
     currentImage:string
     
@@ -35,8 +37,6 @@ export class LayoutEditorChoiceModal {
         if(this.itemList){
             if(!this.filteredItemList){
                 this.filteredItemList = this.itemList.filter(i=>i.itemGroup == this.item.elementTmpType);
-                
-                
                 //initialize the selected element...
                 for(let i = 0; i < this.filteredItemList.length;i++){
                     if(this.filteredItemList[i].itemName==this.item.elementTmpName){
@@ -79,6 +79,15 @@ export class LayoutEditorChoiceModal {
         this.changeItem.emit({a:this.currentElement,b:this.item});
         //this.changeItem.emit(this.currentElement);
         this.toggleModal(null);
+    }
+    changeTroughPicture(item){
+        console.log("WOrking here");
+        this.selectedIndex = this.filteredItemList.indexOf(item);
+        this.currentElement = item;
+        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+    }
+    remove(){
+        this.removeItem.emit(this.item);
     }
     
         

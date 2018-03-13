@@ -19,7 +19,7 @@ exports.assembleTemplate = function(pageData){
         let contentEditNav = '<content-edit-nav *ngIf="loginCheck()" [editPressed]="showElementTools" (editClick)="editClick()" (disableClick)="disableClick()" (saveClick)="saveClick()"></content-edit-nav>';
         mainString += contentEditNav;
         
-        let layoutEditor = '<layout-editor *ngIf="loginCheck() && showElementTools" [pageData]="pageData" ></layout-editor>';
+        let layoutEditor = '<layout-editor *ngIf="loginCheck() && showElementTools" [pageData]="clonedPageData" ></layout-editor>';
         mainString += layoutEditor;   
         
         let navbar = `<${pageData.navbarElement.elementTmpName} [pageData]="pageData"></${pageData.navbarElement.elementTmpName}>`;

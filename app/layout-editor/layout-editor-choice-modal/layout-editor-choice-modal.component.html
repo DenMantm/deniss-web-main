@@ -27,8 +27,10 @@
        </div>
        <div class="col-md-10">
          <div id="car_m_2_thumbs" class="padding20 bg-grayLighter align-center">
-          
-             <div *ngFor="let item of filteredItemList" class="thumb" data-index="1"><div class="image-container image-format-fill" style="width: 100%; height: 100%;"><div class="frame"><div style="width: 100%; height: 100%; background-image: url(&quot;{{prefix+ item.itemName+ sufix}}&quot;); background-size: cover; background-repeat: no-repeat; border-radius: 0px;"></div></div></div></div>
+
+                         <!--[ngStyle]="{ 'background-image': 'url('+prefix+ item.itemName+ sufix+';);' }"-->
+                         <img class="shadow hand" (click)="changeTroughPicture(item)" *ngFor="let item of filteredItemList" src="{{prefix+ item.itemName+ sufix}}" style="width: 20%; height: 20%;display:inline;margin-left:5px;">
+
          
          </div>
         

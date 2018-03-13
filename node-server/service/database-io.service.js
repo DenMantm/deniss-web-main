@@ -285,7 +285,9 @@ exports.initializeTitlePage = function(req,res){
                                  text:'You have to make your websites with love these days!'
                                 }];
         
-        let dataAgencyHeadder = "";
+        let dataAgencyHeadder = {"title":"Your Favorite Source of Free Bootstrap Themes",
+                                   "subtitle":"Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!"};
+        
         let dataAgencyPortfolio = "";
         let dataAgencyAmazingTeam = "";
         let dataAgencyAbout =  "";

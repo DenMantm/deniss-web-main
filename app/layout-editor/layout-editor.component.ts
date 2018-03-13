@@ -19,6 +19,7 @@ export class LayoutEditor {
     @Input() pageData:any;
     imageStructure:any;
     itemList:any;
+    removedItemList:any = [];
     
     constructor(@Inject(JQUERY_TOKEN) private $,
                 private auth:AuthService,
@@ -45,9 +46,11 @@ export class LayoutEditor {
         
     ngOnInit(){
         
-                        this.ls.getTemplateItemList().subscribe((e:any)=>{
+            this.ls.getTemplateItemList().subscribe((e:any)=>{
             this.itemList = JSON.parse(e._body)
-            console.log(this.itemList)
+            //console.log(this.itemList)
+            console.log("Debug Page Data");
+            console.log(this.pageData);
         })
         
         //Add some sort of the loading symbol here after....
@@ -67,14 +70,17 @@ export class LayoutEditor {
             this.$("#img-"+this.pageData.footer.elementTmpName).attr("src", "data:image/png;base64,"+data);
         });
         
-        this.pageData.pageData.forEach(i => {
-            this.img.getScreenshotOfElement(this.$("#"+i.elementTmpName+i.elementSequence).get(0), 0, 0, 
-            this.$("#"+i.elementTmpName+i.elementSequence).get(0).clientWidth, 
-            this.$("#"+i.elementTmpName+i.elementSequence).get(0).clientHeight,
-            (data) => {
-                this.$("#img-"+i.elementTmpName+i.elementSequence).attr("src", "data:image/png;base64,"+data);
-            });
-        })
+        
+        //slows down everything this one..
+        
+        // this.pageData.pageData.forEach(i => {
+        //     this.img.getScreenshotOfElement(this.$("#"+i.elementTmpName+i.elementSequence).get(0), 0, 0, 
+        //     this.$("#"+i.elementTmpName+i.elementSequence).get(0).clientWidth, 
+        //     this.$("#"+i.elementTmpName+i.elementSequence).get(0).clientHeight,
+        //     (data) => {
+        //         this.$("#img-"+i.elementTmpName+i.elementSequence).attr("src", "data:image/png;base64,"+data);
+        //     });
+        // })
         
         
         
@@ -112,18 +118,53 @@ export class LayoutEditor {
        }
        
       this.sv.changeTitlePageAlignment(tmpArray).subscribe(s => {
-          console.log(s);
+         // console.log(s);
           //refresh page logic...
           window.location.reload();
       });
-       console.log(tmpArray);
+       //console.log(tmpArray);
    }
    change(item){
        console.log("Item to be changed...");
+
+       this.pageData.pageData[this.pageData.pageData.indexOf(item.b)].elementTmpName = item.a.itemName;
        
        this.$("#"+'img-'+item.b.elementTmpName+item.b.elementSequence).attr("src", 'app/assets/images/templates/Page-elements/'+item.a.itemName+'.PNG');
       
-       console.log(item);
+       //console.log(item);
+   }
+   
+   addItem(item):void{
+       //adding new item...
+       
+       let newItem = this.generateItem(item);
+       this.pageData.pageData.push(newItem);
+       console.log(newItem);
+       console.log("Item to be added...");
+   }
+   generateItem(item):any{
+       return {"elementTmpName":item.itemName,
+                    "elementTmpType":item.itemGroup,
+                    "title":{"subtitle":"This is the subtitle","title":"This is the title"},
+                    "data":item.tempData,
+                    "elementSequence":this.pageData.pageData.length
+       }
+       
+   }
+   removeItem(item){
+       //add item to the remove list...
+       
+       let index = this.pageData.pageData.indexOf(item);
+       
+       this.removedItemList.push(item);
+       
+       this.pageData.pageData.splice(index, 1);
+       
+      //rearrange indexes...
+      for (let i = 0;i<this.pageData.pageData.length;i++){
+          this.pageData.pageData[i].elementSequence = i;
+      }
+       
    }
    
    //checking the sorta ble allignment

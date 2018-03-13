@@ -9,7 +9,8 @@ var templateItemList = mongoose.Schema({
     itemGroup : String,
     description : String,
     image : String,
-    sequence : Number
+    sequence : Number,
+    tempData : Object
 });
 
 
