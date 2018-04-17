@@ -1,7 +1,7 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewChild } from '@angular/core';
 import { JQUERY_TOKEN } from '../../../../common/index';
 import { AuthService } from '../../../../user/index';
-
+import { ViewUploadedImages } from '../../../../view-uploaded-images/index';
 
 @Component({
     selector: 'creative-headder',
@@ -13,7 +13,7 @@ import { AuthService } from '../../../../user/index';
 export class CreativeHeadder {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
-    
+    @ViewChild('uploadImages') child:ViewUploadedImages;
     
     constructor(@Inject(JQUERY_TOKEN) private $,private auth:AuthService){
     }
@@ -22,6 +22,12 @@ export class CreativeHeadder {
     loginCheck(){
        //console.log(this.auth.isAuthenticated());
        return this.auth.isAuthenticated();
+   }
+   background(){
+       this.child.openModal();
+   }
+   changeImage(image){
+       console.log('Change to : ' + image);
    }
     
 }

@@ -9,7 +9,7 @@
 }
 
 .btn-circle.btn-xl {
-    z-index:1000;
+    z-index:1002;
     width: 70px;
     height: 70px;
     padding: 10px 16px;
@@ -18,7 +18,7 @@
     line-height: 1.33;
 }
 .btn-circle.cover-xl {
-    z-index:900;
+    z-index:1001;
     width: 260px;
     height: 70px;
     padding: 10px 16px;

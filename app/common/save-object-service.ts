@@ -158,6 +158,7 @@ export class SaveObjectService{
 
         return this.http.post('/api/saveTitlePageModel',JSON.stringify(titlePageModel),options);
     }
+    
     changeTitlePageAlignment(titlePageDataModel){
         
         let headers = new Headers({'Content-Type':'application/json'});

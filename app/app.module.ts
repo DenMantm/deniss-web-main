@@ -60,8 +60,8 @@ import { JQUERY_TOKEN,
          } from './common/index';
          
          
-import { AddPageEditor } from './add-page-editor/index';        
-        
+import { AddPageEditor } from './add-page-editor/index';
+import { ViewUploadedImages } from './view-uploaded-images/index';
 
 
 import { appRoutes } from './routes'
@@ -109,7 +109,8 @@ declare let moment:Object;
                     LayoutEditorOptionNav,
                     LayoutEditorChoiceModal,
                     LayoutEditorAddNewItem,
-                    AddPageEditor
+                    AddPageEditor,
+                    ViewUploadedImages
                     ],
     providers: [AuthService,
                 FirstPageGuard,

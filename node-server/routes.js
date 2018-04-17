@@ -19,6 +19,7 @@ module.exports = function(app) {
   
   //tittle page manipulations
   app.post('/api/changeTitlePageAlignment', dbIO.changeTitlePageAlignment);
+  app.post('/api/saveTitlePageModel', dbIO.saveTitlePageModel);
   
   app.get('/api/initializeTitlePage', dbIO.initializeTitlePage);
   

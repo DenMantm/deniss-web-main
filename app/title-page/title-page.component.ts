@@ -55,7 +55,8 @@ onWindowScroll(event) {
            this.pageData =  JSON.parse(res['titlePageModel']._body);
            this.lastStateTitlePageModel = JSON.parse(res['titlePageModel']._body);
            this.clonedPageData = JSON.parse(res['titlePageModel']._body);
-
+            console.log('checkThis');
+            console.log(this.pageData);
 
        })
 
@@ -102,9 +103,50 @@ onWindowScroll(event) {
         saveClick(){
         	
         	//same as the current model
-        	this.lastStateTitlePageModel =  this.arrayUtil.deepCopy(this.pageData);
-             
-            PR.prettyPrint();
+        	
+        	if (JSON.stringify(this.pageData) !== JSON.stringify(this.lastStateTitlePageModel) ) {
+        	    
+        	    this.lastStateTitlePageModel =  JSON.parse(JSON.stringify(this.pageData));
+            
+                    swal({
+                      title: "Are you sure?",
+                      text: "Save changes?",
+                      type: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#DD6B55",
+                      confirmButtonText: "Yes",
+                      cancelButtonText: "Cancel",
+                      closeOnConfirm: true,
+                      closeOnCancel: true
+                    },
+                    (isConfirm) => {
+                      if (isConfirm) {
+                        //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        //userResponse = true;
+                        
+                        this.objectService.savePageModel(this.pageData.pageData).subscribe((res:any)=>{
+                                                
+                        });
+                        //notify user that everything was saved here...
+
+                      } else {
+                        //swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        //userResponse = false;
+                      }
+                    });
+        	    
+        	    
+        	    
+        	    
+        	    
+        	    
+        	    
+        	}
+        	else{
+        	    swal("There is nothin to save, no schema changes made", "error");
+        	}
+
+            
         }
 
         
@@ -113,12 +155,8 @@ onWindowScroll(event) {
     //perform if statement to compare two data structures...            	
     if (JSON.stringify(this.pageData) !== JSON.stringify(this.lastStateTitlePageModel) ) {
         
-        let obs;
-        
-        let promise = new Promise<any>( subsc => obs = subsc );
-        
         // let userResponse = false;
-        
+        let can;
         swal({
           title: "Are you sure?",
           text: "Discard changes?",
@@ -130,21 +168,21 @@ onWindowScroll(event) {
           closeOnConfirm: true,
           closeOnCancel: true
         },
-        function(isConfirm){
+        (isConfirm)=> {
           if (isConfirm) {
             //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            obs(true);
+            can = true;
             //userResponse = true;
           } else {
             //swal("Cancelled", "Your imaginary file is safe :)", "error");
             //userResponse = false;
-            obs(false);
+            can = false;
           }
         });
         //console.log(userResponse);
         
         
-        return promise.then(res => res)
+        return can
         
            // if(userResponse) this.showElementTools = false;
         

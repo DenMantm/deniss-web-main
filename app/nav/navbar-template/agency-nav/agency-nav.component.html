@@ -7,16 +7,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
-            <li class="nav-item">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-page-modal">
-                  Add Element
-                </button>
-            </li>
-            
             <li *ngFor="let ele of navItemList" class="nav-item">
               <a class="nav-link js-scroll-trigger" href="{{'#'+ele.elementTmpName+ele.elementSequence}}">{{ele.navName}}</a>
             </li>
-            
             
             <!--<li class="nav-item">-->
             <!--  <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>-->
@@ -37,7 +30,6 @@
         </div>
       </div>
     </nav>
-    <add-page-editor></add-page-editor>
 <!--<div class="container-fluid headder">-->
 <!--  <div class="row">-->
 <!--    <div class='col'>-->

@@ -1,6 +1,8 @@
     <!-- Header -->
      <!--menu to control and edit the element-->
-      <content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+    <content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+    
+    
     <header class="masthead" id="{{pageData.elementTmpName+pageData.elementSequence}}">
       <div class="container">
         <div class="intro-text">

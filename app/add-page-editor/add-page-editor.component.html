@@ -1,5 +1,10 @@
+<button (mouseenter) ="layoutButton=true"  (mouseleave)="layoutButton=false" type="button" data-toggle="modal" data-target="#add-page-modal" class="btn btn-warning btn-circle btn-xl edit-pages"><i class="fa fa-check"></i>
+</button>
 
+<button *ngIf="layoutButton" type="button" class="btn btn-warning btn-circle cover-xl edit-pages">___>Manage Pages
+</button>
  <!--The Modal -->
+ 
 <div id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
   
   <div class="modal-content" [style.top]="top">

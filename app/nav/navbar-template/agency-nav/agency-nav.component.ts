@@ -17,9 +17,6 @@ export class AgencyNavComponent {
     constructor(@Inject(JQUERY_TOKEN) private $,
     private location:Location,
     ){}
-    
-    
-    
         ngOnChanges(){
         if(this.pageData){
             if(!this.navItemList){

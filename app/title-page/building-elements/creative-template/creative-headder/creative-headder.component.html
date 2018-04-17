@@ -1,4 +1,5 @@
-     <content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+    <content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+    <view-uploaded-images  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
     <header class="masthead text-center text-white d-flex" id="{{pageData.elementTmpName+pageData.elementSequence}}">
       <div class="container my-auto">
         <div class="row">

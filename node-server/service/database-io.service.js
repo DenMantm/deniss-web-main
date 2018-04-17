@@ -222,12 +222,34 @@ page.findOneAndUpdate({"pageType":"titlepage"}, {"pageData":req.body}, {upsert:t
     };
 });
 
-//INITIALIZATION PART, WHERE WE CREATE NEW APPLICATION FOR THE USER....
+}
+
+
+exports.saveTitlePageModel = function(req,res){
+        //adding snippet counter here for convenience
+
+    
+page.findOneAndUpdate({"pageType":"titlepage"}, {"pageData":req.body}, {upsert:true}, function(err, p){
+    if (err) 
+        return res.send({ error: err });
+    else if(!p) {
+            res.send('Error, no title page found');
+            }
+    else{ 
+                //assemble page from the model
+                p.pageData = req.body;
+                res.json(p);
+    };
+});
 
 }
 
 
+//INITIALIZATION PART, WHERE WE CREATE NEW APPLICATION FOR THE USER....
+
 exports.initializeTitlePage = function(req,res){
+
+page.find({"pageType":"titlepage"}).remove().exec();
 
                 //producing template of the title page
                   
@@ -247,7 +269,16 @@ exports.initializeTitlePage = function(req,res){
         }];
         
         let dataCreativeHeadder = {"title":"Your Favorite Source of Free Bootstrap Themes",
-                                   "subtitle":"Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!"};
+                                   "subtitle":"Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!",
+                                    "background":"./app/assets/bootstrap-templates/img-tmp1/header.jpg",
+                                    "buttonLink":"#"
+        };
+                
+        let dataAgencyHeadder = {"title":"Your Favorite Source of Free Bootstrap Themes",
+                                   "subtitle":"Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!",
+                                    "background":"./app/assets/bootstrap-templates/img-tmp2/header-bg.jpg",
+                                    "buttonLink":"#"
+        };
         
         let dataCreativeService =  [{sequence:0,
                                  icon:'fa-diamond',
@@ -267,32 +298,111 @@ exports.initializeTitlePage = function(req,res){
                                  text:'You have to make your websites with love these days!'
                                 }];
                                 
-        let dataCreativePortfolio = [{sequence:0,
-                                 icon:'fa-diamond',
-                                 heading:'Sturdy Templates',
-                                 text:'Our templates are updated regularly so they dont break.'},
-                                 {sequence:1,
-                                 icon:'fa-paper-plane',
-                                 heading:'Ready to Ship',
-                                 text:'You can use this theme as is, or you can make changes!'},
-                                {sequence:2,
-                                 icon:'fa-newspaper-o',
-                                 heading:'Up to Date',
-                                 text:'We update dependencies to keep things fresh.'},
-                                {sequence:3,
-                                 icon:'fa-heart',
-                                 heading:'Made with Love',
-                                 text:'You have to make your websites with love these days!'
-                                }];
+        let dataCreativePortfolio = [{"title":"Threads",
+                                    "subtitle":"Illustration",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/1.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/01-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Explore",
+                                    "subtitle":"Graphic Design",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/2.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/02-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Finish",
+                                    "subtitle":"Identity",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/3.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/03-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    
+                                    {"title":"Lines",
+                                    "subtitle":"Branding",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/4.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/04-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Southwest",
+                                    "subtitle":"Website Design",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/5.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/05-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Window",
+                                    "subtitle":"Photography",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/6.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/06-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    }
+                                    ];
         
-        let dataAgencyHeadder = {"title":"Your Favorite Source of Free Bootstrap Themes",
-                                   "subtitle":"Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!"};
         
-        let dataAgencyPortfolio = "";
+        let dataAgencyPortfolio = [{"title":"Threads",
+                                    "subtitle":"Illustration",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/01-thumbnail.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/01-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Explore",
+                                    "subtitle":"Graphic Design",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/02-thumbnail.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/02-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Finish",
+                                    "subtitle":"Identity",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/03-thumbnail.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/03-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    
+                                    {"title":"Lines",
+                                    "subtitle":"Branding",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/04-thumbnail.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/04-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Southwest",
+                                    "subtitle":"Website Design",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/05-thumbnail.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/05-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    },
+                                    {"title":"Window",
+                                    "subtitle":"Photography",
+                                    "smallImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/06-thumbnail.jpg",
+                                    "modal":{"title":"PROJECT NAME",
+                                    "subtitle":"Lorem ipsum dolor sit amet consectetur.",
+                                    "bigImage":"app/assets/bootstrap-templates/img-tmp2/portfolio/06-full.jpg",
+                                    "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
+                                    }];
         let dataAgencyAmazingTeam = "";
         let dataAgencyAbout =  "";
         let dataAgencyFooter  = "";
-        let dataAgencyNavbar  = [{"name":"element1","sequence":0,"link":"/element1"}];
+        let dataAgencyNavbar  = {"additionalElements":[{"name":"element1","sequence":0,"link":"/element1"}],"title":"Template"};
         
            
         //     <layout-editor *ngIf="loginCheck() && showElementTools" ></layout-editor>
@@ -312,54 +422,70 @@ exports.initializeTitlePage = function(req,res){
     p.navbarElement = {"elementTmpName":"agency-nav",
                                           "elementTmpType":"nav",
                                           "elementSequence":'',
-                                          "title":'',
+                                          "title":{"title":"title","subtitle":"subtitle"},
                                           "data":dataAgencyNavbar};
     p.footer = {"elementTmpName":"agency-footer",
                                           "elementTmpType":"footer",
                                           "elementSequence":'',
-                                          "title":'',
+                                          "title":{"title":"title","subtitle":"subtitle"},
                                           "data":dataAgencyFooter};
     p.pageType = "titlepage";
     p.pageData = [{"elementTmpName":"creative-headder",
+                            "includeInNav":false,
+                        "navName":"Headder",
                                           "elementTmpType":"headder",
                                           "elementSequence":0,
                                           "title":dataCreativeHeadder,
                                           "data":''},
                                          {"elementTmpName":"agency-service",
+                                          "includeInNav":true,
+                                          "navName":"Services",
                                           "elementTmpType":"service",
                                           "elementSequence":1,
                                           "title":{"title":"Services",
                                                     "subtitle":"Lorem ipsum dolor sit amet consectetur."},
                                           "data":dataAgencyService},
                                          {"elementTmpName":"creative-service",
+                                          "includeInNav":true,
+                                          "navName":"Services",                                         
                                           "elementTmpType":"service",
-                                          "title":{"title":"servicex"},
+                                          "title":{"title":"title","subtitle":"subtitle"},
                                           "elementSequence":2,
                                           "data":dataCreativeService},
                                         {"elementTmpName":"creative-portfolio",
+                                          "includeInNav":true,
+                                          "navName":"Portfolio",                                        
                                           "elementTmpType":"portfolio",
                                           "elementSequence":3,
-                                          "title":null,
+                                          "title":{"title":"title","subtitle":"subtitle"},
                                           "data":dataCreativePortfolio},
                                         {"elementTmpName":"agency-headder",
+                                          "includeInNav":true,
+                                          "navName":"HEadder",                                        
                                           "elementTmpType":"headder",
                                           "elementSequence":4,
                                           "title":{"title":"titlex","subtitle":"saddsaew"},
                                           "data":dataAgencyHeadder},
                                         {"elementTmpName":"agency-portfolio",
+                                          "includeInNav":true,
+                                          "navName":"Portfolio",                                        
                                           "elementTmpType":"portfolio",
                                           "elementSequence":5,
-                                          "title":null,
+                                          "title":{"title":"titlex","subtitle":"saddsaew"},
                                           "data":dataAgencyPortfolio},
                                         {"elementTmpName":"agency-amazing-team",
+                                          "includeInNav":true,
+                                          "navName":"Team",                                        
                                           "elementTmpType":"team",
                                           "elementSequence":6,
-                                          "title":null,
+                                          "title":{"title":"title","subtitle":"subtitle"},
                                           "data":dataAgencyAmazingTeam},
                                         {"elementTmpName":"agency-about",
+                                          "includeInNav":true,
+                                          "navName":"About",                                        
                                           "elementTmpType":"about",
                                           "elementSequence":7,
-                                          "title":null,
+                                          "title":{"title":"title","subtitle":"subtitle"},
                                           "data":dataAgencyAbout}
                                           ];
                 

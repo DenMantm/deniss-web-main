@@ -38,16 +38,35 @@ exports.assembleTemplate = function(pageData){
 
 exports.writeToDisk = function(path,page){
     
+
+         write(path,page);
+
+// fs.writeFile(__dirname+path, page, function(err) {
+//     if(err) {
+//         return console.log(err);
+//     }
+
+//     console.log("The file was saved!");
+// }); 
     
-fs.writeFile(__dirname+path, page, function(err) {
+    
+}
+//if fails recursively calls itself untill succeeds...
+function write(path,page){
+    
+    try{
+    fs.writeFile(__dirname+path, page, function(err) {
     if(err) {
         return console.log(err);
     }
-
-    console.log("The file was saved!");
+        console.log("The file was saved!");
 }); 
-    
-    
+}catch(e){
+    console.log("Error! Retrying");
+    console.log(e);
+    write(path,page);
+}
+
 }
 
 

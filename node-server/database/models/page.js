@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 
 var pageData = mongoose.Schema({
+        background: Object,
         includeInNav  : Boolean,
         navName       : String,
         elementSequence : Number,
