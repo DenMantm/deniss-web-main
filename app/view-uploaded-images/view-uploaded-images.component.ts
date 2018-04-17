@@ -54,7 +54,7 @@ export class ViewUploadedImages {
         //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
         }
     ngAfterViewInit(){
-        $('.tabx').tab('show');
+        $('#cp2').colorpicker();
     }
     
     ngOnInit(){

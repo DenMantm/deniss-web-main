@@ -18,7 +18,7 @@
                             <ul class="tabs">
                                 <li class="active"><a href="#frame_3_1">Existing Images</a></li>
                                 <li class=""><a href="#frame_3_2">Select Background Color</a></li>
-                                <li class=""><a href="#frame_3_3">Upload Image</a></li>
+                                <li class=""><a href="#frame_3_3">Upload And Select Image</a></li>
                             </ul>
                             <div class="frames">
                                 <div class="frame bg-grayLighter" id="frame_3_1" style="display: block;">
@@ -70,7 +70,7 @@
                                                    <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
                                                    <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>
                                                   </div>
-                                             </div>
+                                                 </div>
                                     
                                     
                                     
@@ -79,6 +79,20 @@
                                     
                                 </div>
                                 <div class="frame bg-grayLighter" id="frame_3_2" style="display: none;">
+                                    <h3>Set Background Color</h3>
+                                    <div id="cp2" style="width:80%" class="input-group colorpicker-component" title="Using input value">
+                                      <input type="text" class="form-control input-lg" value="#DD0F20"/>
+                                      <span class="input-group-addon"><i></i></span>
+                                    </div>
+                                    <br/>
+                                                                                      <div class="row">
+                                                  <div class="col-md-12">
+                                                   <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
+                                                   <button (click)="changeColor()" class="button success"><span class="mif-pencil"></span>Pick selected color</button>
+                                                   <button (click)="discardColor()" class="button warning"><span class="mif-pencil"></span>Discard background color</button>
+                                                  </div>
+                                                 </div>
+                                                                        
                                 </div>
                                 <div class="frame bg-grayLighter" id="frame_3_3" style="display: none;">
                                     
