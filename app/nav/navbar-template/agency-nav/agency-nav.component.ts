@@ -13,10 +13,27 @@ import {
 
 export class AgencyNavComponent {
    @Input() pageData:any;
+    navItemList:any;
     constructor(@Inject(JQUERY_TOKEN) private $,
     private location:Location,
-    ){
+    ){}
+    
+    
+    
+        ngOnChanges(){
+        if(this.pageData){
+            if(!this.navItemList){
+                this.navItemList = this.pageData.pageData.filter(i=>i.includeInNav == true);
+            console.log(this.navItemList);
+            }
+        }
+        
     }
+    
+    
+    
+    
+    
     ngOnInit(){
         }
     ngAfterViewInit(){
