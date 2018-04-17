@@ -1,42 +1,20 @@
 import { Component, Inject, Output, Input, EventEmitter,HostListener } from '@angular/core';
-import { AuthService } from '../../user/auth.service';
-import { LayoutEditorService } from '../services/layout-editor.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../user/auth.service';
 
 declare var PR;
 declare var $;
 @Component({
-    selector: 'layout-editor-add-new-item',
-    templateUrl: 'app/layout-editor/layout-editor-add-new-item/layout-editor-add-new-item.component.html',
-    styleUrls: ['app/layout-editor/layout-editor-add-new-item/layout-editor-add-new-item.component.css']
+    selector: 'add-page-editor',
+    templateUrl: 'app/add-page-editor/add-page-editor.component.html',
+    styleUrls: ['app/add-page-editor/add-page-editor.component.css']
 })
 
-export class LayoutEditorAddNewItem {
+export class AddPageEditor {
 
-    constructor(private auth:AuthService,private le:LayoutEditorService){
-            this.prefix = "app/assets/images/templates/Page-elements/";
-            this.sufix = ".PNG"
-        //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
-        }
-    ngOnInit(){
-        this.navName = new FormControl('',Validators.required)
-        this.isInNav = new FormControl(true)
-        this.navForm = new FormGroup({
-            navName:this.navName,
-            isInNav:this.isInNav
-        })
-        
-    }
-    navForm:FormGroup;
-    navName:FormControl;
-    isInNav:FormControl;
-        
-        
     modalActive:boolean;
     top:string;
-    @Input() item:any
-    @Input() itemList:any
-    @Input() pageData:any
+    item:any
+    itemList:any
     @Output() addItem = new EventEmitter();
     filteredItemList:any
     itemGroupList:any
@@ -48,9 +26,27 @@ export class LayoutEditorAddNewItem {
     
     selectedIndex:any
     
-    ngOnChanges(){
-        if(this.itemList){
+        constructor(private auth:AuthService){
+            this.prefix = "app/assets/images/templates/Page-elements/";
+            this.sufix = ".PNG"
             
+            
+                        this.itemList = [{itemName:'layout_1',itemGroup:'pages'},
+                        {itemName:'layout_2',itemGroup:'pages'},
+                        {itemName:'blog',itemGroup:'components'},
+                        {itemName:'library',itemGroup:'components'}];
+                        
+        this.item = this.itemList[0];
+            
+            
+            
+        //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
+        }
+    
+    
+    ngOnInit(){
+        if(this.itemList){
+            console.log('Excecuting some additional logic here...')
             //create list of the item groups here...
             console.log(this.itemList);
             this.itemGroupList = [];
@@ -67,15 +63,12 @@ export class LayoutEditorAddNewItem {
                 //initialize the selected element...
                         this.selectedIndex = 0;
                         this.currentElement = this.filteredItemList[0];
-                        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+                        this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
 
                 //console.log(this.filteredItemList);
             }
-            
-            
             //console.log(this.item);
             console.log('Item List Structure...');
-            console.log(this.itemList)
             
         }
         
@@ -87,7 +80,7 @@ export class LayoutEditorAddNewItem {
 
                         this.selectedIndex = 0;
                         this.currentElement = this.filteredItemList[0];
-                        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+                        this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
 
                 console.log(this.filteredItemList);
     }
@@ -105,41 +98,27 @@ export class LayoutEditorAddNewItem {
         this.selectedIndex--;
         this.currentElement = this.filteredItemList[this.selectedIndex];
         console.log('Debug, backwards');
-        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+        this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
     }
     forward(){
         this.selectedIndex++;
         this.currentElement = this.filteredItemList[this.selectedIndex];
         console.log('Debug, forward');
-        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+        this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
     }
     
-    change(value){
-        
-        
-                //check if the maximum allowed value of elements is reached...
-        let counter = 0;
-        this.pageData.forEach(ele => {
-            if(ele.includeInNav) counter++ ;
-        })
-        
-        if (counter > 10){
-            alert("Maximum ammount of elements in nav is reached, please unselect the include checkbox");
-            return;
-        }
-        
-        let tmpObject = {obj1:this.currentElement,obj2:value}
-        
-        this.addItem.emit(tmpObject);
+    change(){
+        this.addItem.emit(this.currentElement);
         this.toggleModal(null);
-        
-        
     }
     changeTroughPicture(item){
         this.selectedIndex = this.filteredItemList.indexOf(item);
         this.currentElement = item;
-        this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+        this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
     }
     
         
 }
+
+
+

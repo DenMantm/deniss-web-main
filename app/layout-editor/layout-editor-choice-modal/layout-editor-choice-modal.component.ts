@@ -1,6 +1,7 @@
 import { Component, Inject, Output, Input, EventEmitter,HostListener } from '@angular/core';
 import { AuthService } from '../../user/auth.service';
 import { LayoutEditorService } from '../services/layout-editor.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare var PR;
 declare var $;
@@ -17,10 +18,26 @@ export class LayoutEditorChoiceModal {
             this.sufix = ".PNG"
         //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
         }
+    
+    ngOnInit(){
+        this.navName = new FormControl('',Validators.required)
+        this.isInNav = new FormControl(true)
+        this.navForm = new FormGroup({
+            navName:this.navName,
+            isInNav:this.isInNav
+        })
+        
+    }
+    navForm:FormGroup;
+    navName:FormControl;
+    isInNav:FormControl;     
+        
+
     modalActive:boolean;
     top:string;
     @Input() item:any
     @Input() itemList:any
+    @Input() pageData:any
     @Output() changeItem = new EventEmitter();
     @Output() removeItem = new EventEmitter();
     filteredItemList:any
@@ -47,10 +64,20 @@ export class LayoutEditorChoiceModal {
                     }
                     
                 }
+                
+                    this.navName = new FormControl(this.item.navName,Validators.required)
+                    this.isInNav = new FormControl(this.item.includeInNav)
+                    this.navForm = new FormGroup({
+                        navName:this.navName,
+                        isInNav:this.isInNav
+                    });
+                
+                
 
                 console.log(this.filteredItemList);
-            }
+                            console.log("Displaying the current item here...");
             console.log(this.item);
+            }
         }
     }
     
@@ -75,7 +102,23 @@ export class LayoutEditorChoiceModal {
         this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
     }
     
-    change(){
+    change(values){
+        
+        //check if the maximum allowed value of elements is reached...
+        let counter = 0;
+        this.pageData.forEach(ele => {
+            if(ele.includeInNav) counter++ ;
+        })
+        
+        if (counter > 10){
+            alert("Maximum ammount of elements in nav is reached, please unselect the include checkbox");
+            return;
+        }
+        
+        this.item.includeInNav = values.isInNav;
+        this.item.navName = values.navName;
+        
+        
         this.changeItem.emit({a:this.currentElement,b:this.item});
         //this.changeItem.emit(this.currentElement);
         this.toggleModal(null);

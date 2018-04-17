@@ -137,16 +137,24 @@ export class LayoutEditor {
    addItem(item):void{
        //adding new item...
        
+       
        let newItem = this.generateItem(item);
        this.pageData.pageData.push(newItem);
        console.log(newItem);
        console.log("Item to be added...");
    }
    generateItem(item):any{
-       return {"elementTmpName":item.itemName,
-                    "elementTmpType":item.itemGroup,
+       
+        // this.item.includeInNav = item.obj2.isInNav;
+        // this.item.navName = item.obj2.navName;
+       
+       
+       return {"elementTmpName":item.obj1.itemName,
+                "includeInNav":item.obj2.isInNav,
+                "navName": item.obj2.navName,
+                    "elementTmpType":item.obj1.itemGroup,
                     "title":{"subtitle":"This is the subtitle","title":"This is the title"},
-                    "data":item.tempData,
+                    "data":item.obj1.tempData,
                     "elementSequence":this.pageData.pageData.length
        }
        

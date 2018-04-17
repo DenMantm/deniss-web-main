@@ -1,3 +1,4 @@
+
 import './rxjs-extemtions';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -57,8 +58,15 @@ import { JQUERY_TOKEN,
          ToastrNotifyService,
          CanDeactivateGuard
          } from './common/index';
+         
+         
+import { AddPageEditor } from './add-page-editor/index';        
+        
+
 
 import { appRoutes } from './routes'
+
+
 
 declare let jQuery:Object;
 declare let moment:Object;
@@ -100,7 +108,8 @@ declare let moment:Object;
                     CreativePortfolio,
                     LayoutEditorOptionNav,
                     LayoutEditorChoiceModal,
-                    LayoutEditorAddNewItem
+                    LayoutEditorAddNewItem,
+                    AddPageEditor
                     ],
     providers: [AuthService,
                 FirstPageGuard,

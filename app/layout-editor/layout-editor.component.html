@@ -24,7 +24,7 @@
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
                   <h2 class="text-uppercase">Edit Layout</h2>
-                  <layout-editor-add-new-item (addItem)="addItem($event)" [itemList]="itemList"></layout-editor-add-new-item>
+                  <layout-editor-add-new-item (addItem)="addItem($event)" [itemList]="itemList" [pageData]="pageData.pageData"></layout-editor-add-new-item>
                                       <!--navbar-->
                   <img id="{{'img-'+'mainNav'}}"/>
                   <section  class="sortable">
@@ -36,7 +36,7 @@
 
                     <div class="border" *ngFor="let item of pageData.pageData" id="{{item.elementSequence}}" >
                       <!--<layout-editor-option-nav (changeItem)="change($event)" [item]="item" [itemList]="itemList"></layout-editor-option-nav>-->
-                      <layout-editor-choice-modal (removeItem)="removeItem($event)" (changeItem)="change($event)" [item]="item" [itemList]="itemList" ></layout-editor-choice-modal>
+                      <layout-editor-choice-modal (removeItem)="removeItem($event)" (changeItem)="change($event)" [item]="item" [itemList]="itemList" [pageData]="pageData.pageData" ></layout-editor-choice-modal>
                       <img src="{{'app/assets/images/templates/Page-elements/'+item.elementTmpName+'.PNG'}}" id="{{'img-'+item.elementTmpName+item.elementSequence}}"/>
                     </div>
                     

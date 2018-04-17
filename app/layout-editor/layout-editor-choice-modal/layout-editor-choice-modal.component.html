@@ -48,11 +48,25 @@
        </div>
       
      </div>
-     
-          <div class="row">
+     <br/>
+     <div class="row">
           <div class="col-md-12">
-           <button (click)="toggleModal()" class="button warning"><i class="fa fa-times"></i> Close</button>
-          <button (click)="change()" class="button success"><span class="mif-pencil"></span> Select Item</button>
+              
+              	  <form  [formGroup]="navForm" (ngSubmit)="change(navForm.value)">
+              	      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" formControlName="isInNav" name="isInNav">
+                        Include this element in the navbar
+                      </label>
+					<input type="text" formControlName="navName" name="navName"  placeholder="Item nav bar name">
+					<br/>
+					<input [disabled]="navForm.invalid" type="submit" name="selectItem" class="button success" value="Select Item">
+					
+				  </form>
+				  <button (click)="toggleModal()" class="button warning"><i class="fa fa-times"></i> Close</button>
+              
+              
+          <!--<button (click)="toggleModal()" class="button warning"><i class="fa fa-times"></i> Close</button>-->
+          <!--<button (click)="change()" class="button success"><span class="mif-pencil"></span> Select Item</button>-->
           </div>
      </div>
      </div>

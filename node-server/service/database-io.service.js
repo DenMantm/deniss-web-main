@@ -292,6 +292,7 @@ exports.initializeTitlePage = function(req,res){
         let dataAgencyAmazingTeam = "";
         let dataAgencyAbout =  "";
         let dataAgencyFooter  = "";
+        let dataAgencyNavbar  = [{"name":"element1","sequence":0,"link":"/element1"}];
         
            
         //     <layout-editor *ngIf="loginCheck() && showElementTools" ></layout-editor>
@@ -312,7 +313,7 @@ exports.initializeTitlePage = function(req,res){
                                           "elementTmpType":"nav",
                                           "elementSequence":'',
                                           "title":'',
-                                          "data":dataAgencyFooter};
+                                          "data":dataAgencyNavbar};
     p.footer = {"elementTmpName":"agency-footer",
                                           "elementTmpType":"footer",
                                           "elementSequence":'',

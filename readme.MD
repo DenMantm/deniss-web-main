@@ -22,6 +22,7 @@ Outstanding ITems:
 3. Add additional pages and putting them into the link repository
 
 4. Navigation bar create repository of valid links in the database.
+** Navigation bar will have limit to the elements it has...
 
 
 
