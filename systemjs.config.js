@@ -26,6 +26,7 @@
       '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
       'angular-sortablejs': 'node_modules/angular-sortablejs/dist/',
       'sortablejs/Sortable.min': 'node_modules/sortablejs/Sortable.min.js',
+      // 'angular2-image-upload': 'npm:angular2-image-upload/index.js',
 
       // other libraries
       'rxjs':                       'npm:rxjs',

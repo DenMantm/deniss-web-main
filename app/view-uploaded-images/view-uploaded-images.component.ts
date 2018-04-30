@@ -1,5 +1,6 @@
 import { Component, Inject, Output, Input, EventEmitter,HostListener,ElementRef,ViewChild } from '@angular/core';
 import { AuthService } from '../user/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare var PR;
 declare var $;
@@ -22,6 +23,11 @@ export class ViewUploadedImages {
     sufix:any
     
     @ViewChild('uploadModal') el:ElementRef;
+    @ViewChild('previewImage') imgEle:ElementRef;
+    
+    uploadForm:FormGroup;
+    fileName:FormControl;
+    
     
     currentElement:any
     currentImage:string
@@ -58,6 +64,17 @@ export class ViewUploadedImages {
     }
     
     ngOnInit(){
+        
+        
+        this.fileName = new FormControl('',Validators.required)
+        this.uploadForm = new FormGroup({
+            fileName:this.fileName
+        })
+        
+        
+        
+        
+        
         if(this.itemList){
             console.log('Excecuting some additional logic here...')
             //create list of the item groups here...
@@ -130,6 +147,22 @@ export class ViewUploadedImages {
         this.currentElement = item;
         this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
     }
+    
+    onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.uploadForm.get('fileName').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        })
+      };
+    }
+  }
+        
     
         
 }

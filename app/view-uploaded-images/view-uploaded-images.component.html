@@ -95,7 +95,12 @@
                                                                         
                                 </div>
                                 <div class="frame bg-grayLighter" id="frame_3_3" style="display: none;">
-                                    
+                                    <!-- <form [formGroup]="uploadForm" (ngSubmit)="change(uploadForm.value)">-->
+                                    <!--    <input formControlName="fileName" (change)="onFileChange($event)" name="fileName" type="file" name="file">-->
+                                    <!--    <input [disabled]="uploadForm.invalid" type="submit" name="selectItem" class="button success" value="Upload">-->
+                                    <!--</form>-->
+                                    <!--<img #previewImage src=""/>-->
+                                    <base64-upload></base64-upload>
                                 </div>
                             </div>
                         </div>

@@ -4,6 +4,7 @@ var auth = require('./auth'),
 var fs = require('fs');
 
 var dbIO = require('./service/database-io.service');
+var fileUpload = require('./service/file-upload.service');
 
 module.exports = function(app) {
   //Custom paths
@@ -22,6 +23,9 @@ module.exports = function(app) {
   app.post('/api/saveTitlePageModel', dbIO.saveTitlePageModel);
   
   app.get('/api/initializeTitlePage', dbIO.initializeTitlePage);
+  
+  
+  app.post('/api/upload', fileUpload.uploadImg);
   
   //app.get('/api/getTitlePageData',dbIO.getTitlePageData);
   
