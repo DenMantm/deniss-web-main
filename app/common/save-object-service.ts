@@ -107,7 +107,7 @@ export class SaveObjectService{
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new RequestOptions({headers:headers});
 
-        return this.http.post('/api/saveSnippetGroup',JSON.stringify(sGroup),options).do(res => {
+        return this.http.post('/api/saveSnippetGroup',JSON.stringify(sGroup),options).do((res:any) => {
             if (res.status == 200){
                 this.notify.success('Modified Succesfully');
             }
@@ -146,8 +146,31 @@ export class SaveObjectService{
          let params: URLSearchParams = new URLSearchParams();
          params.set('pageType', 'titlepage');
 
-        return this.http.get('/api/getPageData',{search: params}).do(res => {
+        return this.http.get('/api/getPageData',{search: params}).do((res:any) => {
                 //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    
+                    console.log('error');
+                    //ideally throw user to the page where he can initialize title page,
+                    //for now it will just initialize title page
+                    
+                    this.http.get('/api/initializeTitlePage').subscribe(res => {
+                        //ideally need error handling...
+                        this.router.navigate(['LoggedoutPage']);
+                        
+                    });
+                    
+
+                    
+                }
+                
+                console.log(!!JSON.parse(res._body).error);
+                
+                
+                
         });
     }
     

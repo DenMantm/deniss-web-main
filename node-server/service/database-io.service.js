@@ -191,6 +191,7 @@ exports.getPageData = function(req,res){
                 return res.send({ error: err });
             }
             else if(!p) {
+
                // res.status(404)
                // res.send('Error, blog post does not exist');
                   res.send({error:"No page "+req.query.itemPage+" found..."});
