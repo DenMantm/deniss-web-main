@@ -159,7 +159,7 @@ export class SaveObjectService{
                     
                     this.http.get('/api/initializeTitlePage').subscribe(res => {
                         //ideally need error handling...
-                        this.router.navigate(['LoggedoutPage']);
+                        this.router.navigate(['title-page']);
                         
                     });
                     
