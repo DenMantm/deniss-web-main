@@ -76,7 +76,6 @@ declare let moment:Object;
 @NgModule({
     imports:[BrowserModule,
             RouterModule.forRoot(appRoutes),
-            SortablejsModule.forRoot({ animation: 150 }),
             FormsModule,
             ReactiveFormsModule,
             HttpModule],
