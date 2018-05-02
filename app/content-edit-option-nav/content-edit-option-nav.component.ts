@@ -13,6 +13,7 @@ export class ContentEditOptionNav {
         @Output() styleClick = new EventEmitter();
         @Output() backgroundClick = new EventEmitter();
         @Output() removeClick = new EventEmitter();
+        @Input() modal:any;
     
     
         constructor(private auth:AuthService){
@@ -24,7 +25,11 @@ export class ContentEditOptionNav {
             this.styleClick.emit();
         }
         background(){
+            
+            
+            
             this.backgroundClick.emit();
+            
         }
         remove(){
             this.removeClick.emit();

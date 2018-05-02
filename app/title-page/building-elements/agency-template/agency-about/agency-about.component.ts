@@ -1,4 +1,4 @@
-import { Component, Inject,Input } from '@angular/core';
+import { Component, Inject,Input,ViewChild } from '@angular/core';
 import { JQUERY_TOKEN } from '../../../../common/index';
 import { AuthService } from '../../../../user/index';
 
@@ -13,6 +13,10 @@ import { AuthService } from '../../../../user/index';
 export class AgencyAbout {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
+    @ViewChild('uploadImages') modal:any;
+    background(){
+       this.modal.openModal();
+   }
     constructor(@Inject(JQUERY_TOKEN) private $,private auth:AuthService){
     }
     ngOnInit(){

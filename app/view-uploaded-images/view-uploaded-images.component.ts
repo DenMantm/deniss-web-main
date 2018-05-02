@@ -17,13 +17,16 @@ export class ViewUploadedImages {
     item:any
     itemList:any
     @Output() changeImage = new EventEmitter();
-    filteredItemList:any
-    itemGroupList:any
-    prefix:any
-    sufix:any
+    filteredItemList:any;
+    itemGroupList:any;
+    prefix:any;
+    sufix:any;
+    @Input() pageData:any;
+    imageOption:boolean=true;
     
     @ViewChild('uploadModal') el:ElementRef;
     @ViewChild('previewImage') imgEle:ElementRef;
+    @ViewChild('cp2') cp:ElementRef;
     
     uploadForm:FormGroup;
     fileName:FormControl;
@@ -60,21 +63,16 @@ export class ViewUploadedImages {
         //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
         }
     ngAfterViewInit(){
-        $('#cp2').colorpicker();
+        $(this.cp.nativeElement).colorpicker();
     }
     
     ngOnInit(){
-        
-        
+
         this.fileName = new FormControl('',Validators.required)
         this.uploadForm = new FormGroup({
             fileName:this.fileName
         })
-        
-        
-        
-        
-        
+
         if(this.itemList){
             console.log('Excecuting some additional logic here...')
             //create list of the item groups here...
@@ -139,7 +137,9 @@ export class ViewUploadedImages {
     }
     
     change(){
-        this.changeImage.emit(this.currentElement.itemName);
+        this.pageData.background.color = "";
+        this.pageData.background.image = this.currentElement.itemName;
+        //this.changeImage.emit(this.currentElement.itemName);
         $(this.el.nativeElement).modal('hide');
     }
     changeTroughPicture(item){
@@ -161,6 +161,16 @@ export class ViewUploadedImages {
         })
       };
     }
+  }
+  
+  //changing the color here...
+  changeColor(color){
+        this.pageData.background.image = "";
+        this.pageData.background.color = color;
+        //this.changeImage.emit(this.currentElement.itemName);
+        $(this.el.nativeElement).modal('hide');
+      
+      
   }
         
     

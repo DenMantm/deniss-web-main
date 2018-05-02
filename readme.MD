@@ -7,7 +7,6 @@ Status: Under Development
 link: https://nci-project-cms-denamntm.c9users.io
 
 Outstanding ITems:
-
 1. Title page generation and editing:
 ** Pulling from the database avalible elements
 ** Rewritting the template of the title page based on the selection made by user..

@@ -7,9 +7,7 @@ const uploadDir = path.join(__dirname, '/..', '/..', '/uploads/') //i made this 
 
 
 
-
 exports.uploadImg = function(req, res) { // This is just for my Controller same as app.post(url, function(req,res,next) {....
-
 
 console.log(uploadDir);
 

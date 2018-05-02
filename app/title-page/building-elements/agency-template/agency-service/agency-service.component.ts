@@ -1,4 +1,4 @@
-import { Component, Inject,Input } from '@angular/core';
+import { Component, Inject,Input,ViewChild } from '@angular/core';
 import { JQUERY_TOKEN } from '../../../../common/index';
 import { AuthService } from '../../../../user/index';
 
@@ -17,6 +17,10 @@ export class AgencyService {
     }
     @Input() pageData:any;
     @Input() showElementTools:boolean;
+        @ViewChild('uploadImages') modal:any;
+    background(){
+       this.modal.openModal();
+   }
     ngOnInit(){
         
         console.log(this.pageData);
@@ -71,9 +75,6 @@ export class AgencyService {
         }
         style(){
             console.log('style');
-        }
-        background(){
-            console.log('background');
         }
         remove(){
             console.log('remove');

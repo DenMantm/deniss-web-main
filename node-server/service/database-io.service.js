@@ -424,12 +424,16 @@ page.find({"pageType":"titlepage"}).remove().exec();
                                           "elementTmpType":"nav",
                                           "elementSequence":'',
                                           "title":{"title":"title","subtitle":"subtitle"},
-                                          "data":dataAgencyNavbar};
+                                          "data":dataAgencyNavbar,
+                                          "background":{"color":"","image":""}
+    };
     p.footer = {"elementTmpName":"agency-footer",
                                           "elementTmpType":"footer",
                                           "elementSequence":'',
                                           "title":{"title":"title","subtitle":"subtitle"},
-                                          "data":dataAgencyFooter};
+                                          "data":dataAgencyFooter,
+                                          "background":{"color":"","image":""}
+    };
     p.pageType = "titlepage";
     p.pageData = [{"elementTmpName":"creative-headder",
                             "includeInNav":false,
@@ -437,7 +441,9 @@ page.find({"pageType":"titlepage"}).remove().exec();
                                           "elementTmpType":"headder",
                                           "elementSequence":0,
                                           "title":dataCreativeHeadder,
-                                          "data":''},
+                                          "data":'',
+                                          "background":{"color":"","image":"app/assets/bootstrap-templates/img-tmp1/header.jpg"}
+    },
                                          {"elementTmpName":"agency-service",
                                           "includeInNav":true,
                                           "navName":"Services",
@@ -445,54 +451,65 @@ page.find({"pageType":"titlepage"}).remove().exec();
                                           "elementSequence":1,
                                           "title":{"title":"Services",
                                                     "subtitle":"Lorem ipsum dolor sit amet consectetur."},
-                                          "data":dataAgencyService},
+                                          "data":dataAgencyService,
+                                        "background":{"color":"","image":""}
+                                         },
                                          {"elementTmpName":"creative-service",
                                           "includeInNav":true,
                                           "navName":"Services",                                         
                                           "elementTmpType":"service",
                                           "title":{"title":"title","subtitle":"subtitle"},
                                           "elementSequence":2,
-                                          "data":dataCreativeService},
+                                          "data":dataCreativeService,
+                                          "background":{"color":"","image":""}
+                                         },
                                         {"elementTmpName":"creative-portfolio",
                                           "includeInNav":true,
                                           "navName":"Portfolio",                                        
                                           "elementTmpType":"portfolio",
                                           "elementSequence":3,
                                           "title":{"title":"title","subtitle":"subtitle"},
-                                          "data":dataCreativePortfolio},
+                                          "data":dataCreativePortfolio,
+                                          "background":{"color":"","image":""}
+                                        },
                                         {"elementTmpName":"agency-headder",
                                           "includeInNav":true,
                                           "navName":"HEadder",                                        
                                           "elementTmpType":"headder",
                                           "elementSequence":4,
                                           "title":{"title":"titlex","subtitle":"saddsaew"},
-                                          "data":dataAgencyHeadder},
+                                          "data":dataAgencyHeadder,
+                                          "background":{"color":"","image":"app/assets/bootstrap-templates/img-tmp2/header-bg.jpg"}
+                                        },
                                         {"elementTmpName":"agency-portfolio",
                                           "includeInNav":true,
                                           "navName":"Portfolio",                                        
                                           "elementTmpType":"portfolio",
                                           "elementSequence":5,
                                           "title":{"title":"titlex","subtitle":"saddsaew"},
-                                          "data":dataAgencyPortfolio},
+                                          "data":dataAgencyPortfolio,
+                                          "background":{"color":"","image":""}
+                                        },
                                         {"elementTmpName":"agency-amazing-team",
                                           "includeInNav":true,
                                           "navName":"Team",                                        
                                           "elementTmpType":"team",
                                           "elementSequence":6,
                                           "title":{"title":"title","subtitle":"subtitle"},
-                                          "data":dataAgencyAmazingTeam},
+                                          "data":dataAgencyAmazingTeam,
+                                           "background":{"color":"","image":""}
+                                        },
                                         {"elementTmpName":"agency-about",
                                           "includeInNav":true,
                                           "navName":"About",                                        
                                           "elementTmpType":"about",
                                           "elementSequence":7,
                                           "title":{"title":"title","subtitle":"subtitle"},
-                                          "data":dataAgencyAbout}
+                                          "data":dataAgencyAbout,
+                                          "background":{"color":"","image":""}
+                                        }
                                           ];
-                
-                
-                
-                                         
+
                     p.save(function(err,p) {
                     if (err)
                         return res.send({ error: err });

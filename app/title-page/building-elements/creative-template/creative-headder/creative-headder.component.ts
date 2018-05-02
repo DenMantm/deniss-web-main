@@ -13,7 +13,11 @@ import { ViewUploadedImages } from '../../../../view-uploaded-images/index';
 export class CreativeHeadder {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
-    @ViewChild('uploadImages') child:ViewUploadedImages;
+    
+    @ViewChild('uploadImages') modal:ViewUploadedImages;
+    background(){
+       this.modal.openModal();
+   }
     
     constructor(@Inject(JQUERY_TOKEN) private $,private auth:AuthService){
     }
@@ -23,11 +27,6 @@ export class CreativeHeadder {
        //console.log(this.auth.isAuthenticated());
        return this.auth.isAuthenticated();
    }
-   background(){
-       this.child.openModal();
-   }
-   changeImage(image){
-       console.log('Change to : ' + image);
-   }
+
     
 }

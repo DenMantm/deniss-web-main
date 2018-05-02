@@ -10,7 +10,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class Base64UploadComponent {
   form: FormGroup;
   loading: boolean = false;
-
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(private fb: FormBuilder) {

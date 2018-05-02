@@ -1,13 +1,12 @@
    
     <!--This page have been formed from the bootstrap templates, REF: https://github.com/BlackrockDigital-->
-    <content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
-    <view-uploaded-images  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
-    <header class="masthead text-center text-white d-flex" id="{{pageData.elementTmpName+pageData.elementSequence}}">
+    <content-edit-option-nav [modal]="modal" *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+    <view-uploaded-images [pageData]="pageData"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
+    <header [ngStyle]="{'background-image': 'url(' + pageData.background.image + ')','background-color':pageData.background.color}" class="masthead text-center text-white d-flex" id="{{pageData.elementTmpName+pageData.elementSequence}}">
       <div class="container my-auto">
         <div class="row">
           <div class="col-lg-10 mx-auto">
-            <h1 class="text-uppercase" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}">
-              <strong [(contenteditableModelHtml)]="pageData.title.title">Your Favorite Soures</strong>
+            <h1 class="text-uppercase" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}"  [(contenteditableModelHtml)]="pageData.title.title">>
             </h1>
             <hr>
           </div>

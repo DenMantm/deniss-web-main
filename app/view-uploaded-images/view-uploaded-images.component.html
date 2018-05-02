@@ -6,29 +6,25 @@
  <!--The Modal -->
  
 <div #uploadModal id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
-  
-  
+
   
   <div class="modal-content" [style.top]="top">
     <span (click)="toggleModal()" data-dismiss="modal" class="close" style="text-align: right !important" >&times;</span>
     <div class="container">
 
-        
 <div class="tabcontrol" data-role="tabcontrol" data-open-target="#frame_3_1">
                             <ul class="tabs">
-                                <li class="active"><a href="#frame_3_1">Existing Images</a></li>
-                                <li class=""><a href="#frame_3_2">Select Background Color</a></li>
-                                <li class=""><a href="#frame_3_3">Upload And Select Image</a></li>
+                                <li class="active"><a href="#frame_3_1" (click)="imageOption=true;colorOption=false;uploadOption=false;">Existing Images</a></li>
+                                <li class=""><a href="#frame_3_2" (click)="imageOption=false;colorOption=true;uploadOption=false;">Select Background Color</a></li>
+                                <li class=""><a href="#frame_3_3" (click)="imageOption=false;colorOption=false;uploadOption=true;">Upload And Select Image</a></li>
                             </ul>
-                            <div class="frames">
-                                <div class="frame bg-grayLighter" id="frame_3_1" style="display: block;">
-                                    
+                            <div >
+                                <div class="frame bg-grayLighter" [hidden]="!imageOption" >
                                      <div class="row">
                                                   <div class="col-md-12">
                                                     <h3>Select existing image</h3>
                                                   </div>
                                                   </div>
-                                                  
                                                   <div class="row">
                                                   <div class="col-md-12">
                                                          <div class="btn-group" role="group" aria-label="...">
@@ -36,8 +32,6 @@
                                                         </div>
                                                   </div>
                                                   </div>
-                                             
-                                             
                                              <div class="row">
                                               <div class="col-sm-1">
                                                <button [disabled]="selectedIndex==0" (click)="back()" class="button cycle-button primary"><<</button>
@@ -68,33 +62,29 @@
                                                   <div class="row">
                                                   <div class="col-md-12">
                                                    <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
-                                                   <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>
+                                                   <button (click)="change()" class="button success"><span class="mif-pencil"></span>Change To Selected</button>
                                                   </div>
                                                  </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+
                                 </div>
-                                <div class="frame bg-grayLighter" id="frame_3_2" style="display: none;">
+                                <!--id="frame_3_2"-->
+                                <div class="frame bg-grayLighter" [hidden]="!colorOption" >
                                     <h3>Set Background Color</h3>
-                                    <div id="cp2" style="width:80%" class="input-group colorpicker-component" title="Using input value">
-                                      <input type="text" class="form-control input-lg" value="#DD0F20"/>
+                                    <div #cp2  style="width:80%" class="input-group colorpicker-component" title="Using input value">
+                                      <input #colorInput type="text" class="form-control input-lg" value="#DD0F20"/>
                                       <span class="input-group-addon"><i></i></span>
                                     </div>
                                     <br/>
                                                                                       <div class="row">
                                                   <div class="col-md-12">
                                                    <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
-                                                   <button (click)="changeColor()" class="button success"><span class="mif-pencil"></span>Pick selected color</button>
+                                                   <button (click)="changeColor(colorInput.value)" class="button success"><span class="mif-pencil"></span>Pick selected color</button>
                                                    <button (click)="discardColor()" class="button warning"><span class="mif-pencil"></span>Discard background color</button>
                                                   </div>
                                                  </div>
                                                                         
                                 </div>
-                                <div class="frame bg-grayLighter" id="frame_3_3" style="display: none;">
+                                <div class="frame bg-grayLighter" [hidden]="!uploadOption">
                                     <!-- <form [formGroup]="uploadForm" (ngSubmit)="change(uploadForm.value)">-->
                                     <!--    <input formControlName="fileName" (change)="onFileChange($event)" name="fileName" type="file" name="file">-->
                                     <!--    <input [disabled]="uploadForm.invalid" type="submit" name="selectItem" class="button success" value="Upload">-->
