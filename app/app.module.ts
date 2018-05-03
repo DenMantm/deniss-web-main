@@ -61,6 +61,7 @@ import { JQUERY_TOKEN,
          
 import { AddPageEditor } from './add-page-editor/index';
 import { ViewUploadedImages,Base64UploadComponent } from './view-uploaded-images/index';
+import { ChangeImages } from './change-images/index';
 
 
 import { appRoutes } from './routes'
@@ -110,7 +111,8 @@ declare let moment:Object;
                     LayoutEditorAddNewItem,
                     AddPageEditor,
                     ViewUploadedImages,
-                    Base64UploadComponent
+                    Base64UploadComponent,
+                    ChangeImages
                     ],
     providers: [AuthService,
                 FirstPageGuard,

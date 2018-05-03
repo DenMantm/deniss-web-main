@@ -4,7 +4,9 @@
 <!--<button *ngIf="layoutButton" type="button" class="btn btn-warning btn-circle cover-xl edit-pages">___>Manage Pages-->
 <!--</button>-->
  <!--The Modal -->
+
  
+<button (click)="openModal()">Open</button>
 <div #uploadModal id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
 
   

@@ -2,7 +2,7 @@
    <!--<content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>-->
    
     <!-- Portfolio Grid -->
-      <content-edit-option-nav [modal]="modal" *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+    <content-edit-option-nav [modal]="modal" *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
     <view-uploaded-images [pageData]="pageData"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
     <section [ngStyle]="{'background-image': 'url(' + pageData.background.image + ')','background-color':pageData.background.color}" class="bg-light" id="{{pageData.elementTmpName+pageData.elementSequence}}">
       <div class="container">
@@ -13,34 +13,30 @@
           </div>
         </div>
         <div class="row">
-          
-          
           <div *ngFor="let item of pageData.data;let i = index" class="col-md-4 col-sm-6 portfolio-item">
-            <a class="portfolio-link" data-toggle="modal" href="{{'#portfolioModal'+i}}">
+            <change-images *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
+            <a class="portfolio-link" data-toggle="modal" href="{{'#portfolioModal'+i+pageData.elementSequence}}">
               <div class="portfolio-hover">
                 <div class="portfolio-hover-content">
                   <i class="fa fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="{{item.smallImage}}" alt="">
+              <img class="img-fluid" src="{{item.smallImage.img}}" alt="">
             </a>
             <div class="portfolio-caption">
               <h4 class="editable" [(contenteditableModelHtml)]="item.title">{{item.title}}</h4>
               <p class="text-muted editable"[(contenteditableModelHtml)]="item.subtitle">{{item.subtitle}}</p>
             </div>
           </div>
-          
         </div>
       </div>
     </section>
-    
-    
-    
+
         <!-- Portfolio Modals -->
 
     <!-- Modal n -->
     <div *ngFor="let item of pageData.data;let i = index">
-    <div class="portfolio-modal modal fade" id="{{'portfolioModal'+i}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="{{'portfolioModal'+i+pageData.elementSequence}}" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="close-modal" data-dismiss="modal">
@@ -55,7 +51,8 @@
                   <!-- Project Details Go Here -->
                   <h2 class="text-uppercase editable"[(contenteditableModelHtml)]="item.modal.title">{{item.modal.title}}</h2>
                   <p class="item-intro text-muted editable"[(contenteditableModelHtml)]="item.modal.subtitle">{{item.modal.subtitle}}</p>
-                  <img class="img-fluid d-block mx-auto" src="{{item.modal.bigImage}}" alt="">
+                  <change-images *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
+                  <img class="img-fluid d-block mx-auto" src="{{item.modal.bigImage.img}}" alt="">
                   <p class="editable"[(contenteditableModelHtml)]="item.modal.text">{{item.modal.text}}</p>
                   <!--<ul class="list-inline">-->
                   <!--  <li>Date: January 2017</li>-->

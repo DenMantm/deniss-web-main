@@ -4,96 +4,151 @@
     <section [ngStyle]="{'background-image': 'url(' + pageData.background.image + ')','background-color':pageData.background.color}" class="p-0" id="{{pageData.elementTmpName+pageData.elementSequence}}">
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/1.jpg" alt="">
+
+          <div *ngFor="let item of pageData.data;let i = index" class="col-lg-4 col-sm-6">
+            <change-images *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
+            <div class="portfolio-box" >
+                <img class="img-fluid" src="{{item.smallImage.img}}" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
+                  <div [(contenteditableModelHtml)]="item.subtitle" class="project-category text-faded editable">
+                    {{item.subtitle}}
                   </div>
-                  <div class="project-name">
-                    Project Name
+                  <div [(contenteditableModelHtml)]="item.title" class="project-name editable">
+                    {{item.title}}
+                  </div>
+                  <div>
+                    <br>
+                    <br>
+                    <br>
+                    <!--href="{{item.modal.bigImage.img}}"-->
+                    <a class="btn btn-info" data-toggle="modal" href="{{'#portfolioModal'+i+pageData.elementSequence}}">Show</a>
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/2.jpg">
-              <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/2.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/3.jpg">
-              <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/3.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/4.jpg">
-              <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/4.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/5.jpg">
-              <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/5.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/6.jpg">
-              <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/6.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
+   
+          <!--<div class="col-lg-4 col-sm-6">-->
+          <!--  <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/2.jpg">-->
+          <!--    <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/2.jpg" alt="">-->
+          <!--    <div class="portfolio-box-caption">-->
+          <!--      <div class="portfolio-box-caption-content">-->
+          <!--        <div class="project-category text-faded">-->
+          <!--          Category-->
+          <!--        </div>-->
+          <!--        <div class="project-name">-->
+          <!--          Project Name-->
+          <!--        </div>-->
+          <!--      </div>-->
+          <!--    </div>-->
+          <!--  </a>-->
+          <!--</div>-->
+          
+          
+          <!--<div class="col-lg-4 col-sm-6">-->
+          <!--  <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/3.jpg">-->
+          <!--    <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/3.jpg" alt="">-->
+          <!--    <div class="portfolio-box-caption">-->
+          <!--      <div class="portfolio-box-caption-content">-->
+          <!--        <div class="project-category text-faded">-->
+          <!--          Category-->
+          <!--        </div>-->
+          <!--        <div class="project-name">-->
+          <!--          Project Name-->
+          <!--        </div>-->
+          <!--      </div>-->
+          <!--    </div>-->
+          <!--  </a>-->
+          <!--</div>-->
+          
+          <!--<div class="col-lg-4 col-sm-6">-->
+          <!--  <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/4.jpg">-->
+          <!--    <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/4.jpg" alt="">-->
+          <!--    <div class="portfolio-box-caption">-->
+          <!--      <div class="portfolio-box-caption-content">-->
+          <!--        <div class="project-category text-faded">-->
+          <!--          Category-->
+          <!--        </div>-->
+          <!--        <div class="project-name">-->
+          <!--          Project Name-->
+          <!--        </div>-->
+          <!--      </div>-->
+          <!--    </div>-->
+          <!--  </a>-->
+          <!--</div>-->
+          
+          <!--<div class="col-lg-4 col-sm-6">-->
+          <!--  <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/5.jpg">-->
+          <!--    <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/5.jpg" alt="">-->
+          <!--    <div class="portfolio-box-caption">-->
+          <!--      <div class="portfolio-box-caption-content">-->
+          <!--        <div class="project-category text-faded">-->
+          <!--          Category-->
+          <!--        </div>-->
+          <!--        <div class="project-name">-->
+          <!--          Project Name-->
+          <!--        </div>-->
+          <!--      </div>-->
+          <!--    </div>-->
+          <!--  </a>-->
+          <!--</div>-->
+          
+          <!--<div class="col-lg-4 col-sm-6">-->
+          <!--  <a class="portfolio-box" href="app/assets/bootstrap-templates/img-tmp1/portfolio/fullsize/6.jpg">-->
+          <!--    <img class="img-fluid" src="app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/6.jpg" alt="">-->
+          <!--    <div class="portfolio-box-caption">-->
+          <!--      <div class="portfolio-box-caption-content">-->
+          <!--        <div class="project-category text-faded">-->
+          <!--          Category-->
+          <!--        </div>-->
+          <!--        <div class="project-name">-->
+          <!--          Project Name-->
+          <!--        </div>-->
+          <!--      </div>-->
+          <!--    </div>-->
+          <!--  </a>-->
+          <!--</div>-->
+          
         </div>
       </div>
     </section>
+    
+                    <!-- Portfolio Modals -->
+
+    <!-- Modal n -->
+    <div *ngFor="let item of pageData.data;let i = index">
+    <div class="portfolio-modal modal fade" id="{{'portfolioModal'+i+pageData.elementSequence}}" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase editable"[(contenteditableModelHtml)]="item.modal.title">{{item.modal.title}}</h2>
+                  <p class="item-intro text-muted editable"[(contenteditableModelHtml)]="item.modal.subtitle">{{item.modal.subtitle}}</p>
+                  <change-images *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
+                  <img class="img-fluid d-block mx-auto" src="{{item.modal.bigImage.img}}" alt="">
+                  <p class="editable"[(contenteditableModelHtml)]="item.modal.text">{{item.modal.text}}</p>
+                  <!--<ul class="list-inline">-->
+                  <!--  <li>Date: January 2017</li>-->
+                  <!--  <li>Client: Threads</li>-->
+                  <!--  <li>Category: Illustration</li>-->
+                  <!--</ul>-->
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">
+                    <i class="fa fa-times"></i>
+                    Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
