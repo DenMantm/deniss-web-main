@@ -13,6 +13,7 @@
           </div>
         </div>
         <div class="row">
+          
           <div *ngFor="let item of pageData.data;let i = index" class="col-md-4 col-sm-6 portfolio-item">
             <change-images *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
             <a class="portfolio-link" data-toggle="modal" href="{{'#portfolioModal'+i+pageData.elementSequence}}">

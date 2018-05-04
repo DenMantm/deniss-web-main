@@ -40,7 +40,7 @@
     text-align: center;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1041; /* Sit on top */
+    z-index: 1042; /* Sit on top */
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */

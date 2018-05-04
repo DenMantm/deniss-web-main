@@ -400,8 +400,14 @@ page.find({"pageType":"titlepage"}).remove().exec();
                                     "bigImage":{"img":"app/assets/bootstrap-templates/img-tmp2/portfolio/06-full.jpg"},
                                     "text":"Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!"}
                                     }];
-        let dataAgencyAmazingTeam = "";
-        let dataAgencyAbout =  "";
+        let dataAgencyAmazingTeam = [{"title":"Kay Garland","subtitle":"Lead Designer","img":"app/assets/bootstrap-templates/img-tmp2/team/1.jpg"},
+                                    {"title":"Larry Parker","subtitle":"Lead Marketer","img":"app/assets/bootstrap-templates/img-tmp2/team/2.jpg"},
+                                    {"title":"Diana Pertersen","subtitle":"Lead Developer","img":"app/assets/bootstrap-templates/img-tmp2/team/3.jpg"}];
+        let dataAgencyAbout =  [{"title":"2009-2011 Our Humble Beginnings","subtitle":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!","img":"app/assets/bootstrap-templates/img-tmp2/about/1.jpg"},
+                                {"title":"March 2011 An Agency is Born","subtitle":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!","img":"app/assets/bootstrap-templates/img-tmp2/about/2.jpg"},
+                                {"title":"December 2012 Transition to Full Service","subtitle":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!","img":"app/assets/bootstrap-templates/img-tmp2/about/3.jpg"},
+                                {"title":"July 2014 Phase Two Expansion","subtitle":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!","img":"app/assets/bootstrap-templates/img-tmp2/about/4.jpg"}
+                                ];
         let dataAgencyFooter  = "";
         let dataAgencyNavbar  = {"additionalElements":[{"name":"element1","sequence":0,"link":"/element1"}],"title":"Template"};
         
@@ -495,7 +501,7 @@ page.find({"pageType":"titlepage"}).remove().exec();
                                           "navName":"Team",                                        
                                           "elementTmpType":"team",
                                           "elementSequence":6,
-                                          "title":{"title":"title","subtitle":"subtitle"},
+                                          "title":{"title":"OUR AMAZING TEAM","subtitle":"Lorem ipsum dolor sit amet consectetur."},
                                           "data":dataAgencyAmazingTeam,
                                            "background":{"color":"","image":""}
                                         },
@@ -504,7 +510,7 @@ page.find({"pageType":"titlepage"}).remove().exec();
                                           "navName":"About",                                        
                                           "elementTmpType":"about",
                                           "elementSequence":7,
-                                          "title":{"title":"title","subtitle":"subtitle"},
+                                          "title":{"title":"ABOUT","subtitle":"Lorem ipsum dolor sit amet consectetur."},
                                           "data":dataAgencyAbout,
                                           "background":{"color":"","image":""}
                                         }
