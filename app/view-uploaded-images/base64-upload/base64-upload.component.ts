@@ -1,7 +1,8 @@
 // src/app/formdata-upload/base64-upload.component.ts
 
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators,FormControl} from "@angular/forms";
+import { Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular/http';
 
 @Component({
   selector: 'base64-upload',
@@ -9,49 +10,98 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class Base64UploadComponent {
   form: FormGroup;
+  avatar:FormControl;
   loading: boolean = false;
+  
+  formData:any;
+  
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private fb: FormBuilder) {
-    this.createForm();
+  constructor(private fb: FormBuilder, private http:Http) {
+    // this.createForm();
+  }
+  ngOnInit(){
+    this.avatar = new FormControl('',Validators.required);
+    
+        this.form = new FormGroup({
+            avatar:this.avatar
+        })
+    
+    
   }
 
-  createForm() {
-    this.form = this.fb.group({
-      avatar: ['', Validators.required]
-    });
-  }
+  // createForm() {
+  //   this.form = this.fb.group({
+  //     avatar: ['']
+  //   });
+  // }
 
   onFileChange(event) {
       console.log('hitting')
-    let reader = new FileReader();
-    if(event.target.files && event.target.files.length > 0) {
+
+    // let reader = new FileReader();
+    // if(event.target.files && event.target.files.length > 0) {
+    //   let file = event.target.files[0];
+    //   reader.readAsDataURL(file);
+    //   reader.onload = () => {
+    //     this.form.get('avatar').setValue({
+    //       filename: file.name,
+    //       filetype: file.type,
+    //       value: reader.result.split(',')[1]
+    //     })
+    //   };
+    // }
+    //this.form.setValue({})
+    
+    let fileList: FileList = event.target.files;
+   if(fileList.length > 0) {
+    let file: File = fileList[0];
+    
+    this.formData = new FormData();
+    this.formData.append('avatar', file, file.name);
+   } 
+   
+   
+   
       let file = event.target.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.form.get('avatar').setValue({
+      this.avatar.setValue({
           filename: file.name,
           filetype: file.type,
-          value: reader.result.split(',')[1]
+          value: ''
         })
-      };
-    }
+   
+   
   }
 
   onSubmit() {
-    const formModel = this.form.value;
+    
+    //const formModel = this.form.value;
+    
     this.loading = true;
     // In a real-world app you'd have a http request / service call here like
-    // this.http.post('apiUrl', formModel)
-    setTimeout(() => {
-      console.log(formModel);
-      alert('done!');
-      this.loading = false;
-    }, 1000);
+     
+    // this.http.post('api/upload', formModel).subscribe(res => {
+    //   console.log(res);
+    // })
+    
+        let headers = new Headers();
+    /** No need to include Content-Type in Angular 4 */
+    // headers.append('Content-Type', 'multipart/form-data');
+    // headers.append('Accept', 'application/json');
+    
+    
+     this.http.post('api/upload', this.formData, 
+     {headers: headers})
+        .map(res => res.json())
+        .catch(function(err){
+          throw err;
+        })
+        .subscribe(
+            data => {console.log('success'); this.loading = false;console.log(data);},
+            error => console.log(error)
+        )
+    
   }
 
-  clearFile() {
-    this.form.get('avatar').setValue(null);
-    this.fileInput.nativeElement.value = '';
-  }
+
 }

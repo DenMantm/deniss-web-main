@@ -29,7 +29,9 @@ app.use(bodyParser.urlencoded({
   app.use(passport.session());
   
   app.use(express.static(rootPath));
-  app.use(bodyParser({uploadDir:'/path/to/temporary/directory/to/store/uploaded/files'}));
+  
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: true}));
   
   app.use('/events', express.static(rootPath));
 }
