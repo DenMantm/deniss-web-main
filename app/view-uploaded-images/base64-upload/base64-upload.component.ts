@@ -1,6 +1,6 @@
 // src/app/formdata-upload/base64-upload.component.ts
 
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild,Output,EventEmitter} from '@angular/core';
 import {FormBuilder, FormGroup, Validators,FormControl} from "@angular/forms";
 import { Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular/http';
 
@@ -12,6 +12,7 @@ export class Base64UploadComponent {
   form: FormGroup;
   avatar:FormControl;
   loading: boolean = false;
+  @Output() imageUploaded = new EventEmitter();
   
   formData:any;
   
@@ -97,7 +98,11 @@ export class Base64UploadComponent {
           throw err;
         })
         .subscribe(
-            data => {console.log('success'); this.loading = false;console.log(data);},
+            (data:any) => {console.log('success'); this.loading = false;
+            console.log(data);
+            this.imageUploaded.emit(data.image);
+              
+            },
             error => console.log(error)
         )
     

@@ -19,18 +19,24 @@ export class BlogPostsComponent implements OnInit {
     createBlPost:FormGroup;
     blogPostName:FormControl;
     blogPostDescription:FormControl;
-
+    pageData:any;
 constructor(private auth:AuthService,
 			@Inject(JQUERY_TOKEN) private $,
 			private route:ActivatedRoute,
 			private objectService:SaveObjectService,
 			private router:Router,
+			
 			){}
 
 //form
     ngOnInit(){
        this.currentUser = this.route.snapshot.data['User'];
        this.blogPostList = this.route.snapshot.data['BlogPostList'];
+       
+       		   this.route.data.subscribe((res:any)=>{
+		       
+           this.pageData =  JSON.parse(res['titlePageModel']._body);
+       })
        
        this.blogPostName = new FormControl('',Validators.required)
         this.blogPostDescription = new FormControl('',Validators.required)

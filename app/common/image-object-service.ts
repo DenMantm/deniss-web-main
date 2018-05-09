@@ -6,194 +6,122 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams} from '@angula
 
 @Injectable()
 export class ImageObjectService{
+    
+    itemList:any;
+    itemGroupList:any;
+    filteredItemList:any;
+    combinedArray:any;
+    
   constructor(  private auth: AuthService,
                 private router:Router,
                 private http:Http,
                 private notify:ToastrNotifyService) {
+                    
+                    this.filteredItemList = [];
+                    
+      this.itemList = [{"itemName":"app/assets/bootstrap-templates/img-tmp1/header.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/header-bg.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/1.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/2.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/3.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/4.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/5.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/6.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/01-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/02-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/03-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/04-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/05-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/06-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/1.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/2.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/3.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/4.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/1.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/2.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/3.jpg","itemGroup":"Icon Size"}
+                      ];
   }
-  saveSnippets(snippetObject){
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers:headers});
-        let loginInfo = snippetObject;
 
-        this.http.post('/api/snippets',JSON.stringify(loginInfo),options).subscribe(resp => {
-            if(resp){
-                //console.log();
+  
+    ngOnInit(){
+        this.refreshImages();
+    }
+  
+  
+    refreshImages(){
+       
+        this.http.get('/api/getImageList').subscribe((res:any)=>{
+            let tmp = JSON.parse(res._body);
+            
+            if(!!tmp.error){
                 
-                if(resp.json().status == 'failed'){
-                    console.log('Failed to save');
-                    }
-                else{
-                    console.log('Saved');
-                }
+                this.combinedArray = this.itemList.concat(tmp);
+                
+                this.itemGroupList = [];
+            
+                this.combinedArray.forEach( e=> this.itemGroupList.indexOf(e.itemGroup) == -1 && e.itemGroup != 'nav' && e.itemGroup != 'footer' ? this.itemGroupList.push(e.itemGroup):null );
+                
+                this.filteredItemList = this.itemList.filter(i=>i.itemGroup == this.itemList[0].itemGroup);
+                
+                this.notify.error('Image loaded');
+                
+                
             }
             else{
-                console.log('No Response');
-                
+                this.notify.error('There was a problem with image');
             }
             
-        });
-  }
-   loadImages(snippetType){
-        let requestOptions = new RequestOptions({search:snippetType});
-
-        return this.http.get('/api/snippets',requestOptions).do(
-            resp =>{ if(resp){
-                console.log('working, loaded snippets');
-                
-            }
-            else if (resp == undefined){
-                //if user is not logged in
-                this.router.navigate(['/notLoggedError']);
-            }
-        });
-    }
-    saveImage(formData){
-        //saving and adding image to the result set...
-        
-    }
-    
-    
-    loadBlogPostList(){
-        return this.http.get('/api/getBlogPostList');//.map(resp => resp.json());
-    }
-    loadBlogPost(blogId){
-        
-         let params: URLSearchParams = new URLSearchParams();
-         params.set('blogId', blogId);
-        
-        
-        return this.http.get('/api/getBlogPost',{search: params}).do(res => {
-            if (res.status == 1){
-                this.notify.error('Cannot find entity in the DB');
-            }
-            else if (res.status == 2){
-                this.notify.error('there was an error...');
-            }
         });//.map(resp => resp.json());
-        
-    }
-    newBlogPost(newBlogPost){
-        //spin authentication here and if succesfull
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers:headers});
-
-        return this.http.post('/api/createNewBlogPost',JSON.stringify(newBlogPost),options);
-    }
-    editBlogPost(blogPost){
-        //spin authentication here and if succesfull
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers:headers});
-
-        return this.http.post('/api/editBlogPost',JSON.stringify(blogPost),options).do(res => {
-            if (res.status == 200){
-                this.notify.success('Modified Succesfully');
-            }
-            else if (res.status == 1){
-                this.notify.error('Cannot find entity in the DB');
-            }
-            else if (res.status == 2){
-                this.notify.error('there was an error...');
-            }
-        })
-
+       
+       
     }
     
-    createSnippetGroup(newSnippetGroup){
-                //spin authentication here and if succesfull
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers:headers});
-
-        return this.http.post('/api/createSnippetGroup',JSON.stringify(newSnippetGroup),options);
+    addExtraItem(item){
+        this.combinedArray.push(item);
+        
+        this.itemGroupList = [];
+            
+        this.combinedArray.forEach( e=> this.itemGroupList.indexOf(e.itemGroup) == -1 && e.itemGroup != 'nav' && e.itemGroup != 'footer' ? this.itemGroupList.push(e.itemGroup):null );
+                
+        this.filteredItemList = this.itemList.filter(i=>i.itemGroup == this.itemList[0].itemGroup);
+        
     }
     
-    editSnippetGroup(sGroup){
-        
-                //spin authentication here and if succesfull
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers:headers});
-
-        return this.http.post('/api/saveSnippetGroup',JSON.stringify(sGroup),options).do((res:any) => {
-            if (res.status == 200){
-                this.notify.success('Modified Succesfully');
+    getImageList(){
+        if(!!this.filteredItemList){
+            this.http.get('/api/getImageList').subscribe((res:any)=>{
+            let tmp = JSON.parse(res._body);
+            
+            if(!!tmp.error){
+                
+                this.combinedArray = this.itemList.concat(tmp);
+                
+                this.itemGroupList = [];
+            
+                this.combinedArray.forEach( e=> this.itemGroupList.indexOf(e.itemGroup) == -1 && e.itemGroup != 'nav' && e.itemGroup != 'footer' ? this.itemGroupList.push(e.itemGroup):null );
+                
+                this.filteredItemList = this.itemList.filter(i=>i.itemGroup == this.itemList[0].itemGroup);
+                
+                return this.filteredItemList;
             }
-            else if (res.status == 1){
-                this.notify.error('Cannot find entity in the DB');
+            else{
+                this.notify.error('There was a problem with image');
+                return null;
             }
-            else if (res.status == 2){
-                this.notify.error('there was an error...');
-            }
-        })
-        
-    }
-    loadSnippetGroupList(){
-        return this.http.get('/api/getSnippetGroupList');//.map(resp => resp.json());
-    }
-    loadSnippetGroup(snippetId){
-        
-         let params: URLSearchParams = new URLSearchParams();
-         params.set('snippetId', snippetId);
-        
-        
-        return this.http.get('/api/getSnippetGroup',{search: params}).do(res => {
-            if (res.status == 1){
-                this.notify.error('Cannot find entity in the DB');
-            }
-            else if (res.status == 2) {
-                this.notify.error('there was an error...');
-            }
+            
         });//.map(resp => resp.json());
+            
+            
+        }
+        else{
+            return this.filteredItemList;
+        }
         
         
-    }
-    
-    // Title Page manipulations...
-    loadTitlePageModel(){
-         let params: URLSearchParams = new URLSearchParams();
-         params.set('pageType', 'titlepage');
-
-        return this.http.get('/api/getPageData',{search: params}).do((res:any) => {
-                //error handling
-                console.log('INITIALIZATION, OUTPUT');
-                
-                //in case if there is an error and there is no title page..
-                if(!!JSON.parse(res._body).error){
-                    
-                    console.log('error');
-                    //ideally throw user to the page where he can initialize title page,
-                    //for now it will just initialize title page
-                    
-                    this.http.get('/api/initializeTitlePage').subscribe(res => {
-                        //ideally need error handling...
-                        this.router.navigate(['title-page']);
-                        
-                    });
-                    
-
-                    
-                }
-                
-                console.log(!!JSON.parse(res._body).error);
-                
-                
-                
-        });
-    }
-    
-    savePageModel(titlePageModel){
-                //spin authentication here and if succesfull
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers:headers});
-
-        return this.http.post('/api/saveTitlePageModel',JSON.stringify(titlePageModel),options);
-    }
-    
-    changeTitlePageAlignment(titlePageDataModel){
         
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers:headers});
-
-        return this.http.post('/api/changeTitlePageAlignment',JSON.stringify(titlePageDataModel),options);
+        
+        
     }
     
 

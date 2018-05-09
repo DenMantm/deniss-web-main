@@ -42,7 +42,7 @@
                                                  <div id="car_m_2_thumbs" class="padding20 bg-grayLighter align-center">
                                         
                                                                  <!--[ngStyle]="{ 'background-image': 'url('+prefix+ item.itemName+ sufix+';);' }"-->
-                                                                 <img class="shadow hand" (click)="changeTroughPicture(item)" *ngFor="let item of filteredItemList" src="{{prefix+ item.itemName+ sufix}}" style="width: 20%; height: 20%;display:inline;margin-left:5px;">
+                                                                 <img class="shadow hand" (click)="changeTroughPicture(item)" *ngFor="let item of filteredItemListObj" src="{{prefix+ item.itemName+ sufix}}" style="width: 20%; height: 20%;display:inline;margin-left:5px;">
                                         
                                            
                                                  </div>
@@ -50,7 +50,7 @@
                                                     <!--Control buttons in order to select the items-->
                                                </div>
                                                <div class="col-sm-1">
-                                               <button [disabled]="selectedIndex==filteredItemList?.length-1" (click)="forward()" class="button cycle-button primary">>></button>
+                                               <button [disabled]="selectedIndex==filteredItemListObj?.length-1" (click)="forward()" class="button cycle-button primary">>></button>
                                                </div>
                                               
                                              </div>

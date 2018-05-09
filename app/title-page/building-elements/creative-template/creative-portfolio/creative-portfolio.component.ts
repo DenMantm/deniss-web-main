@@ -13,6 +13,7 @@ import { AuthService } from '../../../../user/index';
 export class CreativePortfolio {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
+    @Input() filteredItemList:any;
     
     @ViewChild('uploadImages') modal:any;
     background(){

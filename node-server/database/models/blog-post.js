@@ -7,7 +7,8 @@ var blogElement = mongoose.Schema({
         id       : String,
         type     : String,
         style    : String,
-        text     : String
+        text     : String,
+        img: String
 });
 
 
@@ -19,7 +20,8 @@ var blogPost = mongoose.Schema({
         author       : String,
         blogElements : [blogElement],
         isPosted     : Boolean,
-        isDeleted    : Boolean
+        isDeleted    : Boolean,
+        img:String
 });
 
 

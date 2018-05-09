@@ -13,6 +13,7 @@ import { ViewUploadedImages } from '../../../../view-uploaded-images/index';
 export class CreativeHeadder {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
+    @Input() filteredItemList:any;
     
     @ViewChild('uploadImages') modal:ViewUploadedImages;
     background(){

@@ -14,6 +14,7 @@ export class CreativeService {
     template:any
     @Input() showElementTools:boolean;
     @Input() pageData:any;
+    @Input() filteredItemList:any;
         @ViewChild('uploadImages') modal:any;
     background(){
        this.modal.openModal();

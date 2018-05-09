@@ -1,12 +1,12 @@
   <!--This page have been formed from the bootstrap templates, REF: https://github.com/BlackrockDigital-->
     <content-edit-option-nav [modal]="modal" *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
-    <view-uploaded-images [pageData]="pageData"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
-    <section [ngStyle]="{'background-image': 'url(' + pageData.background.image + ')','background-color':pageData.background.color}" class="p-0" id="{{pageData.elementTmpName+pageData.elementSequence}}">
+    <view-uploaded-images *ngIf="showElementTools" [filteredItemList]="filteredItemList"  [pageData]="pageData"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
+    <section [ngStyle]="{'background-image': 'url(' + pageData?.background.image + ')','background-color':pageData?.background.color}" class="p-0" id="{{pageData?.elementTmpName+pageData?.elementSequence}}">
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
 
-          <div *ngFor="let item of pageData.data;let i = index" class="col-lg-4 col-sm-6">
-            <change-images *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
+          <div *ngFor="let item of pageData?.data;let i = index" class="col-lg-4 col-sm-6">
+            <change-images [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
             <div class="portfolio-box" >
                 <img class="img-fluid" src="{{item.smallImage.img}}" alt="">
               <div class="portfolio-box-caption">
@@ -22,7 +22,7 @@
                     <br>
                     <br>
                     <!--href="{{item.modal.bigImage.img}}"-->
-                    <a class="btn btn-info" data-toggle="modal" href="{{'#portfolioModal'+i+pageData.elementSequence}}">Show</a>
+                    <a class="btn btn-info" data-toggle="modal" href="{{'#portfolioModal'+i+pageData?.elementSequence}}">Show</a>
                   </div>
                 </div>
               </div>
@@ -117,8 +117,8 @@
                     <!-- Portfolio Modals -->
 
     <!-- Modal n -->
-    <div *ngFor="let item of pageData.data;let i = index">
-    <div class="portfolio-modal modal fade" id="{{'portfolioModal'+i+pageData.elementSequence}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div *ngFor="let item of pageData?.data;let i = index">
+    <div class="portfolio-modal modal fade" id="{{'portfolioModal'+i+pageData?.elementSequence}}" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="close-modal" data-dismiss="modal">
@@ -133,7 +133,7 @@
                   <!-- Project Details Go Here -->
                   <h2 class="text-uppercase editable"[(contenteditableModelHtml)]="item.modal.title">{{item.modal.title}}</h2>
                   <p class="item-intro text-muted editable"[(contenteditableModelHtml)]="item.modal.subtitle">{{item.modal.subtitle}}</p>
-                  <change-images *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
+                  <change-images [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
                   <img class="img-fluid d-block mx-auto" src="{{item.modal.bigImage.img}}" alt="">
                   <p class="editable"[(contenteditableModelHtml)]="item.modal.text">{{item.modal.text}}</p>
                   <!--<ul class="list-inline">-->

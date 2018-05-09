@@ -1,8 +1,25 @@
 var blogPost = require('../database/models/blog-post');
+var userImage = require('../database/models/user-image');
 var snippetGroup = require('../database/models/snippet-group');
 var templateItemList = require('../database/models/page-item-list');
 var page = require('../database/models/page');
 var pageService = require('../service/page.service');
+
+
+
+//IMAGES
+
+exports.getImageList = function(req,res) {
+    
+        userImage.find({}).exec(function(err, userImage) {
+        if (!err)
+            res.json(userImage);
+        else {
+            return res.send(500, { error: err });
+        }
+    });
+}
+
 
 
 // ~~~~~~~~~~~~~~~~~ BLOG POSTS SECTION
@@ -40,14 +57,15 @@ exports.getBlogPostList = function(req, res) {
     });
 
 }
+
+
 exports.getBlogPost = function(req, res) {
     blogPost.findOne({ '_id': req.query.blogId }, function(err, blog) {
 
         if (err) {
-            return res.send(2, { error: err });
+            return res.send({ error: err });
         }
         else if (!blog) {
-            res.status(1)
             res.send('Error, blog post does not exist');
         }
         else res.json(blog);
@@ -57,7 +75,6 @@ exports.getBlogPost = function(req, res) {
 }
 exports.editBlogPost = function(req, res) {
     //delete req.body._id;
-
     var query = { '_id': req.body._id };
     delete req.body._id;
     delete req.body.author;

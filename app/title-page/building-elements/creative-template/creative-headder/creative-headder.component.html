@@ -1,17 +1,17 @@
    
     <!--This page have been formed from the bootstrap templates, REF: https://github.com/BlackrockDigital-->
     <content-edit-option-nav [modal]="modal" *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
-    <view-uploaded-images [pageData]="pageData"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
-    <header [ngStyle]="{'background-image': 'url(' + pageData.background.image + ')','background-color':pageData.background.color}" class="masthead text-center text-white d-flex" id="{{pageData.elementTmpName+pageData.elementSequence}}">
+    <view-uploaded-images *ngIf="showElementTools" [filteredItemList]="filteredItemList" [pageData]="pageData"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
+    <header [ngStyle]="{'background-image': 'url(' + pageData?.background.image + ')','background-color':pageData?.background.color}" class="masthead text-center text-white d-flex" id="{{pageData?.elementTmpName+pageData?.elementSequence}}">
       <div class="container my-auto">
         <div class="row">
           <div class="col-lg-10 mx-auto">
-            <h1 class="text-uppercase" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}"  [(contenteditableModelHtml)]="pageData.title.title">>
+            <h1 class="text-uppercase" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}"  [(contenteditableModelHtml)]="pageData?.title.title">>
             </h1>
             <hr>
           </div>
           <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5" class='editable' [(contenteditableModelHtml)]="pageData.title.subtitle" [ngClass]="{'border': loginCheck()&&showElementTools}">Start Bootstrap can help you build better websites usin</p>
+            <p class="text-faded mb-5" class='editable' [(contenteditableModelHtml)]="pageData?.title.subtitle" [ngClass]="{'border': loginCheck()&&showElementTools}">Start Bootstrap can help you build better websites usin</p>
             <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
           </div>
         </div>

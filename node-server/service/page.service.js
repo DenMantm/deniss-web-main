@@ -26,7 +26,7 @@ exports.assembleTemplate = function(pageData){
         mainString += navbar;                                 
         
         for(let i = 0;i<pageData.pageData.length;i++){
-            mainString += `<${pageData.pageData[i].elementTmpName} [showElementTools]="showElementTools" [pageData]="pageData.pageData[${i}]"></${pageData.pageData[i].elementTmpName}>`;
+            mainString += `<${pageData.pageData[i].elementTmpName} [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[${i}]"></${pageData.pageData[i].elementTmpName}>`;
         }
         
         let footer = `<${pageData.footer.elementTmpName} [pageData]="pageData"></${pageData.footer.elementTmpName}>`;

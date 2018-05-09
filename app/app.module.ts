@@ -13,6 +13,7 @@ import { Error404Component } from './errors/404.component';
 import { LayoutEditor,LayoutEditorService,LayoutEditorOptionNav,LayoutEditorChoiceModal,HtmlToCanvasService,LayoutEditorAddNewItem } from './layout-editor/index'
 import { TitlePageComponent,
         TitlePageResolverService,
+        ImageResolverService,
         AgencyService,
         AgencyPortfolio,
         AgencyHeadder,
@@ -20,7 +21,8 @@ import { TitlePageComponent,
         AgencyAbout,
         CreativeHeadder,
         CreativeService,
-        CreativePortfolio
+        CreativePortfolio,
+        BlogInfo
         } from './title-page/index';
 import { ProjectsPageComponent } from './projects/index';
 import {BlogPostsComponent, 
@@ -55,7 +57,8 @@ import { JQUERY_TOKEN,
          MediumEditorService,
          VariableStorageService,
          ToastrNotifyService,
-         CanDeactivateGuard
+         CanDeactivateGuard,
+         ImageObjectService
          } from './common/index';
          
          
@@ -66,14 +69,12 @@ import { ChangeImages } from './change-images/index';
 
 import { appRoutes } from './routes'
 
-
-
-
 declare let jQuery:Object;
 declare let moment:Object;
 
 // declare let metro:Object;
-
+import {enableProdMode} from '@angular/core';
+enableProdMode();
 @NgModule({
     imports:[BrowserModule,
             RouterModule.forRoot(appRoutes),
@@ -112,7 +113,8 @@ declare let moment:Object;
                     AddPageEditor,
                     ViewUploadedImages,
                     Base64UploadComponent,
-                    ChangeImages
+                    ChangeImages,
+                    BlogInfo
                     ],
     providers: [AuthService,
                 FirstPageGuard,
@@ -133,7 +135,9 @@ declare let moment:Object;
                 {provide:JQUERY_TOKEN,useValue:jQuery},
                 TitlePageResolverService,
                 LayoutEditorService,
-                HtmlToCanvasService
+                HtmlToCanvasService,
+                ImageObjectService,
+                ImageResolverService
     ],
     bootstrap:[MyAppComponent]
 })

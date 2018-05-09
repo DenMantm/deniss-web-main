@@ -1,6 +1,7 @@
 import { Component, Inject, Output, Input, EventEmitter,HostListener,ElementRef,ViewChild } from '@angular/core';
 import { AuthService } from '../user/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ImageObjectService } from '../common/index';
 
 declare var PR;
 declare var $;
@@ -17,12 +18,13 @@ export class ViewUploadedImages {
     item:any
     itemList:any
     @Output() changeImage = new EventEmitter();
-    filteredItemList:any;
     itemGroupList:any;
     prefix:any;
     sufix:any;
     @Input() pageData:any;
+    @Input() filteredItemList:any;
     imageOption:boolean=true;
+    filteredItemListObj:any;
     
     @ViewChild('uploadModal') el:ElementRef;
     @ViewChild('previewImage') imgEle:ElementRef;
@@ -37,37 +39,11 @@ export class ViewUploadedImages {
     
     selectedIndex:any
     
-        constructor(private auth:AuthService){
+        constructor(private auth:AuthService,private imgService:ImageObjectService){
             this.prefix = "";
             this.sufix = ""
-                        this.itemList = [{"itemName":"app/assets/bootstrap-templates/img-tmp1/header.jpg","itemGroup":"Backgrounds"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/header-bg.jpg","itemGroup":"Backgrounds"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/1.jpg","itemGroup":"Small Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/2.jpg","itemGroup":"Small Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/3.jpg","itemGroup":"Small Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/4.jpg","itemGroup":"Small Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/5.jpg","itemGroup":"Small Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/6.jpg","itemGroup":"Small Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/01-full.jpg","itemGroup":"Big Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/02-full.jpg","itemGroup":"Big Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/03-full.jpg","itemGroup":"Big Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/04-full.jpg","itemGroup":"Big Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/05-full.jpg","itemGroup":"Big Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/06-full.jpg","itemGroup":"Big Items"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/1.jpg","itemGroup":"Icon Size"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/2.jpg","itemGroup":"Icon Size"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/3.jpg","itemGroup":"Icon Size"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/4.jpg","itemGroup":"Icon Size"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/1.jpg","itemGroup":"Icon Size"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/2.jpg","itemGroup":"Icon Size"},
-                                        {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/3.jpg","itemGroup":"Icon Size"}
-                                        ];
                         
-        this.item = this.itemList[0];
-            
-            
-            
-        //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
+                    
         }
     ngAfterViewInit(){
         $(this.cp.nativeElement).colorpicker();
@@ -80,30 +56,40 @@ export class ViewUploadedImages {
             fileName:this.fileName
         })
 
-        if(this.itemList){
-            console.log('Excecuting some additional logic here...')
-            //create list of the item groups here...
-            console.log(this.itemList);
-            this.itemGroupList = [];
+        // if(this.itemList){
+        //     console.log('Excecuting some additional logic here...')
+        //     //create list of the item groups here...
+        //     console.log(this.itemList);
+        //     this.itemGroupList = [];
             
-            this.itemList.forEach( e=> this.itemGroupList.indexOf(e.itemGroup) == -1 && e.itemGroup != 'nav' && e.itemGroup != 'footer' ? this.itemGroupList.push(e.itemGroup):null );
+        //     this.itemList.forEach( e=> this.itemGroupList.indexOf(e.itemGroup) == -1 && e.itemGroup != 'nav' && e.itemGroup != 'footer' ? this.itemGroupList.push(e.itemGroup):null );
             
-            console.log(this.itemGroupList);
+        //     console.log(this.itemGroupList);
             
-            if(!this.filteredItemList){
+        //     if(!this.filteredItemListObj){
                 
-                this.filteredItemList = this.itemList.filter(i=>i.itemGroup == this.itemList[0].itemGroup);
+        //         this.filteredItemListObj = this.itemList.filter(i=>i.itemGroup == this.itemList[0].itemGroup);
 
                 
-                //initialize the selected element...
+        //         //initialize the selected element...
+        //                 this.selectedIndex = 0;
+        //                 this.currentElement = this.filteredItemListObj[0];
+        //                 this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
+
+        //         //console.log(this.filteredItemListObj);
+        //     }
+        //     //console.log(this.item);
+        // }
+                this.filteredItemListObj = this.filteredItemList.obj1;
+                this.itemGroupList = this.filteredItemList.obj2;
+                this.itemList = this.filteredItemList.obj3;
+        this.item = this.itemList[0];
                         this.selectedIndex = 0;
-                        this.currentElement = this.filteredItemList[0];
+                        this.currentElement = this.filteredItemListObj[0];
                         this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
+        
 
-                //console.log(this.filteredItemList);
-            }
-            //console.log(this.item);
-        }
+        
         
     }
     openModal(){
@@ -111,14 +97,14 @@ export class ViewUploadedImages {
     }
     
     changeItemGroup(group){
-                        this.filteredItemList = this.itemList.filter(i=>i.itemGroup == group);
+                        this.filteredItemListObj = this.itemList.filter(i=>i.itemGroup == group);
                 //initialize the selected element...
 
                         this.selectedIndex = 0;
-                        this.currentElement = this.filteredItemList[0];
+                        this.currentElement = this.filteredItemListObj[0];
                         this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
 
-                console.log(this.filteredItemList);
+                console.log(this.filteredItemListObj);
     }
     
     
@@ -132,13 +118,13 @@ export class ViewUploadedImages {
     
     back(){
         this.selectedIndex--;
-        this.currentElement = this.filteredItemList[this.selectedIndex];
+        this.currentElement = this.filteredItemListObj[this.selectedIndex];
         console.log('Debug, backwards');
         this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
     }
     forward(){
         this.selectedIndex++;
-        this.currentElement = this.filteredItemList[this.selectedIndex];
+        this.currentElement = this.filteredItemListObj[this.selectedIndex];
         console.log('Debug, forward');
         this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
     }
@@ -146,11 +132,24 @@ export class ViewUploadedImages {
     change(){
         this.pageData.background.color = "";
         this.pageData.background.image = this.currentElement.itemName;
+        console.log(this.currentElement.itemName);
         //this.changeImage.emit(this.currentElement.itemName);
         $(this.el.nativeElement).modal('hide');
     }
+    changeFromUpload(img){
+        
+        this.pageData.background.color = "";
+        this.pageData.background.image = img.itemName;
+        this.itemList.push(img);
+        console.log(this.currentElement.itemName);
+        //this.changeImage.emit(this.currentElement.itemName);
+        $(this.el.nativeElement).modal('hide');
+        
+        
+    }
+    
     changeTroughPicture(item){
-        this.selectedIndex = this.filteredItemList.indexOf(item);
+        this.selectedIndex = this.filteredItemListObj.indexOf(item);
         this.currentElement = item;
         this.currentImage = this.prefix+this.currentElement.itemName+this.sufix;
     }

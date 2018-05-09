@@ -1,5 +1,4 @@
 import { Component, Inject, Input } from '@angular/core';
-import { JQUERY_TOKEN } from '../common/index';
 import { AuthService } from '../user/auth.service';
 
 
@@ -15,7 +14,7 @@ import { AuthService } from '../user/auth.service';
 
 export class FooterComponent {
     @Input() pageData:any;
-    constructor(@Inject(JQUERY_TOKEN) private $,
+    constructor(
                 private auth:AuthService){
     }
     ngOnInit(){

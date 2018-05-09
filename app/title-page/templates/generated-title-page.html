@@ -1,1 +1,9 @@
-<content-edit-nav *ngIf="loginCheck()" [editPressed]="showElementTools" (editClick)="editClick()" (disableClick)="disableClick()" (saveClick)="saveClick()"></content-edit-nav><layout-editor *ngIf="loginCheck() && showElementTools" [pageData]="clonedPageData" ></layout-editor><agency-nav [pageData]="pageData"></agency-nav><creative-headder [showElementTools]="showElementTools" [pageData]="pageData.pageData[0]"></creative-headder><agency-about [showElementTools]="showElementTools" [pageData]="pageData.pageData[1]"></agency-about><agency-amazing-team [showElementTools]="showElementTools" [pageData]="pageData.pageData[2]"></agency-amazing-team><agency-footer [pageData]="pageData"></agency-footer>
+<content-edit-nav *ngIf="loginCheck()" [editPressed]="showElementTools" (editClick)="editClick()" (disableClick)="disableClick()" (saveClick)="saveClick()"></content-edit-nav>
+<layout-editor *ngIf="loginCheck() && showElementTools" [pageData]="clonedPageData" ></layout-editor>
+<agency-nav [pageData]="pageData"></agency-nav>
+<creative-headder [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[0]"></creative-headder>
+<blog-info [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[1]"></blog-info>
+<creative-service [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[2]"></creative-service>
+<agency-about [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[3]"></agency-about>
+<agency-amazing-team [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[4]"></agency-amazing-team>
+<agency-footer [pageData]="pageData"></agency-footer>

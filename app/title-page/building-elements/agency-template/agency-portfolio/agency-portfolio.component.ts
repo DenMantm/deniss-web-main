@@ -12,6 +12,7 @@ import { AuthService } from '../../../../user/index';
 export class AgencyPortfolio {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
+    @Input() filteredItemList:any;
         @ViewChild('uploadImages') modal:any;
     background(){
        this.modal.openModal();

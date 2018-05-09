@@ -17,6 +17,7 @@ export class AgencyService {
     }
     @Input() pageData:any;
     @Input() showElementTools:boolean;
+    @Input() filteredItemList:any;
         @ViewChild('uploadImages') modal:any;
     background(){
        this.modal.openModal();

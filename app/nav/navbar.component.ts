@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { JQUERY_TOKEN } from '../common/index';
 
 
 @Component({
@@ -44,7 +43,7 @@ import { JQUERY_TOKEN } from '../common/index';
 })
 
 export class NavbarComponent {
-    constructor(@Inject(JQUERY_TOKEN) private $){
+    constructor(){
     }
     ngOnInit(){
         }

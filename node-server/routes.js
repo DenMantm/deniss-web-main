@@ -25,6 +25,9 @@ module.exports = function(app) {
   app.get('/api/initializeTitlePage', dbIO.initializeTitlePage);
   
   
+  
+  //manipulating images
+  app.get('/api/getImageList', dbIO.getImageList);
   app.post('/api/upload', fileUpload.uploadImg);
   
   //app.get('/api/getTitlePageData',dbIO.getTitlePageData);

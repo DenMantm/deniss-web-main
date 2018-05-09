@@ -173,6 +173,31 @@ export class SaveObjectService{
                 
         });
     }
+        loadUserImages(){
+
+        return this.http.get('/api/getImageList').do((res:any) => {
+                //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    
+                    console.log('error');
+                    //ideally throw user to the page where he can initialize title page,
+                    //for now it will just initialize title page
+
+                }
+                
+                console.log(!!JSON.parse(res._body).error);
+                
+                
+                
+        });
+    }
+    
+    
+    
+    
     
     savePageModel(titlePageModel){
                 //spin authentication here and if succesfull
