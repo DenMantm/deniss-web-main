@@ -13,6 +13,7 @@ export class AgencyAmazingTeam {
     @Input() showElementTools:boolean;
     @Input() pageData:any;
     @Input() filteredItemList:any;
+    template:any;
         @ViewChild('uploadImages') modal:any;
     background(){
        this.modal.openModal();
@@ -20,9 +21,41 @@ export class AgencyAmazingTeam {
     constructor(@Inject(JQUERY_TOKEN) private $,private auth:AuthService){
     }
     ngOnInit(){
+        this.template = {
+            "title": "Kay Garland",
+            "subtitle": "Lead Designer",
+            "img": "app/assets/bootstrap-templates/img-tmp2/team/1.jpg"
         }
-        loginCheck(){
+        }
+            ngAfterViewInit(){
+            this.$('.sortable-amazing-team').sortable({
+                cancel: ':input,button,.editable',
+                update: (event, ui) => {
+                            let linkOrderData = this.$(".sortable-amazing-team").sortable("toArray",{attribute:'data'});
+                            let tmpArray = []
+                            linkOrderData.forEach( item =>{tmpArray.push(this.pageData.data[item])});
+                            this.pageData.data = tmpArray;
+                            }
+            });
+            this.$('.sortable-amazing-team').sortable("disable");
+        }
+        ngOnChanges(){
+            if(this.showElementTools != undefined){
+                if(this.showElementTools){
+                    this.$('.sortable-amazing-team').sortable('enable');
+                }
+                    
+                else
+                    this.$('.sortable-amazing-team').sortable("disable");
+            }
+        }
+    
+    
+        add(){
+            this.pageData.data.push(this.template)
+        }
+    loginCheck(){
        //console.log(this.auth.isAuthenticated());
        return this.auth.isAuthenticated();
-        }
+    }
    }

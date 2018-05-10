@@ -1,0 +1,43 @@
+<!--<button (mouseenter) ="layoutButton=true"  (mouseleave)="layoutButton=false" type="button" data-toggle="modal" data-target="#add-page-modal" class="btn btn-warning btn-circle btn-xl edit-pages"><i class="fa fa-check"></i>-->
+<!--</button>-->
+
+<!--<button *ngIf="layoutButton" type="button" class="btn btn-warning btn-circle cover-xl edit-pages">___>Manage Pages-->
+<!--</button>-->
+<!--The Modal -->
+
+
+<!--<button (click)="add()" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>-->
+<ul style="list-style: none;margin-left: -2.6875rem;">
+    <li style="display: inline;">
+        <button (click)="openModal()" type="button" class="btn btn-info btn-circle"><i class="fa fa-file-image-o"></i></button>
+    </li>
+</ul>
+
+<!--Button trigger modal -->
+
+
+<div  #buttonModal id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
+
+    <div class="modal-content" [style.top]="top">
+        <span  data-dismiss="modal" class="close" style="text-align: right !important">&times;</span>
+        <div class="container">
+                    <div class="frame bg-grayLighter">
+                        <h3>Set Button Action</h3>
+                        <br/>
+                       
+                        <br/>
+                        
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button  data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
+                                <!--<button (click)="changeIcon($event)" class="button success"><span class="mif-pencil"></span>Select</button>-->
+                            </div>
+                        </div>
+
+                    </div>
+                
+            
+        </div>
+    </div>
+</div>

@@ -53,21 +53,31 @@ export class CreativeService {
         }
         
         ngAfterViewInit(){
-            this.$('.sortable-creative-service').sortable({cancel: ':input,button,.editable'});
+            this.$('.sortable-creative-service').sortable({
+                cancel: ':input,button,.editable',
+                update: (event, ui) => {
+                            let linkOrderData = this.$(".sortable-creative-service").sortable("toArray",{attribute:'data'});
+                            let tmpArray = []
+                            linkOrderData.forEach( item =>{tmpArray.push(this.pageData.data[item])});
+                            this.pageData.data = tmpArray;
+                            }
+            });
             this.$('.sortable-creative-service').sortable("disable");
         }
         ngOnChanges(){
             if(this.showElementTools != undefined){
-                if(this.showElementTools)
+                if(this.showElementTools){
                     this.$('.sortable-creative-service').sortable('enable');
+                }
+                    
                 else
                     this.$('.sortable-creative-service').sortable("disable");
             }
         }
     
     
-            add(){
-            this.template.source = this.data.length;
+        add(){
+            this.template.sequence = this.data.length;
             this.data.push(this.template)
         }
         style(){

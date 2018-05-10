@@ -16,11 +16,12 @@
       </div>
       <div class="container">
         <div class="row sortable-creative-service">
-          <div *ngFor="let ele of data" class="col-lg-3 col-md-6 text-center">
+          <div *ngFor="let ele of data;let i = index" class="col-lg-3 col-md-6 text-center" [attr.data]=i>
+            <change-images [toggleIcons]="false" [pageData]="pageData" [removableItem]="ele" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]=""></change-images>
             <div class="service-box mt-5 mx-auto">
               <i class="fa fa-4x {{ele.icon}} text-primary mb-3 sr-icons"></i>
-              <h3 class="mb-3" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele.heading}}</h3>
-              <p class="text-muted mb-0" class='editable' [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele.text}}</p>
+              <h3 class="mb-3" class='editable' [(contenteditableModelHtml)]="ele.heading" [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele.heading}}</h3>
+              <p class="text-muted mb-0" class='editable' [(contenteditableModelHtml)]="ele.text" [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele.text}}</p>
             </div>
           </div>
         </div>

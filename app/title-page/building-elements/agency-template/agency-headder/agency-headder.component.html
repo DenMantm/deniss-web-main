@@ -10,7 +10,8 @@
         <div class="intro-text">
           <div class="intro-lead-in editable" [(contenteditableModelHtml)]="pageData?.title.title">Welcome To Our St</div>
           <div class="intro-heading text-uppercase editable" [(contenteditableModelHtml)]="pageData?.title.subtitle">It's Nice To Me</div>
-          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
+          <button-options *ngIf="showElementTools"></button-options>
+          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" href="#services">Tell Me More</a>
         </div>
       </div>
       

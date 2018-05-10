@@ -50,7 +50,16 @@ export class AgencyService {
 
         }
         ngAfterViewInit(){
-            this.$('.sortable-agency-service').sortable({cancel: ':input,button,.editable'});
+
+                this.$('.sortable-agency-service').sortable({
+                cancel: ':input,button,.editable',
+                update: (event, ui) => {
+                            let linkOrderData = this.$(".sortable-agency-service").sortable("toArray",{attribute:'data'});
+                            let tmpArray = []
+                            linkOrderData.forEach( item =>{tmpArray.push(this.pageData.data[item])});
+                            this.pageData.data = tmpArray;
+                            }
+            });
             this.$('.sortable-agency-service').sortable("disable");
         }
         ngOnChanges(){
@@ -59,7 +68,9 @@ export class AgencyService {
             if(this.showElementTools != undefined){
                 if(this.showElementTools){
                     this.$('.sortable-agency-service').sortable('enable');
-                    console.log('en');
+                                    let linkOrderData = this.$('.sortable-creative-service').sortable('serialize');
+                console.log('Sortable here...');
+                console.log(linkOrderData);
                 }
                 else{
                     this.$('.sortable-agency-service').sortable("disable");
@@ -71,7 +82,6 @@ export class AgencyService {
         }
         
         add(){
-            this.template.source = this.data.length;
             this.data.push(this.template)
         }
         style(){

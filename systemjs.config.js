@@ -27,7 +27,7 @@
       'angular-sortablejs': 'node_modules/angular-sortablejs/dist/',
       'sortablejs/Sortable.min': 'node_modules/sortablejs/Sortable.min.js',
       // 'angular2-image-upload': 'npm:angular2-image-upload/index.js',
-
+      'ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
       // other libraries
       'rxjs':                       'npm:rxjs',
     },

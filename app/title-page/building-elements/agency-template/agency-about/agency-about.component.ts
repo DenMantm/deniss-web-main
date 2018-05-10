@@ -15,12 +15,45 @@ export class AgencyAbout {
     @Input() pageData:any;
     @Input() filteredItemList:any;
     @ViewChild('uploadImages') modal:any;
+    template:any;
     background(){
        this.modal.openModal();
    }
     constructor(@Inject(JQUERY_TOKEN) private $,private auth:AuthService){
     }
     ngOnInit(){
+                this.template =  {
+            "title": "2009-2011 Our Humble Beginnings",
+            "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!",
+            "img": "app/assets/bootstrap-templates/img-tmp2/about/1.jpg"
+        };
+        }
+                    ngAfterViewInit(){
+            this.$('.sortable-about').sortable({
+                cancel: ':input,button,.editable',
+                update: (event, ui) => {
+                            let linkOrderData = this.$(".sortable-about").sortable("toArray",{attribute:'data'});
+                            let tmpArray = []
+                            linkOrderData.forEach( item =>{tmpArray.push(this.pageData.data[item])});
+                            this.pageData.data = tmpArray;
+                            }
+            });
+            this.$('.sortable-about').sortable("disable");
+        }
+        ngOnChanges(){
+            if(this.showElementTools != undefined){
+                if(this.showElementTools){
+                    this.$('.sortable-about').sortable('enable');
+                }
+                    
+                else
+                    this.$('.sortable-about').sortable("disable");
+            }
+        }
+    
+    
+        add(){
+            this.pageData.data.push(this.template)
         }
     loginCheck(){
        //console.log(this.auth.isAuthenticated());

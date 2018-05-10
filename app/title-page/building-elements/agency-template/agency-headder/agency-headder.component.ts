@@ -26,12 +26,7 @@ export class AgencyHeadder {
         add(){
             console.log('add');
         }
-        style(){
-            console.log('style');
-        }
-        remove(){
-            console.log('remove');
-        }
+
        loginCheck(){
        //console.log(this.auth.isAuthenticated());
        return this.auth.isAuthenticated();

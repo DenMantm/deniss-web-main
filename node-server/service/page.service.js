@@ -8,8 +8,13 @@ exports.generateTitlePage = function(){
 
 
 let rewritePageContent = function(){
+}
+
+exports.addSimplePage = function(req,res){
     
 }
+
+
 
 exports.assembleTemplate = function(pageData){
         

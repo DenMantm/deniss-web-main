@@ -12,11 +12,11 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <ul class="timeline">
-          <li *ngFor="let item of pageData?.data;let i = index" [ngClass]="{'timeline-inverted':i%2==1}">
+        <ul class="timeline sortable-about">
+          <li *ngFor="let item of pageData?.data;let i = index" [ngClass]="{'timeline-inverted':i%2==1}" [attr.data]=i>
 
             <div class="timeline-image">
-              <change-images [filteredItemList]="filteredItemList" *ngIf="showElementTools" [image]="item"></change-images>
+              <change-images [toggleIcons]="true" [pageData]="pageData" [removableItem]="item" [filteredItemList]="filteredItemList" *ngIf="showElementTools" [image]="item"></change-images>
               <img class="rounded-circle img-fluid" src="{{item.img}}" alt="">
             </div>
             <div class="timeline-panel">

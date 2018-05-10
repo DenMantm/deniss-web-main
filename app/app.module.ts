@@ -1,11 +1,11 @@
-
+import {Ng2PageScrollModule,PageScrollService} from 'ng2-page-scroll';
 import './rxjs-extemtions';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule,ActivatedRouteSnapshot} from '@angular/router'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-
+import {ButtonOptions} from './button-options/index';
 
 import { MyAppComponent} from './my-app.component';
 import { AgencyNavComponent} from './nav/index';
@@ -72,6 +72,7 @@ import { appRoutes } from './routes'
 declare let jQuery:Object;
 declare let moment:Object;
 
+
 // declare let metro:Object;
 import {enableProdMode} from '@angular/core';
 enableProdMode();
@@ -80,7 +81,8 @@ enableProdMode();
             RouterModule.forRoot(appRoutes),
             FormsModule,
             ReactiveFormsModule,
-            HttpModule],
+            HttpModule,
+            Ng2PageScrollModule.forRoot()],
     declarations:[LayoutEditor,
                     AgencyNavComponent,
                     Error404Component,
@@ -114,7 +116,8 @@ enableProdMode();
                     ViewUploadedImages,
                     Base64UploadComponent,
                     ChangeImages,
-                    BlogInfo
+                    BlogInfo,
+                    ButtonOptions
                     ],
     providers: [AuthService,
                 FirstPageGuard,

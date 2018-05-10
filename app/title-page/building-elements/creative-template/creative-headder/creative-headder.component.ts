@@ -28,6 +28,9 @@ export class CreativeHeadder {
        //console.log(this.auth.isAuthenticated());
        return this.auth.isAuthenticated();
    }
+           add(){
+            console.log('add');
+        }
 
     
 }

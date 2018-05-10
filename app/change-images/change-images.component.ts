@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare var PR;
 declare var $;
+declare var swal;
 @Component({
     selector: 'change-images',
     templateUrl: 'app/change-images/change-images.component.html',
@@ -22,10 +23,16 @@ export class ChangeImages {
     sufix:any;
     @Input() image:any;
     @Input() filteredItemList:any;
+    
+    @Input() pageData:any;
+    @Input() removableItem:any;
+    @Input() toggleIcons:any;
+    
     imageOption:boolean=true;
     filteredItemListObj:any;
     
     @ViewChild('uploadModal') el:ElementRef;
+    @ViewChild('iconModal') icoel:ElementRef;
     @ViewChild('previewImage') imgEle:ElementRef;
     @ViewChild('cp2') cp:ElementRef;
     
@@ -68,6 +75,9 @@ export class ChangeImages {
     openModal(){
         $(this.el.nativeElement).modal('show');
     }
+    openIconModal(){
+         $(this.icoel.nativeElement).modal('show'); 
+    }
     
     changeItemGroup(group){
                         this.filteredItemListObj = this.itemList.filter(i=>i.itemGroup == group);
@@ -88,6 +98,9 @@ export class ChangeImages {
         }
         this.modalActive = !this.modalActive;
     }
+    
+  
+    
     
     back(){
         this.selectedIndex--;
@@ -130,16 +143,34 @@ export class ChangeImages {
       };
     }
   }
+  remove(){
+      
+              swal({
+          title: "Are you sure?",
+          text: "Remove element?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes",
+          cancelButtonText: "Cancel",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        (isConfirm)=> {
+          if (isConfirm) 
+            this.pageData.data.splice(this.pageData.data.indexOf(this.removableItem), 1);
+          
+        });
+      
+      
+  }
+  changeIcon(element){
+      
+      console.log(element.srcElement.parentNode.parentNode.firstElementChild.firstElementChild.attributes.class.nodeValue.slice(3))
+      this.removableItem.icon = element.srcElement.parentNode.parentNode.firstElementChild.firstElementChild.attributes.class.nodeValue.slice(3);
+      $(this.icoel.nativeElement).modal('hide');
+  }
   
-  //changing the color here...
-//   changeColor(color){
-//         this.pageData.background.image = "";
-//         this.pageData.background.color = color;
-//         //this.changeImage.emit(this.currentElement.itemName);
-//         $(this.el.nativeElement).modal('hide');
-      
-      
-//   }
         
     
         

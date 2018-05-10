@@ -12,10 +12,10 @@
             <h3 class="section-subheading text-muted editable" [(contenteditableModelHtml)]="pageData?.title.subtitle">{{pageData?.title.subtitle}}</h3>
           </div>
         </div>
-        <div class="row">
+        <div class="row sortable-agency-portfolio" >
           
-          <div *ngFor="let item of pageData?.data;let i = index" class="col-md-4 col-sm-6 portfolio-item">
-            <change-images [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
+          <div *ngFor="let item of pageData?.data;let i = index" class="col-md-4 col-sm-6 portfolio-item" [attr.data]=i>
+            <change-images [pageData]="pageData" [removableItem]="item" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
             <a class="portfolio-link" data-toggle="modal" href="{{'#portfolioModal'+i+pageData?.elementSequence}}">
               <div class="portfolio-hover">
                 <div class="portfolio-hover-content">
@@ -52,7 +52,7 @@
                   <!-- Project Details Go Here -->
                   <h2 class="text-uppercase editable"[(contenteditableModelHtml)]="item.modal.title">{{item.modal.title}}</h2>
                   <p class="item-intro text-muted editable"[(contenteditableModelHtml)]="item.modal.subtitle">{{item.modal.subtitle}}</p>
-                  <change-images [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
+                  <change-images [toggleIcons]="true" [pageData]="pageData" [removableItem]="item" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
                   <img class="img-fluid d-block mx-auto" src="{{item.modal.bigImage.img}}" alt="">
                   <p class="editable"[(contenteditableModelHtml)]="item.modal.text">{{item.modal.text}}</p>
                   <!--<ul class="list-inline">-->

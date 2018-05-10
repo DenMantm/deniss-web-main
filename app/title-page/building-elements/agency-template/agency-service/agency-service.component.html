@@ -19,13 +19,14 @@
         </div>
         <div class="row text-center sortable-agency-service">
           
-          <div *ngFor="let ele of data" class="col-md-4">
+          <div *ngFor="let ele of data;sortable-agency-service" class="col-md-4" [attr.data]=i>
+            <change-images [toggleIcons]="false" [pageData]="pageData" [removableItem]="ele" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]=""></change-images>
             <span class="fa-stack fa-4x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa {{ele.icon}} fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading" class='editable' [(contenteditableModelHtml)]="data.heading" [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele.heading}}</h4>
-            <p class="text-muted" class='editable' [(contenteditableModelHtml)]="data.text" [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele.text}}</p>
+            <h4 class="service-heading" class='editable' [(contenteditableModelHtml)]="ele.heading" [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele?.heading}}</h4>
+            <p class="text-muted" class='editable' [(contenteditableModelHtml)]="ele.text" [ngClass]="{'border': loginCheck()&&showElementTools}">{{ele?.text}}</p>
           </div>
           
           <!--<div class="col-md-4">-->

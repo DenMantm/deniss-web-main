@@ -10,11 +10,11 @@
         <h3 class="section-subheading text-muted editable" [(contenteditableModelHtml)]="pageData?.title.subtitle">{{pageData?.title.subtitle}}</h3>
       </div>
     </div>
-    <div class="row">
+    <div class="row sortable-amazing-team">
 
-      <div *ngFor="let item of pageData?.data" class="col-sm-4">
+      <div *ngFor="let item of pageData?.data;let i = index" class="col-sm-4" [attr.data]=i>
         <div class="team-member">
-          <change-images [filteredItemList]="filteredItemList"  *ngIf="showElementTools" [image]="item"></change-images>
+          <change-images [toggleIcons]="true" [pageData]="pageData" [removableItem]="item" [filteredItemList]="filteredItemList"  *ngIf="showElementTools" [image]="item"></change-images>
           <img class="mx-auto rounded-circle" src="{{item.img}}" alt="">
           <h4 class="editable" [(contenteditableModelHtml)]="item.title">{{item.title}}</h4>
           <p class="text-muted editable" [(contenteditableModelHtml)]="item.subtitle">{{item.subtitle}}</p>
