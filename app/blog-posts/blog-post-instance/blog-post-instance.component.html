@@ -1,5 +1,23 @@
  <!-- Main component for a primary marketing message or call to action -->
 <content-edit-nav *ngIf="loginCheck()" [editPressed]="showElementTools" (editClick)="editClick()" (disableClick)="disableClick()" (saveClick)="saveClick()"></content-edit-nav>
+<agency-nav [pageData]="pageData"></agency-nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('app/assets/bootstrap-templates/blog-template/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading title animated fadeIn">
+                        <h1 [ngClass]="{'border': loginCheck()&&showElementTools}" [(contenteditableModelText)]="blogPost.title" class="editable">Man must explore, and this is exploration at its greatest</h1>
+                        <h2 [ngClass]="{'border': loginCheck()&&showElementTools}" class="subheading editable" [(contenteditableModelHtml)]="blogPost.description">Problems look mighty small from 150 miles up</h2>
+                        <span class="meta">Posted by <a href="#">{{blogPost?.author}}</a> {{blogPost?.date | date: 'dd/MM/yyyy at HH:MM'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
 
 <div class="container main-container">
 

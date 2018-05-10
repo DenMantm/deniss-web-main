@@ -19,7 +19,7 @@ export const appRoutes:Routes = [
     {path:'blog-posts/:blogId',
      component:BlogPostInstanceComponent,
      canDeactivate: [CanDeactivateGuard],
-     resolve:{BlogPost:BlogPostInstanceResolverService,User:UserLoggedInResolver},
+     resolve:{BlogPost:BlogPostInstanceResolverService,User:UserLoggedInResolver,titlePageModel:TitlePageResolverService},
      data: { blogId: ':blogId' }
     },
     {path:'snippet-repository',

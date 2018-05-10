@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, Renderer, Inject, } from '@angular/core';
+import { Component, HostListener, OnInit, Renderer, Inject,Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../user/auth.service';
 import { IUser } from '../../user/user.model';
@@ -24,6 +24,7 @@ export class BlogPostInstanceComponent implements OnInit {
     lastStateBlogPost:any;
     showElementTools:boolean
     editor:any
+    pageData:any;
 
 constructor(private auth:AuthService,
 			@Inject(JQUERY_TOKEN) private $,
@@ -36,7 +37,8 @@ constructor(private auth:AuthService,
 //form
     ngOnInit(){
        this.currentUser = this.route.snapshot.data['User'];
-       this.route.data.subscribe((res:any)=>{ 
+       this.route.data.subscribe((res:any)=>{
+           this.pageData = JSON.parse(res['titlePageModel']._body)
            this.blogPost =  JSON.parse(res['BlogPost']._body);
            this.lastStateBlogPost = JSON.parse(res['BlogPost']._body);
        })
