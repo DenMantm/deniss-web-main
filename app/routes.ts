@@ -39,4 +39,4 @@ export const appRoutes:Routes = [
     {path:'title-page',component:TitlePageComponent,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,titlePageModel:TitlePageResolverService}},
     { path: '404', component: Error404Component },
     {path:'', redirectTo:'/title-page', pathMatch:'full'},
-    {path:'pages/testpage',component:pages.testpage ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService}},];
+{path:'pages/MyfirstPage',component:pages.MyfirstPage ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService}},];

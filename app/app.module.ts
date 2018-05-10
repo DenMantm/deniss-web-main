@@ -86,7 +86,7 @@ enableProdMode();
             ReactiveFormsModule,
             HttpModule,
             Ng2PageScrollModule.forRoot()],
-    declarations:[pages.testpage,
+    declarations:[pages.MyfirstPage,
 LayoutEditor,
                     AgencyNavComponent,
                     Error404Component,
