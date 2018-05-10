@@ -11,6 +11,7 @@ import {FirstPageGuard,LoggedInGuard, CanDeactivateGuard } from './common/index'
 
 import { UserLoggedInResolver } from './user/index'
 
+import * as pages from './other-pages/index';
 //canDeactivate:['canDeactivateCreateEvent'],
 
 export const appRoutes:Routes = [
@@ -35,10 +36,7 @@ export const appRoutes:Routes = [
                  currentSgroup:SnippetRepResolverService,
                  User:UserLoggedInResolver
     }},
-    {path:'title-page',component:TitlePageComponent,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,
-                                                                                         User:UserLoggedInResolver,
-                                                                                         titlePageModel:TitlePageResolverService
-    }},
+    {path:'title-page',component:TitlePageComponent,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,titlePageModel:TitlePageResolverService}},
     { path: '404', component: Error404Component },
-    {path:'', redirectTo:'/title-page', pathMatch:'full'}
-    ];
+    {path:'', redirectTo:'/title-page', pathMatch:'full'},
+    {path:'pages/testpage',component:pages.testpage ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService}},];

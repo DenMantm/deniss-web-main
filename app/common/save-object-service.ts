@@ -189,9 +189,7 @@ export class SaveObjectService{
                 }
                 
                 console.log(!!JSON.parse(res._body).error);
-                
-                
-                
+
         });
     }
     
@@ -215,5 +213,36 @@ export class SaveObjectService{
         return this.http.post('/api/changeTitlePageAlignment',JSON.stringify(titlePageDataModel),options);
     }
     
+    generateNewPage(params){
+        
+                let headers = new Headers({'Content-Type':'application/json'});
+        let options = new RequestOptions({headers:headers});
 
-}
+        return this.http.post('/api/generateNewPage',JSON.stringify(params),options);
+        
+    }
+    
+        loadSimplePageModel(page){
+         let params: URLSearchParams = new URLSearchParams();
+         params.set('pageType', page);
+
+        return this.http.get('/api/getPageData',{search: params}).do((res:any) => {
+                //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    
+                }
+        });
+    }
+    
+    
+    
+        
+    }
+    
+    
+    
+    
+

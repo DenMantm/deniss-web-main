@@ -1,4 +1,4 @@
-var fs = require('fs');
+var fs = require('fs-extra');
 var page = require('../database/models/page');
 
 exports.generateTitlePage = function(){
@@ -10,9 +10,82 @@ exports.generateTitlePage = function(){
 let rewritePageContent = function(){
 }
 
+
 exports.addSimplePage = function(req,res){
     
+    console.log(req.body);
+    
+    let moduleName = req.body.navbarName + Math.random().toString(36).substring(7);
+    
+    moduleName = moduleName.replace(/[^A-Z]+/ig, "").replace(/\s/g, "");
+    
+    console.log(moduleName)
+    //1. Copy and rename the folder
+    let path = __dirname+'/../../app/other-pages/';
+    let newname = "testpage";
+    
+    fs.copySync(path+'template', path+newname);
+     //copies directory, even if it has subdirectories or files
+    //2. Rename module in module file
+    let moduleFile = readFile(path+newname+'/simple-page.component.ts');
+    let resFile = moduleFile.replace('TitlePageComponent',newname);
+    writeFile(path+newname+'/simple-page.component.ts',resFile);
+    
+    //3. Add module to index.ts
+    let index = readFile(path+'/index.ts');
+    index = index + "export * from './"+newname+"/simple-page.component';"+"\r\n";
+    writeFile(path+'/index.ts',index);
+    
+    //4. Adjust string path in configuration file
+    
+    let configuration = `export var componentData = 
+                    {
+                        templateUrl : "./app/other-pages/${newname}/simple-page.component.html",
+                    	styleUrls :["./app/other-pages/shared/simple-page.component.css"]
+                    }`
+    writeFile(path+newname+'/configuration.ts',configuration);
+    
+    //4. Add module to app.module
+    
+    let appModule = readFile(path+'/../app.module.ts');
+    
+    appModule = appModule.replace('declarations:[',`declarations:[pages.${newname},`+"\r\n")
+    writeFile(path+'/../app.module.ts',appModule);
+    //5. Add module to routes
+    
+    let routeAddition = `{path:'pages/${newname}',component:pages.${newname} ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService}},`
+    
+    let routeFile = readFile(path+'/../routes.ts');
+    routeFile = routeFile.replace('];','');
+    routeFile += routeAddition + '];';
+    writeFile(path+'/../routes.ts',routeFile);
 }
+
+function readFile(filename){
+    return fs.readFileSync(filename, 'utf8');
+//     fs.readFile(filename, 'utf8', function(err, data) {
+//   if (err) {
+//       console.log('errorr');
+//      // throw err;
+//       return readFile(filename);
+//       //throw err;
+//   }
+//       console.log('OK: ' + filename);
+//       //console.log(data)
+//       return data;
+// });
+}
+function writeFile(filename,data){
+    fs.writeFile(filename, data, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+}); 
+    
+}
+
 
 
 

@@ -10,11 +10,9 @@
   <div class="modal-content" [style.top]="top">
     <span (click)="toggleModal()" data-dismiss="modal" class="close" style="text-align: right !important" >&times;</span>
     <div class="container">
-     
-
           <div class="row">
           <div class="col-md-12">
-            <h3>Adding new item:</h3>
+            <h3>Adding new page</h3>
           </div>
           </div>
           
@@ -28,39 +26,47 @@
      
      
      <div class="row">
-      <div class="col-sm-1">
-       <button [disabled]="selectedIndex==0" (click)="back()" class="button cycle-button primary"><<</button>
-       </div>
-       <div class="col-md-10">
-         <div id="car_m_2_thumbs" class="padding20 bg-grayLighter align-center">
-
-                         <!--[ngStyle]="{ 'background-image': 'url('+prefix+ item.itemName+ sufix+';);' }"-->
-                         <img class="shadow hand" (click)="changeTroughPicture(item)" *ngFor="let item of filteredItemList" src="{{prefix+ item.itemName+ sufix}}" style="width: 20%; height: 20%;display:inline;margin-left:5px;">
-
-   
+       <div class="col-md-12">
+                <form class='new-page-form' [formGroup]="newPageForm" (ngSubmit)="createNewPage(newPageForm.value)">
+                <!--<input [ngClass]="{'inputError': !validInputField(subdomainName) }" type="text" formControlName="subdomainName" name="subdomainName" placeholder="Please type in subdomain name">-->
+                   <div class="form-group">
+                        <label for="domainInput">Page name in nav
+                        	<a (click)='hint("This is the title under which page will apear in the navbar")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
+								?
+							</a>
+                        </label>
+                         <em class="error animated fadeIn left" [hidden]="validInputField(navbarName)">This field is required</em>
+                        <input [ngClass]="{'inputError': !validInputField(navbarName) }" formControlName="navbarName" name="navbarName" type="text" class="form-control" id="domainInput" aria-describedby="domainName"  placeholder="Please type in subdomain name">
+                        <small class="form-text text-muted">please spectify how page will appear in navbar</small>
+                   </div>
+                   
+                   <div class="form-group">
+                    <label for="applicationType">Page Type
+                    <a (click)='hint("Selecting the application type","Currently there are two application types supported: \n 1. CMS Lite - This application is our own make and is recomended for novice users \n 2. Grav CMS - This is third party website builder solution that is not that user friendly")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
+								?
+							</a>
+                    </label>
+                    <em class="error animated fadeIn left" [hidden]="validInputField(pageType)">Please select page Type to create</em>
+                    <select formControlName="pageType" name="pageType" class="form-control" id="pageType">
+                      <option value="template1">Simple template</option>
+                      <option value="template2">Advanced Template</option>
+                    </select>
+                  </div>
+                  
+                		<input [disabled]="newPageForm.invalid"  type="submit" name="Create Web Application" class="login loginmodal-submit" value="Create">
+                		<input  type="button" data-dismiss="modal" name="Cancel" class="login loginmodal-submit" value="Cancel">
+				  </form>
+       
          </div>
-        
             <!--Control buttons in order to select the items-->
-       </div>
-       <div class="col-sm-1">
-       <button [disabled]="selectedIndex==filteredItemList?.length-1" (click)="forward()" class="button cycle-button primary">>></button>
-       </div>
-      
-     </div>
-     <div class="row">
-        <div class="col-md-12">
-        <img src="{{currentImage}}" style="height:100%">
-            <!--Control buttons in order to select the items-->
-       </div>
-      
-     </div>
+         </div>
      
-          <div class="row">
-          <div class="col-md-12">
-           <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
-           <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>
-          </div>
-     </div>
+    <!--<div class="row">-->
+    <!--      <div class="col-md-12">-->
+    <!--       <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>-->
+    <!--       <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>-->
+    <!--      </div>-->
+    <!-- </div>-->
      </div>
     
 

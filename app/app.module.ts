@@ -75,6 +75,9 @@ declare let moment:Object;
 
 // declare let metro:Object;
 import {enableProdMode} from '@angular/core';
+
+import * as pages from './other-pages/index';
+
 enableProdMode();
 @NgModule({
     imports:[BrowserModule,
@@ -83,7 +86,8 @@ enableProdMode();
             ReactiveFormsModule,
             HttpModule,
             Ng2PageScrollModule.forRoot()],
-    declarations:[LayoutEditor,
+    declarations:[pages.testpage,
+LayoutEditor,
                     AgencyNavComponent,
                     Error404Component,
                     TitlePageComponent,
@@ -140,7 +144,8 @@ enableProdMode();
                 LayoutEditorService,
                 HtmlToCanvasService,
                 ImageObjectService,
-                ImageResolverService
+                ImageResolverService,
+                pages.SimplePageResolverService
     ],
     bootstrap:[MyAppComponent]
 })

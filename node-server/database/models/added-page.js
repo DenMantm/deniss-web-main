@@ -8,8 +8,9 @@ var addedPage = mongoose.Schema({
     name : String, // title, simple
     modulePath : String,
     moduleName : String,
+    routerAddedString : String,
+    appModuleAddedString : String
 });
-
 
 
 // create the model for users and expose it to our app

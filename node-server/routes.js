@@ -5,6 +5,7 @@ var fs = require('fs');
 
 var dbIO = require('./service/database-io.service');
 var fileUpload = require('./service/file-upload.service');
+var pageService = require('./service/page.service');
 
 module.exports = function(app) {
   //Custom paths
@@ -29,6 +30,12 @@ module.exports = function(app) {
   //manipulating images
   app.get('/api/getImageList', dbIO.getImageList);
   app.post('/api/upload', fileUpload.uploadImg);
+  
+  
+  //create new pages here
+  app.post('/api/generateNewPage', pageService.addSimplePage);
+  
+  //app.post('/api/getSimplePage',dbIO.getSimplePage);
   
   //app.get('/api/getTitlePageData',dbIO.getTitlePageData);
   
@@ -74,6 +81,11 @@ module.exports = function(app) {
   });
   
     app.get('/title-page', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../index.html'));
+  });
+  
+  //all user created pages
+      app.get('/pages/*', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
 
