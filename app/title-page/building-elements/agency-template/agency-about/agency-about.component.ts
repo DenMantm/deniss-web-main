@@ -53,7 +53,7 @@ export class AgencyAbout {
     
     
         add(){
-            this.pageData.data.push(this.template)
+            this.pageData.data.push(JSON.parse(JSON.stringify(this.template)))
         }
     loginCheck(){
        //console.log(this.auth.isAuthenticated());

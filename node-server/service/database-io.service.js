@@ -589,10 +589,30 @@ exports.initializeTitlePage = function(req, res) {
 
     var p = new page();
     p.pageName = "Title Page";
+    p.blog =  {"isActive":true,
+            "background": {
+                "color": "",
+                "image": "app/assets/bootstrap-templates/blog-template/home-bg.jpg"
+            },
+            "data": "",
+            "title": {
+                "title": "Blog",
+                "subtitle": "A Clean Blog",
+                "background": "./app/assets/bootstrap-templates/img-tmp1/header.jpg",
+                "buttonLink": "#"
+            },
+            "elementSequence": 0,
+            "elementTmpType": "headder",
+            "navName": "Headder",
+            "includeInNav": false,
+            "elementTmpName": "creative-headder"
+        },
+    
     p.navbarElement = {
         "elementTmpName": "agency-nav",
         "elementTmpType": "nav",
-        "elementSequence": '',
+        "elementSequence": "",
+        "enableBlog":true,
         "title": { "title": "title", "subtitle": "subtitle" },
         "data": dataAgencyNavbar,
         "background": { "color": "", "image": "" }

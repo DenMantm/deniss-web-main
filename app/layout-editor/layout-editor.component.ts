@@ -185,7 +185,7 @@ export class LayoutEditor {
                     this.pageData.navbarElement.data.additionalElements[i].elements = [];
                     
                     if(this.pageData.includeInNav){
-                        this.pageData.navbarElement.data.additionalElements[i].elements.push({"navName":this.pageData.title,"slideTo":'#'})
+                        this.pageData.navbarElement.data.additionalElements[i].elements.push({"navName":this.pageData.title,"slideTo":'#top_of_page'})
                     }
                     
                     

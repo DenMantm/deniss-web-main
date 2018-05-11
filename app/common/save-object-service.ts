@@ -202,7 +202,16 @@ export class SaveObjectService{
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new RequestOptions({headers:headers});
 
-        return this.http.post('/api/savePageModel',JSON.stringify({data:pageModel,pageType:pageType}),options);
+        return this.http.post('/api/savePageModel',JSON.stringify({data:pageModel,pageType:pageType}),options).do((res:any) => {
+                //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    this.notify.error('there was an error...');
+                }
+                else this.notify.success('Page model have been saved...');
+        });
     }
     removeSimplePage(pageType){
                         //spin authentication here and if succesfull
@@ -245,7 +254,7 @@ export class SaveObjectService{
                 
                 //in case if there is an error and there is no title page..
                 if(!!JSON.parse(res._body).error){
-                    
+                    this.notify.error('there was an error...');
                     console.log('error');
                     //ideally throw user to the page where he can initialize title page,
                     //for now it will just initialize title page
@@ -260,7 +269,7 @@ export class SaveObjectService{
                 
                 //in case if there is an error and there is no title page..
                 if(!!JSON.parse(res._body).error){
-                    
+                    this.notify.error('there was an error...');
                     console.log('error');
                     //ideally throw user to the page where he can initialize title page,
                     //for now it will just initialize title page
@@ -272,11 +281,22 @@ export class SaveObjectService{
     
     
     generateNewPage(params){
-        
-                let headers = new Headers({'Content-Type':'application/json'});
+        let headers = new Headers({'Content-Type':'application/json'});
         let options = new RequestOptions({headers:headers});
 
-        return this.http.post('/api/generateNewPage',JSON.stringify(params),options);
+        return this.http.post('/api/generateNewPage',JSON.stringify(params),options).do((res:any) => {
+                //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    this.notify.error('there was an error...');
+                }
+                else{
+                    window.location.reload();
+                   // this.router.navigate(['title-page']);
+                } 
+        });
         
     }
     
@@ -290,7 +310,7 @@ export class SaveObjectService{
                 
                 //in case if there is an error and there is no title page..
                 if(!!JSON.parse(res._body).error){
-                    
+                    this.notify.error('there was an error...');
                 }
         });
     }

@@ -1,7 +1,7 @@
    <!--This page have been formed from the bootstrap templates, REF: https://github.com/BlackrockDigital-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Welcome to my page</a>
+        <a class="navbar-brand js-scroll-trigger" [routerLink]="['/title-page']" pageScroll  href="#top_of_page">Home</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -24,9 +24,7 @@
               <li *ngFor="let ele of page.elements" class="nav-item">
                 <a class="nav-link js-scroll-trigger" [routerLink]="[page.page]" pageScroll  href="{{ele.slideTo}}">{{ele.navName}}</a>
               </li>
-            
-            
-            
+
             <!--<li class="nav-item">-->
             <!--  <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>-->
             <!--</li>-->
@@ -43,6 +41,13 @@
             <!--  <a class="nav-link js-scroll-trigger" routerLink="/blog-posts">Blog</a>-->
             <!--</li>-->
           </ul>
+          
+            <ul *ngIf="pageData.navbarElement.enableBlog" class="navbar-nav text-uppercase ml-auto">
+              <li  class="nav-item">
+                <a class="nav-link js-scroll-trigger" [routerLink]="['/blog-posts']" pageScroll  href="#top_of_page">Blog Section</a>
+              </li>
+            </ul>
+          
         </div>
       </div>
     </nav>

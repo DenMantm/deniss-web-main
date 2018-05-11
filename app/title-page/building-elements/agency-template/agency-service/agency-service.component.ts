@@ -82,7 +82,7 @@ export class AgencyService {
         }
         
         add(){
-            this.data.push(this.template)
+            this.pageData.data.push(JSON.parse(JSON.stringify(this.template)))
         }
         style(){
             console.log('style');

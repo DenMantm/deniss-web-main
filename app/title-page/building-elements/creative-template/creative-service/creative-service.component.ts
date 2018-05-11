@@ -78,7 +78,7 @@ export class CreativeService {
     
         add(){
             this.template.sequence = this.data.length;
-            this.data.push(this.template)
+            this.pageData.data.push(JSON.parse(JSON.stringify(this.template)))
         }
         style(){
             console.log('style');

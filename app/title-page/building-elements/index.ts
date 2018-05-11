@@ -9,3 +9,4 @@ export * from './creative-template/creative-service/creative-service.component'
 export * from './creative-template/creative-portfolio/creative-portfolio.component'
 
 export * from './blog-template/blog-info/blog-info.component'
+export * from './blog-template/blog-headder/blog-headder.component'

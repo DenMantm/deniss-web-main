@@ -9,14 +9,15 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="margin:auto;">
                     <div class="site-heading">
-                        <h1>Clean Blog</h1>
+                        <h1>Blog</h1>
                         <hr class="small">
-                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                        <!--<span class="subheading">A Clean Blog Theme by Start Bootstrap</span>-->
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    
 
     <!-- Main Content -->
     <div class="container">
@@ -31,7 +32,7 @@
                 
                 <div *ngFor="let post of blogPostList">
                 <div class="post-preview" >
-                    <a [routerLink]="['/blog-posts',post._id]">
+                    <a [routerLink]="['/blog-posts',post._id] " pageScroll  href="#top_of_page">
                         <h2 class="post-title">
                             {{post.title}}
                         </h2>

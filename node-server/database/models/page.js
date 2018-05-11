@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 
 var pageData = mongoose.Schema({
+        enableBlog:Boolean,
         background: Object,
         includeInNav  : Boolean,
         navName       : String,
@@ -16,6 +17,7 @@ var pageData = mongoose.Schema({
 
 
 var Page = mongoose.Schema({
+    blog:Object,
     title:String,
     includeInNav:Boolean,
     pageName : String,

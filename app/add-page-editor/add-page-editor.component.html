@@ -1,33 +1,33 @@
-<button (mouseenter) ="layoutButton=true"  (mouseleave)="layoutButton=false" type="button" data-toggle="modal" data-target="#add-page-modal" class="btn btn-warning btn-circle btn-xl edit-pages"><i class="fa fa-check"></i>
+<button (mouseenter)="layoutButton=true" (mouseleave)="layoutButton=false" type="button" data-toggle="modal" data-target="#add-page-modal" class="btn btn-warning btn-circle btn-xl edit-pages"><i class="fa fa-check"></i>
 </button>
 
 <button *ngIf="layoutButton" type="button" class="btn btn-warning btn-circle cover-xl edit-pages">__Manage Pages
 </button>
- <!--The Modal -->
- 
+<!--The Modal -->
+
 <div id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
-  
-  <div class="modal-content" [style.top]="top">
-    <span (click)="toggleModal()" data-dismiss="modal" class="close" style="text-align: right !important" >&times;</span>
-    <div class="container">
-          <div class="row">
-          <div class="col-md-12">
-            <h3>Adding new page</h3>
-          </div>
-          </div>
-          
-          <div class="row">
-          <div class="col-md-12">
-                 <div class="btn-group" role="group" aria-label="...">
-                  <button (click)="changeItemGroup(item)" *ngFor="let item of itemGroupList" type="button" class="btn btn-default">{{item}}</button>
-                </div>
-          </div>
-          </div>
-     
-     
-     <div class="row">
+ <div class="modal-content" [style.top]="top">
+  <span (click)="toggleModal()" data-dismiss="modal" class="close" style="text-align: right !important">&times;</span>
+  <div class="container">
+
+
+   <div class="tabcontrol" data-role="tabcontrol" data-open-target="#frame_3_1">
+    <ul class="tabs">
+     <li class="active"><a href="#frame_3_1" (click)="newPageOption=true;addSectionOption=false;uploadOption=false;">New Page Creation</a></li>
+     <li class=""><a href="#frame_3_2" (click)="newPageOption=false;addSectionOption=true;uploadOption=false;">Add Extra Section</a></li>
+     <!--<li class=""><a href="#frame_3_3" (click)="newPageOption=false;addSectionOption=false;uploadOption=true;">Upload And Select Image</a></li>-->
+    </ul>
+   
+     <div class="frame bg-grayLighter" [hidden]="!newPageOption">
+      <div class="row">
        <div class="col-md-12">
-                <form class='new-page-form' [formGroup]="newPageForm" (ngSubmit)="createNewPage(newPageForm.value)">
+        <h3>Add New Page</h3>
+       </div>
+       </div>
+       
+         <div class="row">
+       <div class="col-md-12" >
+                <form style="padding: 25px;" class='new-page-form' [formGroup]="newPageForm" (ngSubmit)="createNewPage(newPageForm.value)">
                 <!--<input [ngClass]="{'inputError': !validInputField(subdomainName) }" type="text" formControlName="subdomainName" name="subdomainName" placeholder="Please type in subdomain name">-->
                    <div class="form-group">
                         <label for="domainInput">Page name in nav
@@ -42,14 +42,14 @@
                    
                    <div class="form-group">
                     <label for="applicationType">Page Type
-                    <a (click)='hint("Selecting the application type","Currently there are two application types supported: \n 1. CMS Lite - This application is our own make and is recomended for novice users \n 2. Grav CMS - This is third party website builder solution that is not that user friendly")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
+                    <a (click)='hint("Selecting the application type","Currently there are two template types supported: \n 1. simple - This template will contain simple layour and is text oriented \n 2. Galery - This template consists of multiple images and is image oriented")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
 								?
 							</a>
                     </label>
                     <em class="error animated fadeIn left" [hidden]="validInputField(pageType)">Please select page Type to create</em>
                     <select formControlName="pageType" name="pageType" class="form-control" id="pageType">
-                      <option value="template1">Simple template</option>
-                      <option value="template2">Advanced Template</option>
+                      <option value="template_text">Text oriented template</option>
+                      <option value="template_galery">Galery Template</option>
                     </select>
                   </div>
                   
@@ -57,22 +57,52 @@
                 		<input  type="button" data-dismiss="modal" name="Cancel" class="login loginmodal-submit" value="Cancel">
 				  </form>
        
-         </div>
+         
             <!--Control buttons in order to select the items-->
          </div>
-     
-    <!--<div class="row">-->
-    <!--      <div class="col-md-12">-->
-    <!--       <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>-->
-    <!--       <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>-->
-    <!--      </div>-->
-    <!-- </div>-->
-     </div>
-    
+       
+       
 
-    
-    
-    
+      </div>
+     </div>
+     <!--id="frame_3_2"-->
+     <div class="frame bg-grayLighter" [hidden]="!addSectionOption">
+      <h3>Enable Additional Sections</h3>
+      <br/>
+      
+      <form [formGroup]="navForm" (ngSubmit)="change(navForm.value)">
+      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" formControlName="isInNav" name="isInNav">
+                        Enable Blogging Section:
+                      </label>
+      <br/>
+      <br/>
+      <input [disabled]="navForm.invalid" type="submit" name="selectItem" class="button success" value="Change section settings">
+
+     </form>
+      
+      
+      
+      
+     </div>
+     <div class="frame bg-grayLighter" [hidden]="!uploadOption">
+
+     </div>
+    </div>
+   </div>
+
+   <!--<div class="row">-->
+   <!--      <div class="col-md-12">-->
+   <!--       <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>-->
+   <!--       <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>-->
+   <!--      </div>-->
+   <!-- </div>-->
   </div>
-</div>
- <!--Button trigger modal -->
+
+
+
+
+
+ </div>
+
+<!--Button trigger modal -->

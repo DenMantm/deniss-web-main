@@ -36,7 +36,7 @@ export class AgencyPortfolio {
         };
     }
             add(){
-            this.pageData.data.push(this.template)
+           this.pageData.data.push(JSON.parse(JSON.stringify(this.template)))
         }
             ngAfterViewInit(){
                 
