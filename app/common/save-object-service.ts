@@ -247,6 +247,29 @@ export class SaveObjectService{
         return this.http.post('/api/saveNavBar',JSON.stringify(navbarModel),options);
     }
     
+    saveBlogSection(blogModel){
+        
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new RequestOptions({headers:headers});
+
+        return this.http.post('/api/saveBlogSection',JSON.stringify(blogModel),options).do((res:any) => {
+                //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    this.notify.error('there was an error...');
+                }
+                else this.notify.success('Page model have been saved...');
+        });
+        
+    }
+        
+    
+    
+    
+    
+    
     getNavBar(){
             return this.http.get('/api/getNavBar').do((res:any) => {
                 //error handling

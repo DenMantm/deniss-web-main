@@ -8,8 +8,8 @@
     <header [ngStyle]="{'background-image': 'url(' + pageData?.background.image + ')','background-color':pageData?.background.color}" class="masthead" id="{{pageData?.elementTmpName+pageData?.elementSequence}}">
       <div class="container">
         <div class="intro-text">
-          <div class="intro-lead-in editable" [(contenteditableModelHtml)]="pageData?.title.title">Welcome To Our St</div>
-          <div class="intro-heading text-uppercase editable" [(contenteditableModelHtml)]="pageData?.title.subtitle">It's Nice To Me</div>
+          <div class="intro-lead-in editable" [(contenteditableModelHtml)]="pageData?.title.title"  [ngClass]="{'border': loginCheck()&&showElementTools}">Welcome To Our St</div>
+          <div class="intro-heading text-uppercase editable" [(contenteditableModelHtml)]="pageData?.title.subtitle"  [ngClass]="{'border': loginCheck()&&showElementTools}">It's Nice To Me</div>
           <button-options *ngIf="showElementTools"></button-options>
           <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" href="#services">Tell Me More</a>
         </div>

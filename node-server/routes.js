@@ -42,6 +42,12 @@ module.exports = function(app) {
   app.get('/api/getNavBar', dbIO.getNavBar);
   app.get('/api/getFooter', dbIO.getFooter);
   
+  
+  //blog section model save
+  app.post('/api/saveBlogSection', dbIO.saveBlogSection);
+  
+  
+  
   //app.post('/api/getSimplePage',dbIO.getSimplePage);
   
   //app.get('/api/getTitlePageData',dbIO.getTitlePageData);

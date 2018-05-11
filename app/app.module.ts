@@ -22,7 +22,8 @@ import { TitlePageComponent,
         CreativeHeadder,
         CreativeService,
         CreativePortfolio,
-        BlogInfo
+        BlogInfo,
+        BlogHeadder
         } from './title-page/index';
 import { ProjectsPageComponent } from './projects/index';
 import {BlogPostsComponent, 
@@ -122,7 +123,8 @@ LayoutEditor,
                     Base64UploadComponent,
                     ChangeImages,
                     BlogInfo,
-                    ButtonOptions
+                    ButtonOptions,
+                    BlogHeadder
                     ],
     providers: [AuthService,
                 FirstPageGuard,

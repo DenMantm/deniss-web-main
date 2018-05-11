@@ -142,6 +142,7 @@ onWindowScroll(event) {
    
    
       editClick(){
+          
         console.log('edit click')
        //Extra variable here
        this.showElementTools = true;
@@ -205,10 +206,10 @@ onWindowScroll(event) {
     if (JSON.stringify(this.pageData) !== JSON.stringify(this.lastStateTitlePageModel) ) {
         
         // let userResponse = false;
-        let can;
-        swal({
+        
+        return swal({
           title: "Are you sure?",
-          text: "Discard changes?",
+          text: "You have unsaved changes!",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
@@ -220,18 +221,18 @@ onWindowScroll(event) {
         (isConfirm)=> {
           if (isConfirm) {
             //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            can = true;
+            return true;
             //userResponse = true;
           } else {
             //swal("Cancelled", "Your imaginary file is safe :)", "error");
             //userResponse = false;
-            can = false;
+            return false;
           }
         });
         //console.log(userResponse);
         
         
-        return can
+   
         
            // if(userResponse) this.showElementTools = false;
         

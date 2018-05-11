@@ -281,7 +281,7 @@ exports.addSimplePage = function(req, res) {
                         else {
                             
                             //save new item to navbar....
-                            pa.navbarElement.data.additionalElements.push({elements: [{navName: newname, slideTo: "#"}], page: "/pages/"+newname})
+                            pa.navbarElement.data.additionalElements.push({elements: [{navName: newname, slideTo: "#top_of_page"}], page: "/pages/"+newname})
                             
                                 page.findOneAndUpdate({ "pageType": "titlepage" }, { "navbarElement": pa.navbarElement }, { upsert: true }, function(err, pr) {
                                     if (err)

@@ -223,7 +223,6 @@ exports.savePageModel = function(req, res) {
 
 exports.saveNavBar = function(req, res){
     
-    
         page.findOneAndUpdate({ "pageType": "titlepage" }, { "navbarElement": req.body }, { upsert: true }, function(err, p) {
         if (err)
             return res.send({ error: err });
@@ -238,10 +237,28 @@ exports.saveNavBar = function(req, res){
         };
     });
     
+}
+
+exports.saveBlogSection = function(req, res){
     
-    
+        page.findOneAndUpdate({ "pageType": "titlepage" }, { "blog": req.body }, { upsert: true }, function(err, p) {
+        if (err)
+            return res.send({ error: err });
+        else if (!p) {
+            res.send('Error, no title page found');
+        }
+        else {
+            //assemble page from the model
+            p.blog = req.body;
+
+            res.json(p);
+        };
+    });
     
 }
+
+
+
 exports.getNavBar = function(req, res){
     
         page.findOne({ 'pageType': "titlepage" }, function(err, p) {
@@ -598,14 +615,14 @@ exports.initializeTitlePage = function(req, res) {
             "title": {
                 "title": "Blog",
                 "subtitle": "A Clean Blog",
-                "background": "./app/assets/bootstrap-templates/img-tmp1/header.jpg",
+                "background": "app/assets/bootstrap-templates/blog-template/home-bg.jpg",
                 "buttonLink": "#"
             },
             "elementSequence": 0,
             "elementTmpType": "headder",
             "navName": "Headder",
             "includeInNav": false,
-            "elementTmpName": "creative-headder"
+            "elementTmpName": "blog-headder"
         },
     
     p.navbarElement = {
