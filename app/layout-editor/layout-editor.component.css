@@ -10,8 +10,8 @@
 
 .btn-circle.btn-xl {
     z-index:1002;
-    width: 70px;
-    height: 70px;
+    width: 40px;
+    height: 40px;
     padding: 10px 16px;
     border-radius: 35px;
     font-size: 24px;
@@ -19,8 +19,8 @@
 }
 .btn-circle.cover-xl {
     z-index:1001;
-    width: 260px;
-    height: 70px;
+    width: 200px;
+    height: 40px;
     padding: 10px 16px;
     border-radius: 35px;
     font-size: 24px;
@@ -38,7 +38,12 @@
 }
 .edit-layout{
     position: fixed;
-    top:80px;
+    top:calc(45%);
+    left:10px;
+}
+.delete-button{
+    position: fixed;
+    top:calc(45% + 90px);
     left:10px;
 }
 

@@ -190,11 +190,6 @@ onWindowScroll(event) {
                     });
         	    
         	    
-        	    
-        	    
-        	    
-        	    
-        	    
         	}
         	else{
         	    swal("There is nothin to save, no schema changes made", "error");

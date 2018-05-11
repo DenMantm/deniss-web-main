@@ -13,6 +13,123 @@ exports.generateTitlePage = function() {
 let rewritePageContent = function() {}
 
 
+
+exports.removeSimplePage = function(req, res) {
+    
+    let pageType = req.body.pageType;
+    
+    if(pageType == 'titlepage'){
+        res.json({error:"cannot delete titlepage..."});
+        return;
+    }
+               
+            try{
+                eraseFiles(pageType);
+            }
+            catch(e){
+                eraseFiles(pageType);
+            }
+          
+            //remove database entry
+            page.find({ "pageType": pageType }).remove().exec();
+
+            //remove nav entry
+        page.findOne({ 'pageType': "titlepage" }, function(err, pg) {
+
+        if (err) {
+            return res.send({ error: err });
+        }
+        else if (!pg) {
+
+            // res.status(404)
+            // res.send('Error, blog post does not exist');
+            res.send({ error: "No page " + req.query.itemPage + " found..." });
+        }
+        else{
+            
+            
+            //res.json(pg.navbarElement);
+            
+            
+            let searchCondition = '/pages/'+pageType;
+            
+
+            for (let i = 0; i < pg.navbarElement.data.additionalElements.length; i++) {
+                if (pg.navbarElement.data.additionalElements[i].page == searchCondition) {
+                    
+                    let deleteIndex = pg.navbarElement.data.additionalElements.indexOf(pg.navbarElement.data.additionalElements[i]);
+                    pg.navbarElement.data.additionalElements.splice(deleteIndex,1);
+
+                }
+            }
+            
+            
+                    page.findOneAndUpdate({ "pageType": "titlepage" }, { "navbarElement": pg.navbarElement }, { upsert: true }, function(err, ppp) {
+                        if (err)
+                            return res.send({ error: err });
+                        else if (!ppp) {
+                            res.send('Error, no title page found');
+                        }
+                        else {
+                            //assemble page from the model
+                
+                            res.json(ppp);
+                        };
+                    });
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        } 
+    });
+            
+            
+            
+            
+            
+}
+
+function eraseFiles(pageType){
+    
+     //1. Remove module from routes
+    
+      let routeAddition = `{path:'pages/${pageType}',component:pages.${pageType} ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titleNav:pages.SimplePageNavResolverService,titleFooter:pages.SimplePageFooterResolverService}},`
+            let path = __dirname + '/../../app/other-pages/';
+            
+
+            let routeFile = readFile(path + '/../routes.ts');
+            routeFile = routeFile.replace(routeAddition, '');
+            writeFile(path + '/../routes.ts', routeFile);
+            
+            
+            //2. Remove module from app.module
+            let appModule = readFile(path + '/../app.module.ts');
+
+            appModule = appModule.replace(`pages.${pageType},` + "\r\n",'')
+            writeFile(path + '/../app.module.ts', appModule);
+                
+                
+            //3. Remove module from index.ts
+            let index = readFile(path + '/index.ts');
+            let replaceString = "export * from './" + pageType + "/simple-page.component';" + "\r\n";
+            index = index.replace(replaceString,'');
+
+            writeFile(path + '/index.ts', index);
+            
+            
+            //remove folder
+            fs.removeSync(path+pageType);
+    
+}
+
+
+
 exports.addSimplePage = function(req, res) {
 
 
@@ -117,7 +234,7 @@ exports.addSimplePage = function(req, res) {
                     
                     
                     let dataCreativeHeadder = {
-                        "title": newname,
+                        "title": req.body.navbarName,
                         "subtitle": "simplePage",
                         "background": {color: "", image: "app/assets/bootstrap-templates/img-tmp1/header.jpg"},
                         "buttonLink": "#"
@@ -141,7 +258,7 @@ exports.addSimplePage = function(req, res) {
                         },
                         {
                             "elementTmpName": "agency-service",
-                            "includeInNav": true,
+                            "includeInNav": false,
                             "navName": "Services",
                             "elementTmpType": "service",
                             "elementSequence": 1,

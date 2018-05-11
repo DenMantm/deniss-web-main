@@ -1,6 +1,0 @@
-<content-edit-nav *ngIf="loginCheck()" [editPressed]="showElementTools" (editClick)="editClick()" (disableClick)="disableClick()" (saveClick)="saveClick()"></content-edit-nav>
-<layout-editor *ngIf="loginCheck() && showElementTools" [pageData]="clonedPageData" ></layout-editor><agency-nav [pageData]="pageData"></agency-nav>
-<creative-headder [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[0]"></creative-headder>
-<agency-portfolio [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[1]"></agency-portfolio>
-<agency-amazing-team [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.pageData[2]"></agency-amazing-team>
-<agency-footer [pageData]="pageData"></agency-footer>

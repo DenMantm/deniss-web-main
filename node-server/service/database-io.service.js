@@ -243,6 +243,7 @@ exports.saveNavBar = function(req, res){
     
 }
 exports.getNavBar = function(req, res){
+    
         page.findOne({ 'pageType': "titlepage" }, function(err, p) {
 
         if (err) {
@@ -539,7 +540,7 @@ exports.initializeTitlePage = function(req, res) {
         { "title": "July 2014 Phase Two Expansion", "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!", "img": "app/assets/bootstrap-templates/img-tmp2/about/4.jpg" }
     ];
     let dataAgencyFooter = "";
-    let dataAgencyNavbar = { "additionalElements":  {
+    let dataAgencyNavbar = { "additionalElements": [ {
                     "page": "/title-page",
                     "elements": [
                         {
@@ -571,7 +572,7 @@ exports.initializeTitlePage = function(req, res) {
                             "slideTo": "#agency-about7"
                         }
                     ]
-                }, "title": "Template" };
+                }], "title": "Template" };
 
 
     //     <layout-editor *ngIf="loginCheck() && showElementTools" ></layout-editor>
@@ -703,5 +704,4 @@ exports.initializeTitlePage = function(req, res) {
             res.json(p);
         }
     });
-
 } //end of new title page generation block

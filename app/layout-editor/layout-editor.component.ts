@@ -4,10 +4,12 @@ import { AuthService } from '../user/index';
 import { LayoutEditorService } from './services/layout-editor.service';
 import { HtmlToCanvasService } from './services/html-to-canvas.service';
 import { SortablejsOptions, SortablejsModule } from 'angular-sortablejs';
+import { Router } from '@angular/router';
 
 
 declare var imagify
 declare var window
+declare var swal;
 @Component({
     selector: 'layout-editor',
     templateUrl: 'app/layout-editor/layout-editor.component.html',
@@ -25,7 +27,8 @@ export class LayoutEditor {
                 private auth:AuthService,
                 private ls:LayoutEditorService,
                 private img:HtmlToCanvasService,
-                private sv:SaveObjectService
+                private sv:SaveObjectService,
+                private router:Router,
                 ){
     }
     // ngOnInit(){
@@ -107,6 +110,46 @@ export class LayoutEditor {
        //console.log(this.auth.isAuthenticated());
        return this.auth.isAuthenticated();
    }
+   
+   
+   
+      removeSimplePage(){
+                           swal({
+                      title: "Are you sure?",
+                      text: "Save changes?",
+                      type: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#DD6B55",
+                      confirmButtonText: "Yes",
+                      cancelButtonText: "Cancel",
+                      closeOnConfirm: true,
+                      closeOnCancel: true
+                    },
+                    (isConfirm) => {
+                      if (isConfirm) {
+                        //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        //userResponse = true;
+                        
+                        this.sv.removeSimplePage(this.pageData.pageType).subscribe((res:any)=>{
+                            this.router.navigate(['title-page']);
+                        });
+                        //notify user that everything was saved here...
+
+                      } else {
+                        //swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        //userResponse = false;
+                      }
+                    });
+       
+   }
+   
+   
+   
+   
+   
+   
+   
+   
    reorder(){
        let sortedIDs = this.$( ".sortable" ).sortable( "toArray" );
        //algorithm to rearrange items here...

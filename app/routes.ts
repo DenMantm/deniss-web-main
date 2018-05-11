@@ -39,5 +39,4 @@ export const appRoutes:Routes = [
     {path:'title-page',component:TitlePageComponent,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,titlePageModel:TitlePageResolverService}},
     { path: '404', component: Error404Component },
     {path:'', redirectTo:'/title-page', pathMatch:'full'},
-{path:'pages/MyfirstPage',component:pages.MyfirstPage ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titleNav:pages.SimplePageNavResolverService,titleFooter:pages.SimplePageFooterResolverService}},
-                {path:'pages/New',component:pages.New ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titleNav:pages.SimplePageNavResolverService,titleFooter:pages.SimplePageFooterResolverService}},{path:'pages/SuperPage',component:pages.SuperPage ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titleNav:pages.SimplePageNavResolverService,titleFooter:pages.SimplePageFooterResolverService}},];
+];

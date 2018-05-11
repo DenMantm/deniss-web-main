@@ -204,6 +204,13 @@ export class SaveObjectService{
 
         return this.http.post('/api/savePageModel',JSON.stringify({data:pageModel,pageType:pageType}),options);
     }
+    removeSimplePage(pageType){
+                        //spin authentication here and if succesfull
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new RequestOptions({headers:headers});
+
+        return this.http.post('/api/removeSimplePage',JSON.stringify({pageType:pageType}),options);
+    }
     
     // changeTitlePageAlignment(titlePageDataModel){
         

@@ -32,8 +32,10 @@ module.exports = function(app) {
   app.post('/api/upload', fileUpload.uploadImg);
   
   
-  //create new pages here
+  //create and remove new pages here
   app.post('/api/generateNewPage', pageService.addSimplePage);
+  app.post('/api/removeSimplePage', pageService.removeSimplePage);
+  
   
   //navbar, footer manipulations here...
   app.post('/api/saveNavBar', dbIO.saveNavBar);

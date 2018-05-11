@@ -2,10 +2,17 @@
 
 <button (mouseenter) ="layoutButton=true"  (mouseleave)="layoutButton=false" type="button" data-toggle="modal" data-target="#layout-modal" class="btn btn-info btn-circle btn-xl edit-layout"><i class="fa fa-check"></i>
 </button>
-
 <button *ngIf="layoutButton" type="button" class="btn btn-info btn-circle cover-xl edit-layout">Edit Layout
 </button>
 
+<!--*ngIf="!pageData.pageType == 'titlepage'"-->
+<button (click)=removeSimplePage()  (mouseenter) ="deleteButton=true"  (mouseleave)="deleteButton=false" type="button" class="btn btn-danger btn-circle btn-xl delete-button"><i class="fa fa-check"></i>
+</button>
+<button (click)=removeSimplePage()  *ngIf="deleteButton" type="button" class="btn btn-danger btn-circle cover-xl delete-button">Delete Page
+</button>
+
+
+<!--remove page-->
 
     <!-- Modal 6 -->
     <div class="portfolio-modal modal fade" id="layout-modal" tabindex="-1" role="dialog" aria-hidden="true">
