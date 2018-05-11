@@ -197,21 +197,72 @@ export class SaveObjectService{
     
     
     
-    savePageModel(titlePageModel){
+    savePageModel(pageType,pageModel){
                 //spin authentication here and if succesfull
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new RequestOptions({headers:headers});
 
-        return this.http.post('/api/saveTitlePageModel',JSON.stringify(titlePageModel),options);
+        return this.http.post('/api/savePageModel',JSON.stringify({data:pageModel,pageType:pageType}),options);
     }
     
-    changeTitlePageAlignment(titlePageDataModel){
+    // changeTitlePageAlignment(titlePageDataModel){
+        
+    //     let headers = new Headers({'Content-Type':'application/json'});
+    //     let options = new RequestOptions({headers:headers});
+
+    //     return this.http.post('/api/changeTitlePageAlignment',JSON.stringify(titlePageDataModel),options);
+    // }
+    
+    
+    changePageAlignment(pageType,pageDataModel){
         
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new RequestOptions({headers:headers});
 
-        return this.http.post('/api/changeTitlePageAlignment',JSON.stringify(titlePageDataModel),options);
+        return this.http.post('/api/changePageAlignment',JSON.stringify({pageType:pageType,data:pageDataModel}),options);
     }
+    
+    
+    saveNavBar(navbarModel){
+        
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new RequestOptions({headers:headers});
+
+        return this.http.post('/api/saveNavBar',JSON.stringify(navbarModel),options);
+    }
+    
+    getNavBar(){
+            return this.http.get('/api/getNavBar').do((res:any) => {
+                //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    
+                    console.log('error');
+                    //ideally throw user to the page where he can initialize title page,
+                    //for now it will just initialize title page
+                }
+                console.log(!!JSON.parse(res._body).error);
+        });
+    }
+    getFooter(){
+            return this.http.get('/api/getFooter').do((res:any) => {
+                //error handling
+                console.log('INITIALIZATION, OUTPUT');
+                
+                //in case if there is an error and there is no title page..
+                if(!!JSON.parse(res._body).error){
+                    
+                    console.log('error');
+                    //ideally throw user to the page where he can initialize title page,
+                    //for now it will just initialize title page
+                }
+                console.log(!!JSON.parse(res._body).error);
+        });
+    }
+    
+    
     
     generateNewPage(params){
         
@@ -222,7 +273,7 @@ export class SaveObjectService{
         
     }
     
-        loadSimplePageModel(page){
+    loadSimplePageModel(page){
          let params: URLSearchParams = new URLSearchParams();
          params.set('pageType', page);
 

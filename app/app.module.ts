@@ -86,7 +86,9 @@ enableProdMode();
             ReactiveFormsModule,
             HttpModule,
             Ng2PageScrollModule.forRoot()],
-    declarations:[pages.MyfirstPage,
+    declarations:[pages.SuperPage,
+pages.New,
+pages.MyfirstPage,
 LayoutEditor,
                     AgencyNavComponent,
                     Error404Component,
@@ -145,7 +147,9 @@ LayoutEditor,
                 HtmlToCanvasService,
                 ImageObjectService,
                 ImageResolverService,
-                pages.SimplePageResolverService
+                pages.SimplePageResolverService,
+                pages.SimplePageFooterResolverService,
+                pages.SimplePageNavResolverService
     ],
     bootstrap:[MyAppComponent]
 })

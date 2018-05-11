@@ -71,7 +71,7 @@ exports.addSimplePage = function(req, res) {
             writeFile(path + '/../app.module.ts', appModule);
             //5. Add module to routes
 
-            let routeAddition = `{path:'pages/${newname}',component:pages.${newname} ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService}},`
+            let routeAddition = `{path:'pages/${newname}',component:pages.${newname} ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titleNav:pages.SimplePageNavResolverService,titleFooter:pages.SimplePageFooterResolverService}},`
 
             let routeFile = readFile(path + '/../routes.ts');
             routeFile = routeFile.replace('];', '');
@@ -96,7 +96,6 @@ exports.addSimplePage = function(req, res) {
                 }
                 else {
 
-
                     let dataAgencyService = [{
                             sequence: 0,
                             icon: 'fa-shopping-cart',
@@ -115,10 +114,12 @@ exports.addSimplePage = function(req, res) {
                             text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.'
                         }
                     ];
+                    
+                    
                     let dataCreativeHeadder = {
                         "title": newname,
                         "subtitle": "simplePage",
-                        "background": "./app/assets/bootstrap-templates/img-tmp1/header.jpg",
+                        "background": {color: "", image: "app/assets/bootstrap-templates/img-tmp1/header.jpg"},
                         "buttonLink": "#"
                     };
 
@@ -127,7 +128,7 @@ exports.addSimplePage = function(req, res) {
                     p.pageName = newname;
                     p.navbarElement = pa.navbarElement;
                     p.footer = pa.footer;
-                    p.pageType = "simple";
+                    p.pageType = newname;
                     p.pageData = [{
                             "elementTmpName": "creative-headder",
                             "includeInNav": false,
@@ -152,17 +153,44 @@ exports.addSimplePage = function(req, res) {
                             "background": { "color": "", "image": "" }
                         }
                     ];
+                    
+                    p.title = req.body.navbarName;
+                    p.includeInNav = true;
+                    
 
                     p.save((err, p) => {
                         if (err)
                             return res.send({ error: err });
                         else {
-                            //assemble page from the model
+                            
+                            //save new item to navbar....
+                            pa.navbarElement.data.additionalElements.push({elements: [{navName: newname, slideTo: "#"}], page: "/pages/"+newname})
+                            
+                                page.findOneAndUpdate({ "pageType": "titlepage" }, { "navbarElement": pa.navbarElement }, { upsert: true }, function(err, pr) {
+                                    if (err)
+                                        return res.send({ error: err });
+                                    else if (!pr) {
+                                        res.send('Error, no title page found');
+                                    }
+                                    else {
+                                        //assemble page from the model
+                                                                    //assemble page from the model
                             var pageTemplate = pageService.assembleTemplate(p);
                             //write the page content to the disk...
                             //writeToDisk('/../../app/title-page/generated-title-page.html', pageTemplate);
                             writeFile(path + newname + '/simple-page.component.html', pageTemplate);
                             res.json(p);
+
+                                    };
+                                });
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+
                         }
                     });
 

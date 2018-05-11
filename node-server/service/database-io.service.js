@@ -9,9 +9,9 @@ var pageService = require('../service/page.service');
 
 //IMAGES
 
-exports.getImageList = function(req,res) {
-    
-        userImage.find({}).exec(function(err, userImage) {
+exports.getImageList = function(req, res) {
+
+    userImage.find({}).exec(function(err, userImage) {
         if (!err)
             res.json(userImage);
         else {
@@ -220,11 +220,11 @@ exports.savePageModel = function(req, res) {
 
 }
 
-exports.changeTitlePageAlignment = function(req, res) {
-    //adding snippet counter here for convenience
 
-
-    page.findOneAndUpdate({ "pageType": "titlepage" }, { "pageData": req.body }, { upsert: true }, function(err, p) {
+exports.saveNavBar = function(req, res){
+    
+    
+        page.findOneAndUpdate({ "pageType": "titlepage" }, { "navbarElement": req.body }, { upsert: true }, function(err, p) {
         if (err)
             return res.send({ error: err });
         else if (!p) {
@@ -232,22 +232,83 @@ exports.changeTitlePageAlignment = function(req, res) {
         }
         else {
             //assemble page from the model
-            p.pageData = req.body;
+            p.navbarElement = req.body;
+
+            res.json(p);
+        };
+    });
+    
+    
+    
+    
+}
+exports.getNavBar = function(req, res){
+        page.findOne({ 'pageType': "titlepage" }, function(err, p) {
+
+        if (err) {
+            return res.send({ error: err });
+        }
+        else if (!p) {
+
+            // res.status(404)
+            // res.send('Error, blog post does not exist');
+            res.send({ error: "No page " + req.query.itemPage + " found..." });
+        }
+        else res.json(p.navbarElement);
+    });
+}
+
+exports.getFooter = function(req, res){
+        page.findOne({ 'pageType': "titlepage" }, function(err, p) {
+
+        if (err) {
+            return res.send({ error: err });
+        }
+        else if (!p) {
+
+            // res.status(404)
+            // res.send('Error, blog post does not exist');
+            res.send({ error: "No page " + req.query.itemPage + " found..." });
+        }
+        else res.json(p.footer);
+    });
+}
+
+
+exports.changePageAlignment = function(req, res) {
+    //adding snippet counter here for convenience
+
+
+    page.findOneAndUpdate({ "pageType": req.body.pageType}, { "pageData": req.body.data }, { upsert: true }, function(err, p) {
+        if (err)
+            return res.send({ error: err });
+        else if (!p) {
+            res.send('Error, no title page found');
+        }
+        else {
+            //assemble page from the model
+            p.pageData = req.body.data;
             var pageTemplate = pageService.assembleTemplate(p);
+
             //write the page content to the disk...
-            pageService.writeToDisk('/../../app/title-page/templates/generated-title-page.html', pageTemplate);
+            if(req.body.pageType=='titlepage')
+                pageService.writeToDisk('/../../app/title-page/templates/generated-title-page.html', pageTemplate);
+            else
+                pageService.writeToDisk('/../../app/other-pages/'+req.body.pageType+'/simple-page.component.html', pageTemplate);
+                
             res.json(p);
         };
     });
 
+
 }
 
 
-exports.saveTitlePageModel = function(req, res) {
+exports.savePageModel = function(req, res) {
     //adding snippet counter here for convenience
 
 
-    page.findOneAndUpdate({ "pageType": "titlepage" }, { "pageData": req.body }, { upsert: true }, function(err, p) {
+    page.findOneAndUpdate({ "pageType": req.body.pageType }, { "pageData": req.body.data }, { upsert: true }, function(err, p) {
         if (err)
             return res.send({ error: err });
         else if (!p) {
@@ -478,7 +539,39 @@ exports.initializeTitlePage = function(req, res) {
         { "title": "July 2014 Phase Two Expansion", "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!", "img": "app/assets/bootstrap-templates/img-tmp2/about/4.jpg" }
     ];
     let dataAgencyFooter = "";
-    let dataAgencyNavbar = { "additionalElements": [{ "name": "element1", "sequence": 0, "link": "/element1" }], "title": "Template" };
+    let dataAgencyNavbar = { "additionalElements":  {
+                    "page": "/title-page",
+                    "elements": [
+                        {
+                            "navName": "Services",
+                            "slideTo": "#agency-service1"
+                        },
+                        {
+                            "navName": "Services",
+                            "slideTo": "#creative-service2"
+                        },
+                        {
+                            "navName": "Portfolio",
+                            "slideTo": "#creative-portfolio3"
+                        },
+                        {
+                            "navName": "HEadder",
+                            "slideTo": "#agency-headder4"
+                        },
+                        {
+                            "navName": "Portfolio",
+                            "slideTo": "#agency-portfolio5"
+                        },
+                        {
+                            "navName": "Team",
+                            "slideTo": "#agency-amazing-team6"
+                        },
+                        {
+                            "navName": "About",
+                            "slideTo": "#agency-about7"
+                        }
+                    ]
+                }, "title": "Template" };
 
 
     //     <layout-editor *ngIf="loginCheck() && showElementTools" ></layout-editor>
@@ -596,6 +689,8 @@ exports.initializeTitlePage = function(req, res) {
             "background": { "color": "", "image": "" }
         }
     ];
+    p.title = "Title Page";
+    p.includeInNav = false;
 
     p.save(function(err, p) {
         if (err)
@@ -604,7 +699,7 @@ exports.initializeTitlePage = function(req, res) {
             //assemble page from the model
             var pageTemplate = pageService.assembleTemplate(p);
             //write the page content to the disk...
-            pageService.writeToDisk('/../../app/title-page/generated-title-page.html', pageTemplate);
+            pageService.writeToDisk('/../../app/title-page/templates/generated-title-page.html', pageTemplate);
             res.json(p);
         }
     });

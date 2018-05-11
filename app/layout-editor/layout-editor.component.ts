@@ -117,7 +117,54 @@ export class LayoutEditor {
            this.pageData.pageData[sortedIDs[i]].elementSequence = i;
        }
        
-      this.sv.changeTitlePageAlignment(tmpArray).subscribe(s => {
+       
+       
+       //save and regenerate navbar here...
+       
+                                           //step to generate navbar
+            let navItemList = this.pageData.pageData.filter(i => i.includeInNav == true);
+            
+            let searchCondition;
+            
+            // if(this.pageData.pageType == 'titlepage'){
+                
+            // }
+            // else{
+                
+            // }
+            
+            this.pageData.pageType == 'titlepage'? searchCondition = '/title-page' : searchCondition = '/pages/'+this.pageData.pageType;
+            
+
+            for (let i = 0; i < this.pageData.navbarElement.data.additionalElements.length; i++) {
+                if (this.pageData.navbarElement.data.additionalElements[i].page == searchCondition) {
+                    
+                    this.pageData.navbarElement.data.additionalElements[i].elements = [];
+                    
+                    if(this.pageData.includeInNav){
+                        this.pageData.navbarElement.data.additionalElements[i].elements.push({"navName":this.pageData.title,"slideTo":'#'})
+                    }
+                    
+                    
+                    
+                    navItemList.forEach(ele => {
+                        this.pageData.navbarElement.data.additionalElements[i].elements.push({"navName":ele.navName,"slideTo":"#"+ele.elementTmpName+ele.elementSequence})
+
+                    })
+
+                }
+            }
+            
+            console.log('VERIFYING IF IT IS WORKING PROPERLY....')
+            console.log(this.pageData.navbarElement);
+                        
+                        
+                        this.sv.saveNavBar(this.pageData.navbarElement).subscribe((res:any)=>{
+                                                
+                        });
+       
+       
+      this.sv.changePageAlignment(this.pageData.pageType,tmpArray).subscribe(s => {
          // console.log(s);
           //refresh page logic...
           window.location.reload();

@@ -17,21 +17,17 @@ export class AgencyNavComponent {
     constructor(@Inject(JQUERY_TOKEN) private $,
     private location:Location,
     ){}
-        ngOnChanges(){
-        if(this.pageData){
-            if(!this.navItemList){
-                this.navItemList = this.pageData.pageData.filter(i=>i.includeInNav == true);
-            console.log(this.navItemList);
-            }
-        }
+    
+    ngOnChanges(){
         
     }
-    
-    
-    
-    
+
     
     ngOnInit(){
+     
+      
+      
+      
         }
     ngAfterViewInit(){
           // Smooth scrolling using jQuery easing

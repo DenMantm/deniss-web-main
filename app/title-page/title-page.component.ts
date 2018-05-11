@@ -175,10 +175,12 @@ onWindowScroll(event) {
                       if (isConfirm) {
                         //swal("Deleted!", "Your imaginary file has been deleted.", "success");
                         //userResponse = true;
+
                         
-                        this.objectService.savePageModel(this.pageData.pageData).subscribe((res:any)=>{
+                        this.objectService.savePageModel(this.pageData.pageType,this.pageData.pageData).subscribe((res:any)=>{
                                                 
                         });
+                        
                         //notify user that everything was saved here...
 
                       } else {

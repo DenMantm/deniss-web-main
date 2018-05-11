@@ -16,6 +16,8 @@ var pageData = mongoose.Schema({
 
 
 var Page = mongoose.Schema({
+    title:String,
+    includeInNav:Boolean,
     pageName : String,
     navbarElement : Object,
     footer : Object, // title, simple

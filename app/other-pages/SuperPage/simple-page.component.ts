@@ -32,7 +32,7 @@ import {componentData} from './configuration';
 @Component(componentData)
 
 
-export class TitlePageComponent implements OnInit {
+export class SuperPage implements OnInit {
     
         
         @HostListener("window:scroll", ['$event'])

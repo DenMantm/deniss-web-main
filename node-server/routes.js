@@ -20,8 +20,8 @@ module.exports = function(app) {
   app.get('/api/createTemplateItemListItem', dbIO.createTemplateItemListItem);
   
   //tittle page manipulations
-  app.post('/api/changeTitlePageAlignment', dbIO.changeTitlePageAlignment);
-  app.post('/api/saveTitlePageModel', dbIO.saveTitlePageModel);
+  app.post('/api/changePageAlignment', dbIO.changePageAlignment);
+  app.post('/api/savePageModel', dbIO.savePageModel);
   
   app.get('/api/initializeTitlePage', dbIO.initializeTitlePage);
   
@@ -34,6 +34,11 @@ module.exports = function(app) {
   
   //create new pages here
   app.post('/api/generateNewPage', pageService.addSimplePage);
+  
+  //navbar, footer manipulations here...
+  app.post('/api/saveNavBar', dbIO.saveNavBar);
+  app.get('/api/getNavBar', dbIO.getNavBar);
+  app.get('/api/getFooter', dbIO.getFooter);
   
   //app.post('/api/getSimplePage',dbIO.getSimplePage);
   

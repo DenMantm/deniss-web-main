@@ -50,16 +50,33 @@ onWindowScroll(event) {
       combinedArray:any;
       itemGroupList:any;
       filteredItemList:any = {};
-
+      titleNav:any;
+      titleFooter:any;
     
 		ngOnInit(): void {
 			this.user = this.route.snapshot.data['user'];
 			
 		   this.route.data.subscribe((res:any)=>{
-		       
+		              //loading custom navbar here...
+           this.titleNav = JSON.parse(res['titleNav']._body);
+           this.titleFooter = JSON.parse(res['titleFooter']._body);
+		   
            this.pageData =  JSON.parse(res['pageModel']._body);
+           this.pageData.navbarElement = this.titleNav;
+           this.pageData.footer = this.titleFooter;
            this.lastStateTitlePageModel = JSON.parse(res['pageModel']._body);
+           this.lastStateTitlePageModel.navbarElement = this.titleNav;
+           this.lastStateTitlePageModel.footer = this.titleFooter;
            this.clonedPageData = JSON.parse(res['pageModel']._body);
+           this.clonedPageData.navbarElement = this.titleNav;
+           this.clonedPageData.footer = this.titleFooter;
+           
+            console.log(this.pageData);
+           
+           
+           
+           
+           
            
            this.userImageList = JSON.parse(res['userImageList']._body);
            
@@ -110,7 +127,7 @@ onWindowScroll(event) {
             
             
 
-       })
+      })
 
 		}
 	user:any;
@@ -131,9 +148,9 @@ onWindowScroll(event) {
     
   }
   
-	ngOnChanges(){
-		this.user = this.auth.getCurrentUser();
-	}
+// 	ngOnChanges(){
+// 		this.user = this.auth.getCurrentUser();
+// 	}
 	
    loginCheck(){
        //console.log(this.auth.isAuthenticated());
@@ -176,7 +193,7 @@ onWindowScroll(event) {
                         //swal("Deleted!", "Your imaginary file has been deleted.", "success");
                         //userResponse = true;
                         
-                        this.objectService.savePageModel(this.pageData.pageData).subscribe((res:any)=>{
+                        this.objectService.savePageModel(this.pageData.pageType,this.pageData.pageData).subscribe((res:any)=>{
                                                 
                         });
                         //notify user that everything was saved here...

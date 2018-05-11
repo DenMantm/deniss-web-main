@@ -7,13 +7,25 @@
           <i class="fa fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav text-uppercase ml-auto">
-            <li *ngFor="let ele of navItemList" class="nav-item">
-              <a class="nav-link js-scroll-trigger" [routerLink]="['/title-page']" pageScroll  href="{{'#'+ele.elementTmpName+ele.elementSequence}}">{{ele.navName}}</a>
-            </li>
-            <li  class="nav-item">
-              <a class="nav-link js-scroll-trigger" [routerLink]="['/blog-posts']">Blog Posts</a>
-            </li>
+          
+          
+          
+          <!--<ul class="navbar-nav text-uppercase ml-auto">-->
+          <!--  <li *ngFor="let ele of navItemList" class="nav-item">-->
+          <!--    <a class="nav-link js-scroll-trigger" [routerLink]="['/title-page']" pageScroll  href="{{'#'+ele.elementTmpName+ele.elementSequence}}">{{ele.navName}}</a>-->
+          <!--  </li>-->
+          <!--  <li  class="nav-item">-->
+          <!--    <a class="nav-link js-scroll-trigger" [routerLink]="['/blog-posts']">Blog Posts</a>-->
+          <!--  </li>-->
+            
+            
+            
+            <ul class="navbar-nav text-uppercase ml-auto" *ngFor="let page of pageData.navbarElement.data.additionalElements">
+              <li *ngFor="let ele of page.elements" class="nav-item">
+                <a class="nav-link js-scroll-trigger" [routerLink]="[page.page]" pageScroll  href="{{ele.slideTo}}">{{ele.navName}}</a>
+              </li>
+            
+            
             
             <!--<li class="nav-item">-->
             <!--  <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>-->
