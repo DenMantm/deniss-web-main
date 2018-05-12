@@ -23,6 +23,7 @@ export class CreativeHeadder {
     constructor(@Inject(JQUERY_TOKEN) private $,private auth:AuthService){
     }
     ngOnInit(){
+        console.log(this.pageData);
         }
     loginCheck(){
        //console.log(this.auth.isAuthenticated());

@@ -24,6 +24,7 @@ import {
 
 declare var PR;
 declare var swal;
+declare var window
 
 //configuration with the templates..
 import {componentData} from './templates/configuration';
@@ -62,6 +63,18 @@ onWindowScroll(event) {
            this.clonedPageData = JSON.parse(res['titlePageModel']._body);
            
            this.userImageList = JSON.parse(res['userImageList']._body);
+           
+           
+           console.log('ZZZZZZZZZZZZZZZZZZZ')
+           console.log(this.pageData)
+           
+           if(!!this.pageData.error){
+               window.location.reload();
+           }
+           
+           
+           
+           
            
             console.log('checkThis');
             console.log(this.userImageList);

@@ -10,6 +10,7 @@
         <div class="intro-text">
           <div class="intro-lead-in editable" [(contenteditableModelHtml)]="pageData?.title.title"  [ngClass]="{'border': loginCheck()&&showElementTools}">Welcome To Our St</div>
           <div class="intro-heading text-uppercase editable" [(contenteditableModelHtml)]="pageData?.title.subtitle"  [ngClass]="{'border': loginCheck()&&showElementTools}">It's Nice To Me</div>
+          
           <button-options [pageData]="pageData" *ngIf="showElementTools"></button-options>
           
           <a *ngIf="!pageData.data.buttonLink.isExternam" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" [routerLink]="[pageData.data.buttonLink.link.page]" pageScroll href="{{pageData.data.buttonLink.link.slideTo}}">{{pageData.data.buttonLink.buttonText}}</a>

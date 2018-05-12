@@ -660,8 +660,8 @@ exports.initializeTitlePage = function(req, res) {
             "navName": "Headder",
             "elementTmpType": "headder",
             "elementSequence": 0,
-            "title": dataCreativeHeadder,
-            "data": '',
+            "title": { "title": "Freshly brewed page", "subtitle": "welcome, please take a look what you can do with CMS Lite" },
+            "data": dataCreativeHeadder,
             "background": { "color": "", "image": "app/assets/bootstrap-templates/img-tmp1/header.jpg" }
         },
         {
@@ -749,7 +749,15 @@ exports.initializeTitlePage = function(req, res) {
             var pageTemplate = pageService.assembleTemplate(p);
             //write the page content to the disk...
             pageService.writeToDisk('/../../app/title-page/templates/generated-title-page.html', pageTemplate);
-            res.json(p);
+            
+            
+            
+            // setTimeout(()=>{
+                res.json(p);
+                // }, 3000);
+            
+            
+            
         }
     });
 } //end of new title page generation block

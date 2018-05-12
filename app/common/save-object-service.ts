@@ -316,8 +316,15 @@ export class SaveObjectService{
                     this.notify.error('there was an error...');
                 }
                 else{
-                    window.location.reload();
-                   // this.router.navigate(['title-page']);
+                    
+                    setTimeout(()=>{ 
+                        
+                        window.location.reload();
+                        
+                        
+                    }, 1000);
+                    
+                    
                 } 
         });
         
