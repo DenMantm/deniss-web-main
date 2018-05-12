@@ -25,9 +25,9 @@ export class LayoutEditor {
     removedItemList:any = [];
     
     
-    // navForm:FormGroup;
-    // navName:FormControl;
-    // isInNav:FormControl;
+    navForm:FormGroup;
+    navName:FormControl;
+    isInNav:FormControl;
     
     constructor(@Inject(JQUERY_TOKEN) private $,
                 private auth:AuthService,
@@ -61,19 +61,14 @@ export class LayoutEditor {
             console.log("Debug Page Data");
             console.log(this.pageData);
             
-            
-            
-            
-        // this.navName = new FormControl('',Validators.required)
-        // this.isInNav = new FormControl(true)
-        // this.navForm = new FormGroup({
-        //     navName:this.navName,
-        //     isInNav:this.isInNav
-        // })
-            
-            
-            
-            
+        })
+        
+        
+        this.navName = new FormControl(this.pageData.title,Validators.required)
+        this.isInNav = new FormControl(this.pageData.includeInNav)
+        this.navForm = new FormGroup({
+            navName:this.navName,
+            isInNav:this.isInNav
         })
         
         //Add some sort of the loading symbol here after....
@@ -171,6 +166,10 @@ export class LayoutEditor {
    
    
    reorder(){
+       
+       
+       
+       
        let sortedIDs = this.$( ".sortable" ).sortable( "toArray" );
        //algorithm to rearrange items here...
        let tmpArray=[];
@@ -198,7 +197,8 @@ export class LayoutEditor {
             
             this.pageData.pageType == 'titlepage'? searchCondition = '/title-page' : searchCondition = '/pages/'+this.pageData.pageType;
             
-
+            let tmpRef;
+            
             for (let i = 0; i < this.pageData.navbarElement.data.additionalElements.length; i++) {
                 if (this.pageData.navbarElement.data.additionalElements[i].page == searchCondition) {
                     
@@ -214,9 +214,31 @@ export class LayoutEditor {
                         this.pageData.navbarElement.data.additionalElements[i].elements.push({"navName":ele.navName,"slideTo":"#"+ele.elementTmpName+ele.elementSequence})
 
                     })
-
+                    tmpRef = this.pageData.navbarElement.data.additionalElements[i].elements.length;
                 }
             }
+            
+            
+            //checking if there are enough items left referenced in NavBar... 
+            
+            
+            
+            if(this.navForm.value.navName==''){
+                swal('Error','Nav reference of page cannot be empty')
+                return;
+            }
+            
+            if(this.pageData.pageType !== 'titlepage'){
+                if(tmpRef==0){
+                    swal('Error','Please select at least one element of entire page in navbar')
+                    return;
+                }
+            }
+            
+            
+            this.pageData.title = this.navForm.value.navName;
+            this.pageData.includeInNav = this.navForm.value.isInNav;
+            
             
             console.log('VERIFYING IF IT IS WORKING PROPERLY....')
             console.log(this.pageData.navbarElement);

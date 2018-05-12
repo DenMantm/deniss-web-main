@@ -19,12 +19,19 @@ export class LayoutEditorAddNewItem {
         //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
         }
     ngOnInit(){
+        
+        
+        
+    
+            
+        
         this.navName = new FormControl('',Validators.required)
-        this.isInNav = new FormControl(true)
+        this.isInNav = new FormControl(false)
         this.navForm = new FormGroup({
             navName:this.navName,
             isInNav:this.isInNav
         })
+        
         
     }
     navForm:FormGroup;
@@ -82,6 +89,7 @@ export class LayoutEditorAddNewItem {
     }
     
     changeItemGroup(group){
+        
                         this.filteredItemList = this.itemList.filter(i=>i.itemGroup == group);
                 //initialize the selected element...
 
@@ -90,6 +98,7 @@ export class LayoutEditorAddNewItem {
                         this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
 
                 console.log(this.filteredItemList);
+                this.navForm.value.navName = this.currentElement.itemGroup;
     }
     
     
@@ -102,16 +111,23 @@ export class LayoutEditorAddNewItem {
     }
     
     back(){
+
         this.selectedIndex--;
         this.currentElement = this.filteredItemList[this.selectedIndex];
         console.log('Debug, backwards');
         this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+        
+        this.navForm.value.navName = this.currentElement.itemGroup;
+        
     }
     forward(){
         this.selectedIndex++;
         this.currentElement = this.filteredItemList[this.selectedIndex];
         console.log('Debug, forward');
         this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+        
+        this.navForm.value.navName = this.currentElement.itemGroup;
+        
     }
     
     change(value){
@@ -139,6 +155,9 @@ export class LayoutEditorAddNewItem {
         this.selectedIndex = this.filteredItemList.indexOf(item);
         this.currentElement = item;
         this.currentImage = 'app/assets/images/templates/Page-elements/'+this.currentElement.itemName+'.PNG';
+        
+        this.navForm.value.navName = this.currentElement.itemGroup;
+        
     }
     
         
