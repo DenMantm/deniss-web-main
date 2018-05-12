@@ -221,9 +221,9 @@ exports.savePageModel = function(req, res) {
 }
 
 
-exports.saveNavBar = function(req, res){
-    
-        page.findOneAndUpdate({ "pageType": "titlepage" }, { "navbarElement": req.body }, { upsert: true }, function(err, p) {
+exports.saveNavBar = function(req, res) {
+
+    page.findOneAndUpdate({ "pageType": "titlepage" }, { "navbarElement": req.body }, { upsert: true }, function(err, p) {
         if (err)
             return res.send({ error: err });
         else if (!p) {
@@ -236,12 +236,12 @@ exports.saveNavBar = function(req, res){
             res.json(p);
         };
     });
-    
+
 }
 
-exports.saveBlogSection = function(req, res){
-    
-        page.findOneAndUpdate({ "pageType": "titlepage" }, { "blog": req.body }, { upsert: true }, function(err, p) {
+exports.saveBlogSection = function(req, res) {
+
+    page.findOneAndUpdate({ "pageType": "titlepage" }, { "blog": req.body }, { upsert: true }, function(err, p) {
         if (err)
             return res.send({ error: err });
         else if (!p) {
@@ -254,14 +254,14 @@ exports.saveBlogSection = function(req, res){
             res.json(p);
         };
     });
-    
+
 }
 
 
 
-exports.getNavBar = function(req, res){
-    
-        page.findOne({ 'pageType': "titlepage" }, function(err, p) {
+exports.getNavBar = function(req, res) {
+
+    page.findOne({ 'pageType': "titlepage" }, function(err, p) {
 
         if (err) {
             return res.send({ error: err });
@@ -276,8 +276,8 @@ exports.getNavBar = function(req, res){
     });
 }
 
-exports.getFooter = function(req, res){
-        page.findOne({ 'pageType': "titlepage" }, function(err, p) {
+exports.getFooter = function(req, res) {
+    page.findOne({ 'pageType': "titlepage" }, function(err, p) {
 
         if (err) {
             return res.send({ error: err });
@@ -297,7 +297,7 @@ exports.changePageAlignment = function(req, res) {
     //adding snippet counter here for convenience
 
 
-    page.findOneAndUpdate({ "pageType": req.body.pageType}, { "pageData": req.body.data }, { upsert: true }, function(err, p) {
+    page.findOneAndUpdate({ "pageType": req.body.pageType }, { "pageData": req.body.data }, { upsert: true }, function(err, p) {
         if (err)
             return res.send({ error: err });
         else if (!p) {
@@ -309,11 +309,11 @@ exports.changePageAlignment = function(req, res) {
             var pageTemplate = pageService.assembleTemplate(p);
 
             //write the page content to the disk...
-            if(req.body.pageType=='titlepage')
+            if (req.body.pageType == 'titlepage')
                 pageService.writeToDisk('/../../app/title-page/templates/generated-title-page.html', pageTemplate);
             else
-                pageService.writeToDisk('/../../app/other-pages/'+req.body.pageType+'/simple-page.component.html', pageTemplate);
-                
+                pageService.writeToDisk('/../../app/other-pages/' + req.body.pageType + '/simple-page.component.html', pageTemplate);
+
             res.json(p);
         };
     });
@@ -373,14 +373,22 @@ exports.initializeTitlePage = function(req, res) {
         "title": "Your Favorite Source of Free Bootstrap Themes",
         "subtitle": "Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!",
         "background": "./app/assets/bootstrap-templates/img-tmp1/header.jpg",
-        "buttonLink": "#"
+        "buttonLink": {
+            "link": { "page": "/title-page", "slideTo": "#agency-amazing-team6" },
+            "buttonText": "Meet the team",
+            "isExternam": false
+        }
     };
 
     let dataAgencyHeadder = {
         "title": "Your Favorite Source of Free Bootstrap Themes",
         "subtitle": "Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!",
         "background": "./app/assets/bootstrap-templates/img-tmp2/header-bg.jpg",
-        "buttonLink": "#"
+        "buttonLink": {
+            "link": { "page": "/title-page", "slideTo": "#agency-amazing-team6" },
+            "buttonText": "Meet the team",
+            "isExternam": false
+        }
     };
 
     let dataCreativeService = [{
@@ -557,39 +565,41 @@ exports.initializeTitlePage = function(req, res) {
         { "title": "July 2014 Phase Two Expansion", "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!", "img": "app/assets/bootstrap-templates/img-tmp2/about/4.jpg" }
     ];
     let dataAgencyFooter = "";
-    let dataAgencyNavbar = { "additionalElements": [ {
-                    "page": "/title-page",
-                    "elements": [
-                        {
-                            "navName": "Services",
-                            "slideTo": "#agency-service1"
-                        },
-                        {
-                            "navName": "Services",
-                            "slideTo": "#creative-service2"
-                        },
-                        {
-                            "navName": "Portfolio",
-                            "slideTo": "#creative-portfolio3"
-                        },
-                        {
-                            "navName": "HEadder",
-                            "slideTo": "#agency-headder4"
-                        },
-                        {
-                            "navName": "Portfolio",
-                            "slideTo": "#agency-portfolio5"
-                        },
-                        {
-                            "navName": "Team",
-                            "slideTo": "#agency-amazing-team6"
-                        },
-                        {
-                            "navName": "About",
-                            "slideTo": "#agency-about7"
-                        }
-                    ]
-                }], "title": "Template" };
+    let dataAgencyNavbar = {
+        "additionalElements": [{
+            "page": "/title-page",
+            "elements": [{
+                    "navName": "Services",
+                    "slideTo": "#agency-service1"
+                },
+                {
+                    "navName": "Services",
+                    "slideTo": "#creative-service2"
+                },
+                {
+                    "navName": "Portfolio",
+                    "slideTo": "#creative-portfolio3"
+                },
+                {
+                    "navName": "HEadder",
+                    "slideTo": "#agency-headder4"
+                },
+                {
+                    "navName": "Portfolio",
+                    "slideTo": "#agency-portfolio5"
+                },
+                {
+                    "navName": "Team",
+                    "slideTo": "#agency-amazing-team6"
+                },
+                {
+                    "navName": "About",
+                    "slideTo": "#agency-about7"
+                }
+            ]
+        }],
+        "title": "Template"
+    };
 
 
     //     <layout-editor *ngIf="loginCheck() && showElementTools" ></layout-editor>
@@ -606,7 +616,8 @@ exports.initializeTitlePage = function(req, res) {
 
     var p = new page();
     p.pageName = "Title Page";
-    p.blog =  {"isActive":true,
+    p.blog = {
+            "isActive": true,
             "background": {
                 "color": "",
                 "image": "app/assets/bootstrap-templates/blog-template/home-bg.jpg"
@@ -624,16 +635,16 @@ exports.initializeTitlePage = function(req, res) {
             "includeInNav": false,
             "elementTmpName": "blog-headder"
         },
-    
-    p.navbarElement = {
-        "elementTmpName": "agency-nav",
-        "elementTmpType": "nav",
-        "elementSequence": "",
-        "enableBlog":true,
-        "title": { "title": "title", "subtitle": "subtitle" },
-        "data": dataAgencyNavbar,
-        "background": { "color": "", "image": "" }
-    };
+
+        p.navbarElement = {
+            "elementTmpName": "agency-nav",
+            "elementTmpType": "nav",
+            "elementSequence": "",
+            "enableBlog": true,
+            "title": { "title": "title", "subtitle": "subtitle" },
+            "data": dataAgencyNavbar,
+            "background": { "color": "", "image": "" }
+        };
     p.footer = {
         "elementTmpName": "agency-footer",
         "elementTmpType": "footer",

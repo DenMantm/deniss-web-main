@@ -5,6 +5,7 @@ import { LayoutEditorService } from './services/layout-editor.service';
 import { HtmlToCanvasService } from './services/html-to-canvas.service';
 import { SortablejsOptions, SortablejsModule } from 'angular-sortablejs';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 declare var imagify
@@ -22,6 +23,11 @@ export class LayoutEditor {
     imageStructure:any;
     itemList:any;
     removedItemList:any = [];
+    
+    
+    // navForm:FormGroup;
+    // navName:FormControl;
+    // isInNav:FormControl;
     
     constructor(@Inject(JQUERY_TOKEN) private $,
                 private auth:AuthService,
@@ -54,6 +60,20 @@ export class LayoutEditor {
             //console.log(this.itemList)
             console.log("Debug Page Data");
             console.log(this.pageData);
+            
+            
+            
+            
+        // this.navName = new FormControl('',Validators.required)
+        // this.isInNav = new FormControl(true)
+        // this.navForm = new FormGroup({
+        //     navName:this.navName,
+        //     isInNav:this.isInNav
+        // })
+            
+            
+            
+            
         })
         
         //Add some sort of the loading symbol here after....

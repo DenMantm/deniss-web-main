@@ -7,7 +7,7 @@ var blogElement = mongoose.Schema({
         id       : String,
         type     : String,
         style    : String,
-        text     : String,
+        text     : Object,
         img: String
 });
 

@@ -133,7 +133,7 @@
                   <!-- Project Details Go Here -->
                   <h2 class="text-uppercase editable"[(contenteditableModelHtml)]="item.modal.title">{{item.modal.title}}</h2>
                   <p class="item-intro text-muted editable"[(contenteditableModelHtml)]="item.modal.subtitle">{{item.modal.subtitle}}</p>
-                  <change-images [pageData]="pageData" [removableItem]="item" [toggleIcons]="true" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
+                  <change-images [removeIcon]="true" [pageData]="pageData" [removableItem]="item" [toggleIcons]="true" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.modal.bigImage"></change-images>
                   <img class="img-fluid d-block mx-auto" src="{{item.modal.bigImage.img}}" alt="">
                   <p class="editable"[(contenteditableModelHtml)]="item.modal.text">{{item.modal.text}}</p>
                   <!--<ul class="list-inline">-->

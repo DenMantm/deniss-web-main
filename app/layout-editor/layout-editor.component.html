@@ -33,6 +33,20 @@
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
                   <h2 class="text-uppercase">Edit Layout</h2>
+                  
+                       <!--<form [formGroup]="navForm" (ngSubmit)="change(navForm.value)">-->
+                       <!--   <label class="form-check-label">-->
+                       <!--   <input class="form-check-input" type="checkbox" value="" formControlName="isInNav" name="isInNav">-->
+                       <!--                     Include reference to entire page in navbar-->
+                       <!--   </label>-->
+                       <!--   <input type="text" formControlName="navName" name="navName" placeholder="Item nav bar name">-->
+                       <!--   <br/>-->
+                          <!--<input [disabled]="navForm.invalid" type="submit" name="selectItem" class="button success" value="Add Selected Element">-->
+                       <!--</form>-->
+                  
+                  
+                  
+                  
                   <layout-editor-add-new-item (addItem)="addItem($event)" [itemList]="itemList" [pageData]="pageData.pageData"></layout-editor-add-new-item>
                                       <!--navbar-->
                   <img id="{{'img-'+'mainNav'}}"/>

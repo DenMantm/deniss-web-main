@@ -7,11 +7,11 @@
 
 
 <!--<button (click)="add()" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>-->
-<ul style="list-style: none;margin-left: -2.6875rem;">
+<ul *ngIf="!!!noIcons" style="list-style: none;margin-left: -2.6875rem;">
     <li style="display: inline;" *ngIf="toggleIcons">
         <button (click)="openModal()" type="button" class="btn btn-info btn-circle"><i class="fa fa-file-image-o"></i></button>
     </li>
-    <li style="display: inline;">
+    <li *ngIf="!!!removeIcon" style="display: inline;">
         <button (click)="remove()" type="button" class="btn btn-danger btn-circle edit-layout third"><i class="fa fa-trash"></i></button>
 
     </li>
@@ -114,7 +114,7 @@
 <!--Button trigger modal -->
 
 
-<div *ngIf="!toggleIcons" #iconModal id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
+<div  *ngIf="!toggleIcons&&!!!noIcons" #iconModal id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
 
     <div class="modal-content" [style.top]="top">
         <span  data-dismiss="modal" class="close" style="text-align: right !important">&times;</span>

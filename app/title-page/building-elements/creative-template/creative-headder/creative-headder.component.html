@@ -13,6 +13,16 @@
           <div class="col-lg-8 mx-auto">
             <p class="text-faded mb-5" class='editable' [(contenteditableModelHtml)]="pageData?.title.subtitle" [ngClass]="{'border': loginCheck()&&showElementTools}">Start Bootstrap can help you build better websites usin</p>
             <!--<a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>-->
+            
+          <button-options [pageData]="pageData" *ngIf="showElementTools"></button-options>
+          
+          <a *ngIf="!pageData.data.buttonLink.isExternam" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" [routerLink]="[pageData.data.buttonLink.link.page]" pageScroll href="{{pageData.data.buttonLink.link.slideTo}}">{{pageData.data.buttonLink.buttonText}}</a>
+          
+          <a *ngIf="pageData.data.buttonLink.isExternam" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" href="{{pageData.data.buttonLink.link.page}}">{{pageData.data.buttonLink.buttonText}}</a>
+          
+            
+            
+            
           </div>
         </div>
       </div>

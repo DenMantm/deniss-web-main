@@ -27,6 +27,11 @@ export class ArrayUtilityService{
       //adding item to the array and passing item length
       item.push(this.elementFactory(item.length,param));
   }
+  addNewElementImg(item){
+      let param = "img";
+      //adding item to the array and passing item length
+      item.push(this.elementFactory(item.length,param));
+  }
   
   
   sortObjArrayById(list){
@@ -86,9 +91,15 @@ export class ArrayUtilityService{
     elementFactory(id,param){
         
         let text;
+        
+        
+        
+        
         param == "div"
         ? text = "<p>This fresh element</p>"
         : text = "code block"
+        
+        if(param == 'img') text = {img:'app/assets/bootstrap-templates/img-tmp2/about/1.jpg'}
         
         
         return  {

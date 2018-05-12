@@ -27,6 +27,8 @@ export class ChangeImages {
     @Input() pageData:any;
     @Input() removableItem:any;
     @Input() toggleIcons:any;
+    @Input() removeIcon:any;
+    @Input() noIcons:any
     
     imageOption:boolean=true;
     filteredItemListObj:any;
@@ -75,6 +77,13 @@ export class ChangeImages {
     openModal(){
         $(this.el.nativeElement).modal('show');
     }
+    
+    imgModalForBlog(img){
+        this.image = img;
+        $(this.el.nativeElement).modal('show');
+
+    }
+    
     openIconModal(){
          $(this.icoel.nativeElement).modal('show'); 
     }

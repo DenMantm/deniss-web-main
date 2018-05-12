@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit, Renderer, Inject,Input } from '@angular/core';
+import { Component, HostListener, OnInit, Renderer, Inject,Input,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../user/auth.service';
 import { IUser } from '../../user/user.model';
+import { ChangeImages } from '../../change-images/index';
 import { JQUERY_TOKEN,
          SaveObjectService,
          ArrayUtilityService,
@@ -25,7 +26,14 @@ export class BlogPostInstanceComponent implements OnInit {
     showElementTools:boolean
     editor:any
     pageData:any;
-
+    userImageList:any;
+    
+    combinedArray:any
+    itemGroupList:any
+     filteredItemList:any = {};
+     itemList:any;
+    @ViewChild('changeImg') changeImg:ChangeImages;
+    
 constructor(private auth:AuthService,
 			@Inject(JQUERY_TOKEN) private $,
 			private route:ActivatedRoute,
@@ -39,11 +47,12 @@ constructor(private auth:AuthService,
        this.currentUser = this.route.snapshot.data['User'];
        this.route.data.subscribe((res:any)=>{
            this.pageData = JSON.parse(res['titlePageModel']._body)
+           this.userImageList = JSON.parse(res['userImageList']._body);
            this.blogPost =  JSON.parse(res['BlogPost']._body);
            this.lastStateBlogPost = JSON.parse(res['BlogPost']._body);
        })
 
-       
+       console.log(this.blogPost);
     //     this.route.params.subscribe(params => {
 
     //                 let blogId = params['blogId'];
@@ -56,7 +65,45 @@ constructor(private auth:AuthService,
     //                 });
 
     // });
-       
+                           this.itemList = [{"itemName":"app/assets/bootstrap-templates/img-tmp1/header.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/header-bg.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/blog-template/about-bg.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/blog-template/contact-bg.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/blog-template/home-bg.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/blog-template/post-bg.jpg","itemGroup":"Backgrounds"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/1.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/2.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/3.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/4.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/5.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp1/portfolio/thumbnails/6.jpg","itemGroup":"Small Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/01-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/02-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/03-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/04-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/05-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/portfolio/06-full.jpg","itemGroup":"Big Items"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/1.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/2.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/3.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/about/4.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/1.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/2.jpg","itemGroup":"Icon Size"},
+                      {"itemName":"app/assets/bootstrap-templates/img-tmp2/team/3.jpg","itemGroup":"Icon Size"}
+                      ];
+                      
+            
+            
+                this.combinedArray = this.itemList.concat(this.userImageList);
+                
+                this.itemGroupList = [];
+            
+                this.combinedArray.forEach( e=> this.itemGroupList.indexOf(e.itemGroup) == -1 && e.itemGroup != 'nav' && e.itemGroup != 'footer' ? this.itemGroupList.push(e.itemGroup):null );
+                
+                this.filteredItemList.obj1 = this.itemList.filter(i=>i.itemGroup == this.itemList[0].itemGroup);
+                this.filteredItemList.obj2 = this.itemGroupList;
+                this.filteredItemList.obj3 = this.combinedArray;
+                this.filteredItemList.obj4 = this;
        
        
        
@@ -89,6 +136,14 @@ constructor(private auth:AuthService,
         this.arrayUtil.addNewElementPre(list);
         setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
    }
+   addElementImg(list){
+        this.arrayUtil.addNewElementImg(list);
+        setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
+   }
+   changeImage(image){
+       this.changeImg.imgModalForBlog(image);
+   }
+   
    
    editClick(){
        //Extra variable here

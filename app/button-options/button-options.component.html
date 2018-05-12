@@ -9,35 +9,125 @@
 <!--<button (click)="add()" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-plus"></i></button>-->
 <ul style="list-style: none;margin-left: -2.6875rem;">
     <li style="display: inline;">
-        <button (click)="openModal()" type="button" class="btn btn-info btn-circle"><i class="fa fa-file-image-o"></i></button>
+        <button (click)="openModal()" type="button" class="btn btn-info btn-circle"><i class="fa fa-pencil-square-o"></i></button>
     </li>
 </ul>
 
 <!--Button trigger modal -->
 
 
-<div  #buttonModal id="add-page-modal" class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
+<div  #buttonModal  class="modal" [ngStyle]="{'display': modalActive == true ? 'block' : 'none' }">
 
-    <div class="modal-content" [style.top]="top">
-        <span  data-dismiss="modal" class="close" style="text-align: right !important">&times;</span>
-        <div class="container">
-                    <div class="frame bg-grayLighter">
-                        <h3>Set Button Action</h3>
-                        <br/>
-                       
-                        <br/>
-                        
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button  data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
-                                <!--<button (click)="changeIcon($event)" class="button success"><span class="mif-pencil"></span>Select</button>-->
-                            </div>
-                        </div>
+ <div class="modal-content" [style.top]="top">
+  <span data-dismiss="modal" class="close" style="text-align: right !important">&times;</span>
+  <div class="container">
 
-                    </div>
-                
-            
-        </div>
+
+   <div class="tabcontrol" data-role="tabcontrol" data-open-target="#frame_3_1">
+    <ul class="tabs">
+     <li class="active"><a href="#frame_3_1" (click)="internalLink=true;externalLink=false;uploadOption=false;">Specify button action</a></li>
+     <li class=""><a href="#frame_3_2" (click)="internalLink=false;externalLink=true;uploadOption=false;">Custom Link</a></li>
+     <!--<li class=""><a href="#frame_3_3" (click)="internalLink=false;externalLink=false;uploadOption=true;">Upload And Select Image</a></li>-->
+    </ul>
+   
+     <div class="frame bg-grayLighter" [hidden]="!internalLink">
+      <div class="row">
+       <div class="col-md-12">
+        <h3>Select button action</h3>
+       </div>
+       </div>
+       
+         <div class="row">
+       <div class="col-md-12" >
+                <form style="padding: 25px;" class='new-page-form' [formGroup]="changeButtonForm" (ngSubmit)="changeLink(changeButtonForm.value)">
+                <!--<input [ngClass]="{'inputError': !validInputField(subdomainName) }" type="text" formControlName="subdomainName" name="subdomainName" placeholder="Please type in subdomain name">-->
+                   <div class="form-group">
+                        <label for="domainInput">Button Text
+                        	<a (click)='hint("Buttno text","This is the text that will be showen on the button")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
+								?
+							</a>
+                        </label>
+                         <em class="error animated fadeIn left" [hidden]="validInputField(buttonText)">This field is required</em>
+                        <input [ngClass]="{'inputError': !validInputField(buttonText) }" formControlName="buttonText" name="buttonText" type="text" class="form-control"  aria-describedby="domainName"  placeholder="Button Text">
+                        <small class="form-text text-muted">please spectify how button will appear in navbar</small>
+                   </div>
+                   
+                   <div class="form-group">
+                    <label for="applicationType">Navigate to
+                    <a (click)='hint("Navigate to section","Here you should select to what page section you want to navigate")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
+								?
+							</a>
+                    </label>
+                    <em class="error animated fadeIn left" [hidden]="validInputField(link)">Please select where to navigate</em>
+                    <select formControlName="link" name="link" class="form-control" >
+                      <!--<div *ngFor="let page of this.navigationList?.data.additionalElements;">-->
+                          <option *ngFor="let option of reorderedNavList;let i = index" value="{{i}}">Section {{option.navName}} of {{option.page}}</option>
+                      <!--</div>-->
+                      <!--<option value="template_text">Text oriented template</option>-->
+                      <!--<option value="template_galery">Galery Template</option>-->
+                    </select>
+                  </div>
+                		<input [disabled]="changeButtonForm.invalid"  type="submit" name="Create Web Application" class="login loginmodal-submit" value="Change">
+                		<input  type="button" data-dismiss="modal" name="Cancel" class="login loginmodal-submit" value="Cancel">
+				  </form>
+       
+         
+            <!--Control buttons in order to select the items-->
+         </div>
+
+      </div>
+      
+     </div>
+     <!--id="frame_3_2"-->
+     <div class="frame bg-grayLighter" [hidden]="!externalLink">
+      <h3>Enable Additional Sections</h3>
+      <br/>
+      
+                <form style="padding: 25px;" class='new-page-form' [formGroup]="changeButtonFormCustom" (ngSubmit)="changeLinkCustom(changeButtonFormCustom.value)">
+                <!--<input [ngClass]="{'inputError': !validInputField(subdomainName) }" type="text" formControlName="subdomainName" name="subdomainName" placeholder="Please type in subdomain name">-->
+                   <div class="form-group">
+                        <label for="buttonTextCustom">Button Text
+                        	<a (click)='hint("Buttno text","This is the text that will be showen on the button")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
+								?
+							</a>
+                        </label>
+                         <em class="error animated fadeIn left" [hidden]="validInputField(buttonTextCustom)">This field is required</em>
+                        <input [ngClass]="{'inputError': !validInputField(buttonTextCustom) }" formControlName="buttonTextCustom" name="buttonTextCustom" type="text" class="form-control"  aria-describedby="buttonTextCustom"  placeholder="Button Text">
+                        <small class="form-text text-muted">please spectify how button will appear in navbar</small>
+                   </div>
+                   
+                   <div class="form-group">
+                    <label for="applicationType">Navigate to
+                    <a (click)='hint("Navigate to url","Here you should specify URL you want to navigate to")' class="badge" style="border: 1px solid #eee;padding:3px 6px;border-radius:4px;">
+								?
+							</a>
+                    </label>
+                    <em class="error animated fadeIn left" [hidden]="validInputField(linkCustom)">Please select where to navigate</em>
+                    <input [ngClass]="{'inputError': !validInputField(linkCustom) }" formControlName="linkCustom" name="linkCustom" type="text" class="form-control" aria-describedby="linkCustom"  placeholder="Custom URL">
+                    <small class="form-text text-muted">Please type in the custom link to go to</small>
+                    
+                    
+                  </div>
+                		<input [disabled]="changeButtonFormCustom.invalid"  type="submit" name="Create Web Application" class="login loginmodal-submit" value="Change">
+                		<input  type="button" data-dismiss="modal" name="Cancel" class="login loginmodal-submit" value="Cancel">
+				  </form>
+      
+      
+      
+      
+     </div>
+     <div class="frame bg-grayLighter" [hidden]="!uploadOption">
+
+     </div>
     </div>
+   </div>
+
+   <!--<div class="row">-->
+   <!--      <div class="col-md-12">-->
+   <!--       <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>-->
+   <!--       <button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>-->
+   <!--      </div>-->
+   <!-- </div>-->
+  </div>
+
 </div>
