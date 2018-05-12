@@ -233,13 +233,26 @@ exports.addSimplePage = function(req, res) {
                     ];
                     
                     
-                    let dataCreativeHeadder = {
-                        "title": req.body.navbarName,
-                        "subtitle": "simplePage",
-                        "background": {color: "", image: "app/assets/bootstrap-templates/img-tmp1/header.jpg"},
-                        "buttonLink": "#"
-                    };
-
+                    // let dataCreativeHeadder = {
+                    //     "title": req.body.navbarName,
+                    //     "subtitle": "simplePage",
+                    //     "background": {color: "", image: "app/assets/bootstrap-templates/img-tmp1/header.jpg"},
+                    //     "buttonLink": "#"
+                    // };
+                    
+                        let dataCreativeHeadder = {
+                            "title": req.body.navbarName,
+                            "subtitle": "Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!",
+                            "background": "./app/assets/bootstrap-templates/img-tmp1/header.jpg",
+                            "buttonLink": {
+                                "link": { "page": "/title-page", "slideTo": "#agency-amazing-team6" },
+                                "buttonText": "Meet the team",
+                                "isExternam": false
+                            }
+                        };
+                    
+                    
+                    
 
                     var p = new page();
                     p.pageName = newname;
@@ -252,8 +265,8 @@ exports.addSimplePage = function(req, res) {
                             "navName": "Headder",
                             "elementTmpType": "headder",
                             "elementSequence": 0,
-                            "title": dataCreativeHeadder,
-                            "data": '',
+                            "title": { "title": req.body.navbarName, "subtitle": "Subtitle here.." },
+                            "data": dataCreativeHeadder,
                             "background": { "color": "", "image": "app/assets/bootstrap-templates/img-tmp1/header.jpg" }
                         },
                         {
