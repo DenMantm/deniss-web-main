@@ -56,6 +56,8 @@ export class LayoutEditor {
     ngOnInit(){
         
             this.ls.getTemplateItemList().subscribe((e:any)=>{
+            console.log(e._body);
+            
             this.itemList = JSON.parse(e._body)
             //console.log(this.itemList)
             console.log("Debug Page Data");
