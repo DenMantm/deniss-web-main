@@ -16,14 +16,14 @@ exports.authenticate = function(req, res, next) {
       var currentContainer = process.env.DATABASE_ID;
       
       //if undefined, all good...
-      if(currentContainer == undefined) return res.send({status:'success', user: user});
+      //if(currentContainer == undefined) return res.send({status:'success', user: user});
       
       docker.findOne({$and:[{ 'identificationId': currentContainer },{'belongsToUser':user.username}]}, function(err, p) {
         if (err) {
             return res.send({ error: err });
         }
         else if (!p) {
-            res.res.json({status:'failed'}); 
+            res.json({status:'failed',containerid:currentContainer});
         }
         else return res.send({status:'success', user: user});
     });

@@ -60,7 +60,8 @@ export class AuthService{
         let loginInfo = {username:username,password:password};
         this.loginSubject = this.http.post('/api/login',JSON.stringify(loginInfo),options);
 
-        return this.loginSubject.do(resp => {
+        return this.loginSubject.do((resp:any) => {
+            console.log(resp)
                  //assign value to the user
                  if(resp.json().user)
                  this.currentUser = resp.json().user;
