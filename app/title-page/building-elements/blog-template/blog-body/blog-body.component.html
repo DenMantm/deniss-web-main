@@ -1,0 +1,50 @@
+   <!--This page have been formed from the bootstrap templates, REF: https://github.com/BlackrockDigital-->
+    <!-- Header -->
+     <!--menu to control and edit the element-->
+    <!--<content-edit-option-nav *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>-->
+    
+    <content-edit-option-nav [modal]="modal" *ngIf="showElementTools" (removeClick)="remove()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+    
+    <view-uploaded-images *ngIf="showElementTools" [filteredItemList]="filteredItemList" [pageData]="pageData"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" [ngStyle]="{'background-image': 'url(' + pageData?.background.image + ')','background-color':pageData?.background.color}">
+    <!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="margin: auto;">
+        <div class="animated fadeIn" *ngFor="let element of blogPost?.blogElements" [ngClass]="{'control-margin': loginCheck()&&showElementTools}">
+          <div [hidden]="!showElementTools" *ngIf="loginCheck()" class="controls">
+            <button (click)='remove(element,blogPost.blogElements)' type="button" class="btn btn-secondary btn-sm control-btn" ><i class="fa fa-times" aria-hidden="true"></i></button>
+            <button (click)='moveUp(element,blogPost.blogElements)' type="button" class="btn btn-secondary btn-sm control-btn" ><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+            <button (click)='moveDown(element,blogPost.blogElements)' type="button" class="btn btn-secondary btn-sm control-btn"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+            <button *ngIf="element.type == 'img'" (click)='changeImage(element.text)' type="button" class="btn btn-secondary btn-sm control-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          </div>
+          <div class="animated fadeIn" [ngClass]="{'border': loginCheck()&&showElementTools}">
+            <div *ngIf="element.type == 'div'" class="editable" [(contenteditableModelHtml)]="element.text"></div>
+            <pre *ngIf="element.type == 'pre'" class="prettyprint editable" [(contenteditableModelHtml)]="element.text"></pre>
+            <img *ngIf="element.type == 'img'" class="prettyprint editable center-block" src="{{element.text.img}}"/>
+          </div>
+        </div>
+        <div [hidden]="!showElementTools" *ngIf="loginCheck()" class="edit-snippet-controls">
+          <!--<button (click)='addElementDiv(blogPost.blogElements)' type="button" class="btn btn-secondary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i> Add Element</button>-->
+          <div class="btn-group dropup">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add Element
+              </button>
+              <div class="dropdown-menu">
+                <button (click)='addElementPre(blogPost.blogElements)' type="button" class="dropdown-item"><i class="fa fa-plus" aria-hidden="true"></i> Code Elem</button>
+                <button (click)='addElementDiv(blogPost.blogElements)' type="button" class="dropdown-item"><i class="fa fa-plus" aria-hidden="true"></i> Simple Elem</button>
+                <button (click)='addElementImg(blogPost.blogElements)' type="button" class="dropdown-item"><i class="fa fa-plus" aria-hidden="true"></i> Image Elem</button>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</article>
+    </header>
+    
+     <change-images style="z-index:1041" #changeImg [noIcons]="true" [filteredItemList]="filteredItemList" *ngIf="showElementTools" ></change-images>

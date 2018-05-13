@@ -19,7 +19,7 @@
         </div>
         <div class="row text-center sortable-agency-service">
           
-          <div *ngFor="let ele of data;sortable-agency-service" class="col-md-4" [attr.data]=i>
+          <div *ngFor="let ele of data;let i = index;" class="col-md-4" [attr.data]=i>
             <change-images [toggleIcons]="false" [pageData]="pageData" [removableItem]="ele" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]=""></change-images>
             <span class="fa-stack fa-4x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>

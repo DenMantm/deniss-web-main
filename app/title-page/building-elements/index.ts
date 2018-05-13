@@ -10,3 +10,5 @@ export * from './creative-template/creative-portfolio/creative-portfolio.compone
 
 export * from './blog-template/blog-info/blog-info.component'
 export * from './blog-template/blog-headder/blog-headder.component'
+export * from './blog-template/blog-body/blog-body.component'
+

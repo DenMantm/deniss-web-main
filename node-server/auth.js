@@ -1,4 +1,5 @@
 var passport = require('passport');
+var docker = require('./database/models/docker-container-model')
 
 // super important that you use "username" in the body.
 exports.authenticate = function(req, res, next) {
@@ -11,7 +12,23 @@ exports.authenticate = function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if(err) {return next(err);}
-      return res.send({status:'success', user: user});
+      
+      var currentContainer = process.env.DATABASE_ID;
+      
+      //if undefined, all good...
+      if(currentContainer == undefined) return res.send({status:'success', user: user});
+      
+      docker.findOne({$and:[{ 'identificationId': currentContainer },{'belongsToUser':user.username}]}, function(err, p) {
+        if (err) {
+            return res.send({ error: err });
+        }
+        else if (!p) {
+            res.res.json({status:'failed'}); 
+        }
+        else return res.send({status:'success', user: user});
+    });
+      
+      
     })
   })
   auth(req, res, next);

@@ -130,15 +130,15 @@ constructor(private auth:AuthService,
    }
    addElementDiv(list){
         this.arrayUtil.addNewElementDiv(list);
-        setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
+        //setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
    }
    addElementPre(list){
         this.arrayUtil.addNewElementPre(list);
-        setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
+        //setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
    }
    addElementImg(list){
         this.arrayUtil.addNewElementImg(list);
-        setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
+        //setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
    }
    changeImage(image){
        this.changeImg.imgModalForBlog(image);

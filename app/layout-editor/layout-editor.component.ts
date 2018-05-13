@@ -54,7 +54,6 @@ export class LayoutEditor {
         
         
     ngOnInit(){
-        
             this.ls.getTemplateItemList().subscribe((e:any)=>{
             console.log(e._body);
             

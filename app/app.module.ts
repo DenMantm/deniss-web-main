@@ -23,7 +23,8 @@ import { TitlePageComponent,
         CreativeService,
         CreativePortfolio,
         BlogInfo,
-        BlogHeadder
+        BlogHeadder,
+        BlogBody
         } from './title-page/index';
 import { ProjectsPageComponent } from './projects/index';
 import {BlogPostsComponent, 
@@ -122,7 +123,8 @@ enableProdMode();
                     ChangeImages,
                     BlogInfo,
                     ButtonOptions,
-                    BlogHeadder
+                    BlogHeadder,
+                    BlogBody
                     ],
     providers: [AuthService,
                 FirstPageGuard,

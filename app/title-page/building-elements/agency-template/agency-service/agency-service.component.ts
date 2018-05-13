@@ -68,10 +68,11 @@ export class AgencyService {
             if(this.showElementTools != undefined){
                 if(this.showElementTools){
                     this.$('.sortable-agency-service').sortable('enable');
-                                    let linkOrderData = this.$('.sortable-creative-service').sortable('serialize');
+                                    let linkOrderData = this.$('.sortable-agency-service').sortable('serialize');
                 console.log('Sortable here...');
                 console.log(linkOrderData);
                 }
+                
                 else{
                     this.$('.sortable-agency-service').sortable("disable");
                     console.log('dis');
@@ -82,6 +83,7 @@ export class AgencyService {
         }
         
         add(){
+            console.log('push');
             this.pageData.data.push(JSON.parse(JSON.stringify(this.template)))
         }
         style(){

@@ -40,4 +40,4 @@ export const appRoutes:Routes = [
     canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,titlePageModel:TitlePageResolverService}},
     { path: '404', component: Error404Component },
     {path:'', redirectTo:'/title-page', pathMatch:'full'},
-];
+    ];

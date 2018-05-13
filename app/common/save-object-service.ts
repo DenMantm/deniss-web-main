@@ -313,6 +313,7 @@ export class SaveObjectService{
                 
                 //in case if there is an error and there is no title page..
                 if(!!JSON.parse(res._body).error){
+                    console.log(res._body);
                     this.notify.error('there was an error...');
                 }
                 else{

@@ -277,6 +277,7 @@ exports.getNavBar = function(req, res) {
 }
 
 exports.getFooter = function(req, res) {
+    
     page.findOne({ 'pageType': "titlepage" }, function(err, p) {
 
         if (err) {
