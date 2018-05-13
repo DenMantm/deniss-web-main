@@ -24,7 +24,7 @@ exports.authenticate = function(req, res, next) {
             return res.send({ error: err });
         }
         else if (!p) {
-            res.json({status:'failed'});
+            res.json({status:'failed1',debug1:currentContainer,debug2:user.username});
         }
         else{
           
@@ -34,7 +34,7 @@ exports.authenticate = function(req, res, next) {
             return res.send({ error: err });
         }
         else if (!pp) {
-            res.json({status:'failed'});
+            res.json({status:'failed2',debug1:currentContainer,debug2:user.username});
         }
         else{
           
