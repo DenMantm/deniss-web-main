@@ -19,12 +19,12 @@ exports.authenticate = function(req, res, next) {
       //if undefined, all good...
       //if(currentContainer == undefined) return res.send({status:'success', user: user});
       
-      docker.findOne({'identificationId': currentContainer }, function(err, p) {
+      docker.findOne({'identificationId': currentContainer.trim() }, function(err, p) {
         if (err) {
             return res.send({ error: err });
         }
         else if (!p) {
-            res.json({status:'failed1',debug1:currentContainer,debug2:user.username});
+            res.json({status:'failed'});
         }
         else{
           
@@ -34,7 +34,8 @@ exports.authenticate = function(req, res, next) {
             return res.send({ error: err });
         }
         else if (!pp) {
-            res.json({status:'failed2',debug1:currentContainer,debug2:user.username});
+          //res.json({status:'failed2',debug1:currentContainer,debug2:user.username});
+            res.json({status:'failed'});
         }
         else{
           
