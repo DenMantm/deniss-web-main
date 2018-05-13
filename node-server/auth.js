@@ -17,7 +17,7 @@ exports.authenticate = function(req, res, next) {
       
       //currentContainer = 'oK0ZWPNB';
       //if undefined, all good...
-      //if(currentContainer == undefined) return res.send({status:'success', user: user});
+      if(currentContainer == undefined) return res.send({status:'success', user: user});
       
       docker.findOne({'identificationId': currentContainer.trim() }, function(err, p) {
         if (err) {
@@ -45,14 +45,9 @@ exports.authenticate = function(req, res, next) {
         
     });
           
+
           
-          
-          
-          
-          
-          
-          
-          return res.send({status:'success', user: user});
+         // return res.send({status:'success', user: user});
           
         }
         
