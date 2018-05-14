@@ -15,7 +15,7 @@
         <div class="row sortable-agency-portfolio" >
           
           <div *ngFor="let item of pageData?.data;let i = index" class="col-md-4 col-sm-6 portfolio-item" [attr.data]=i>
-            <change-images [pageData]="pageData" [removableItem]="item" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
+            <change-images [pageData]="pageData" [toggleIcons]="true" [removableItem]="item" [filteredItemList]="filteredItemList" *ngIf="showElementTools"  [image]="item.smallImage"></change-images>
             <a class="portfolio-link" data-toggle="modal" href="{{'#portfolioModal'+i+pageData?.elementSequence}}">
               <div class="portfolio-hover">
                 <div class="portfolio-hover-content">
