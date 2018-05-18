@@ -192,6 +192,9 @@ onWindowScroll(event) {
 
                         
                         this.objectService.savePageModel(this.pageData.pageType,this.pageData.pageData).subscribe((res:any)=>{
+                            
+                                                        //changing model of layout editor...
+                            this.clonedPageData = JSON.parse(JSON.stringify(this.pageData));
                                                 
                         });
                         
