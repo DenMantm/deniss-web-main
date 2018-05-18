@@ -11,6 +11,6 @@ When editing content and after saving it, and going into layout editor and chang
 
 Add additional features:
 
-** Widen text in the blog-body
-** add video element where video insertion from youtube is possible
-** multi paragraph text addition
+*** Widen text in the blog-body
+*** add video element where video insertion from youtube is possible
+*** multi paragraph text addition
