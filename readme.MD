@@ -16,3 +16,4 @@ Add additional features:
 * Widen text in the blog-body
 * add video element where video insertion from youtube is possible
 * multi paragraph text addition
+* In about section enable media link addition
