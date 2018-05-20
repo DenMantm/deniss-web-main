@@ -52,7 +52,7 @@ export class ChangeImages {
             this.sufix = ""
         }
     ngAfterViewInit(){
-        $(this.cp.nativeElement).colorpicker();
+        // $(this.cp.nativeElement).colorpicker();
     }
     
     ngOnInit(){
@@ -179,6 +179,16 @@ export class ChangeImages {
       this.removableItem.icon = element.srcElement.parentNode.parentNode.firstElementChild.firstElementChild.attributes.class.nodeValue.slice(3);
       $(this.icoel.nativeElement).modal('hide');
   }
+  
+      changeFromUpload(img){
+        
+        this.image.img = img.itemName;
+        this.itemList.push(img);
+        //this.changeImage.emit(this.currentElement.itemName);
+        $(this.el.nativeElement).modal('hide');
+        
+        
+    }
   
         
     

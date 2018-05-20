@@ -29,7 +29,7 @@
             <div class="tabcontrol" data-role="tabcontrol" data-open-target="#frame_3_1">
                 <ul class="tabs">
                     <li class="active"><a href="#frame_3_1" (click)="imageOption=true;colorOption=false;uploadOption=false;">Existing Images</a></li>
-                    <li class=""><a href="#frame_3_2" (click)="imageOption=false;colorOption=true;uploadOption=false;">Select Color</a></li>
+                    <!--<li class=""><a href="#frame_3_2" (click)="imageOption=false;colorOption=true;uploadOption=false;">Select Color</a></li>-->
                     <li class=""><a href="#frame_3_3" (click)="imageOption=false;colorOption=false;uploadOption=true;">Upload And Select Image</a></li>
                 </ul>
                 <div>
@@ -82,29 +82,29 @@
 
                     </div>
                     <!--id="frame_3_2"-->
-                    <div class="frame bg-grayLighter" [hidden]="!colorOption">
-                        <h3>Set Color</h3>
-                        <div #cp2 style="width:80%" class="input-group colorpicker-component" title="Using input value">
-                            <input #colorInput type="text" class="form-control input-lg" value="#DD0F20" />
-                            <span class="input-group-addon"><i></i></span>
-                        </div>
-                        <br/>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>
-                                <button (click)="changeColor(colorInput.value)" class="button success"><span class="mif-pencil"></span>Pick selected color</button>
-                                <button (click)="discardColor()" class="button warning"><span class="mif-pencil"></span>Discard color</button>
-                            </div>
-                        </div>
+                    <!--<div class="frame bg-grayLighter" [hidden]="!colorOption">-->
+                    <!--    <h3>Set Color</h3>-->
+                    <!--    <div #cp2 style="width:80%" class="input-group colorpicker-component" title="Using input value">-->
+                    <!--        <input #colorInput type="text" class="form-control input-lg" value="#DD0F20" />-->
+                    <!--        <span class="input-group-addon"><i></i></span>-->
+                    <!--    </div>-->
+                    <!--    <br/>-->
+                    <!--    <div class="row">-->
+                    <!--        <div class="col-md-12">-->
+                    <!--            <button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>-->
+                    <!--            <button (click)="changeColor(colorInput.value)" class="button success"><span class="mif-pencil"></span>Pick selected color</button>-->
+                    <!--            <button (click)="discardColor()" class="button warning"><span class="mif-pencil"></span>Discard color</button>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
 
-                    </div>
+                    <!--</div>-->
                     <div class="frame bg-grayLighter" [hidden]="!uploadOption">
                         <!-- <form [formGroup]="uploadForm" (ngSubmit)="change(uploadForm.value)">-->
                         <!--    <input formControlName="fileName" (change)="onFileChange($event)" name="fileName" type="file" name="file">-->
                         <!--    <input [disabled]="uploadForm.invalid" type="submit" name="selectItem" class="button success" value="Upload">-->
                         <!--</form>-->
                         <!--<img #previewImage src=""/>-->
-                        <base64-upload></base64-upload>
+                        <base64-upload (imageUploaded)="changeFromUpload($event)"></base64-upload>
                     </div>
                 </div>
             </div>

@@ -40,14 +40,14 @@
             <!--<li class="nav-item">-->
             <!--  <a class="nav-link js-scroll-trigger" routerLink="/blog-posts">Blog</a>-->
             <!--</li>-->
+            
           </ul>
           
             <ul *ngIf="pageData.navbarElement.enableBlog" class="navbar-nav text-uppercase">
               <li  class="nav-item">
-                <a class="nav-link js-scroll-trigger" [routerLink]="['/blog-posts']" pageScroll  href="#top_of_page">Blog Section</a>
+                <a class="nav-link js-scroll-trigger" [routerLink]="['/blog-posts']" pageScroll  href="#top_of_page">{{pageData.blog.title.title}}</a>
               </li>
             </ul>
-          
         </div>
       </div>
     </nav>
