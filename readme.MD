@@ -8,7 +8,8 @@ mongolab: personal-blog-page
 
 Known bugs:
 * (Fixed) When editing content and after saving it, and going into layout editor and changing layout previously saved content is not persisting...
-* When uploading image in image change mode, just uploading and not changing image itself...
+* (APrtial fix)When uploading image in image change mode, just uploading and not changing image itself...
+* Fix image upload errors
 
 
 Add additional features:
@@ -17,3 +18,4 @@ Add additional features:
 * add video element where video insertion from youtube is possible
 * multi paragraph text addition
 * In about section enable media link addition
+* implement forver module
