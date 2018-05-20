@@ -30,7 +30,7 @@
      <li class=""><a href="#frame_3_3" (click)="internalLink=false;externalLink=false;uploadOption=true;">Enable/Disable</a></li>
     </ul>
    
-     <div class="frame bg-grayLighter" [hidden]="!internalLink">
+     <div style="color:black;" class="frame bg-grayLighter" [hidden]="!internalLink">
       <div class="row">
        <div class="col-md-12">
         <h3>Select button action</h3>
@@ -79,7 +79,7 @@
       
      </div>
      <!--id="frame_3_2"-->
-     <div class="frame bg-grayLighter" [hidden]="!externalLink">
+     <div style="color:black;"  class="frame bg-grayLighter" [hidden]="!externalLink">
       <h3>Enable Additional Sections</h3>
       <br/>
       
@@ -116,7 +116,21 @@
       
       
      </div>
-     <div class="frame bg-grayLighter" [hidden]="!uploadOption">
+     <div style="color:black;" class="frame bg-grayLighter" [hidden]="!uploadOption">
+      
+      
+            <form [formGroup]="buttonEnable" (ngSubmit)="changeEnabledOption(buttonEnable.value)">
+      <label  class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" formControlName="isEnabled" name="isEnabled">
+                        Enable Blogging Section:
+                      </label>
+      <br/>
+      <br/>
+      <input [disabled]="buttonEnable.invalid" type="submit" name="selectItem" class="button success" value="Change section settings">
+
+     </form>
+      
+      
 
      </div>
     </div>
@@ -129,16 +143,7 @@
           <!--<button (click)="toggleModal()" data-dismiss="modal" class="button warning"><i class="fa fa-times"></i> Close</button>-->
           <!--<button (click)="change()" class="button success"><span class="mif-pencil"></span>Add Selected Element</button>-->
                
-      <form [formGroup]="buttonEnable" (ngSubmit)="changeEnDis(buttonEnable.value)">
-      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value="" formControlName="isEnabled" name="isEnabled">
-                        Enable Blogging Section:
-                      </label>
-      <br/>
-      <br/>
-      <input [disabled]="buttonEnable.invalid" type="submit" name="selectItem" class="button success" value="Change section settings">
 
-     </form>
          
          
          </div>

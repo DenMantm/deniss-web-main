@@ -16,9 +16,9 @@
             
           <button-options [pageData]="pageData" *ngIf="showElementTools"></button-options>
           
-          <a *ngIf="!pageData?.data.buttonLink.isExternam" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" [routerLink]="[pageData?.data.buttonLink.link.page]" pageScroll href="{{pageData?.data.buttonLink.link.slideTo}}">{{pageData?.data.buttonLink.buttonText}}</a>
+          <a *ngIf="!pageData?.data.buttonLink.isExternam&&pageData.data.buttonLink.isEnabled" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" [routerLink]="[pageData?.data.buttonLink.link.page]" pageScroll href="{{pageData?.data.buttonLink.link.slideTo}}">{{pageData?.data.buttonLink.buttonText}}</a>
           
-          <a *ngIf="pageData?.data.buttonLink.isExternam" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" href="{{pageData?.data.buttonLink.link.page}}">{{pageData?.data.buttonLink.buttonText}}</a>
+          <a *ngIf="pageData?.data.buttonLink.isExternam&&pageData.data.buttonLink.isEnabled" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="color:black" href="{{pageData?.data.buttonLink.link.page}}">{{pageData?.data.buttonLink.buttonText}}</a>
           
             
             
