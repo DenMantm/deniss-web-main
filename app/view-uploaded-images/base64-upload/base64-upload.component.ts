@@ -100,10 +100,18 @@ export class Base64UploadComponent {
         .subscribe(
             (data:any) => {console.log('success'); this.loading = false;
             console.log(data);
-            this.imageUploaded.emit(data.image);
+            
+            if(!!!data.image){
+              console.log(data)
+              alert(data)
+            }else{
+              this.imageUploaded.emit(data.image);
+            }
+            
+            
               
             },
-            error => console.log(error)
+            error => {console.log(error)}
         )
     
   }
