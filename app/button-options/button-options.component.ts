@@ -31,6 +31,10 @@ export class ButtonOptions {
     linkCustom:FormControl;
     
     
+    buttonEnable:FormGroup;
+    isEnabled:FormControl;
+    
+    
     internalLink:boolean = true;
     navigationList:any;
     reorderedNavList:Array<any>=[];
@@ -47,6 +51,14 @@ export class ButtonOptions {
     }
     
     ngOnInit(){
+        
+        
+        this.isEnabled = new FormControl(this.pageData.data.buttonLink.isEnabled)
+        this.buttonEnable = new FormGroup({
+            isEnabled:this.isEnabled
+        })
+        
+        
         
         this.buttonText = new FormControl(this.pageData.data.buttonLink.buttonText,Validators.required);
         this.link = new FormControl('',Validators.required);
@@ -103,7 +115,11 @@ export class ButtonOptions {
                 this.pageData.data.buttonLink.link.slideTo = ""
                 $(this.el.nativeElement).modal('hide');
     }
-    
+    changeEnabledOption(values){
+        
+        this.pageData.data.buttonLink.isEnabled = values.isEnabled;
+        $(this.el.nativeElement).modal('hide');
+    }
     
     
     openModal(){

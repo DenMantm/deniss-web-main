@@ -251,7 +251,8 @@ exports.addSimplePage = function(req, res) {
                         "buttonLink": {
                             "link": { "page": "/title-page", "slideTo": "#agency-amazing-team6" },
                             "buttonText": "Meet the team",
-                            "isExternam": false
+                            "isExternam": false,
+                            "isEnabled":true
                         }
                     };
 
@@ -269,6 +270,7 @@ exports.addSimplePage = function(req, res) {
             },
             "data": {
                 "buttonLink": {
+                    "isEnabled":true,
                     "isExternam": false,
                     "buttonText": "Meet the team",
                     "link": {

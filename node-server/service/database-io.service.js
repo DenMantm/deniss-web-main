@@ -375,6 +375,7 @@ exports.initializeTitlePage = function(req, res) {
         "subtitle": "Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!",
         "background": "./app/assets/bootstrap-templates/img-tmp1/header.jpg",
         "buttonLink": {
+            "isEnabled":true,
             "link": { "page": "/title-page", "slideTo": "#agency-amazing-team6" },
             "buttonText": "Meet the team",
             "isExternam": false
@@ -386,6 +387,7 @@ exports.initializeTitlePage = function(req, res) {
         "subtitle": "Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!",
         "background": "./app/assets/bootstrap-templates/img-tmp2/header-bg.jpg",
         "buttonLink": {
+            "isEnabled":true,
             "link": { "page": "/title-page", "slideTo": "#agency-amazing-team6" },
             "buttonText": "Meet the team",
             "isExternam": false
