@@ -21,3 +21,9 @@ Add additional features:
 * implement forver module
 * image upload error handling
 * add buttons
+
+Samples
+=================
+* http://separate-pages.deniss-strods.com/
+* http://erikgalery.deniss-strods.com/
+* http://doctorlarisa.deniss-strods.com/
