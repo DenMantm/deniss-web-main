@@ -19,3 +19,5 @@ Add additional features:
 * multi paragraph text addition
 * In about section enable media link addition
 * implement forver module
+* image upload error handling
+* add buttons
