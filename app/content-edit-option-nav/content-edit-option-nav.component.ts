@@ -14,6 +14,8 @@ export class ContentEditOptionNav {
         @Output() backgroundClick = new EventEmitter();
         @Output() removeClick = new EventEmitter();
         @Input() modal:any;
+        @Input() addItem:any;
+        @Input() removeItem:any;
     
     
         constructor(private auth:AuthService){

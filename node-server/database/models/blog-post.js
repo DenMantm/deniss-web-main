@@ -21,7 +21,7 @@ var blogPost = mongoose.Schema({
         blogElements : [blogElement],
         isPosted     : Boolean,
         isDeleted    : Boolean,
-        img:String
+        background:Object
 });
 
 

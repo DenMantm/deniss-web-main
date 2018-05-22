@@ -15,7 +15,7 @@
 <!--</ul>-->
 
 <div class="editmenu">
-<div>
+<div *ngIf="!!!addItem">
 <button (click)="add()" (mouseenter) ="elementButton1=true"  (mouseleave)="elementButton1=false" type="button" class="btn btn-success btn-circle btn-xl edit-layout first"><i class="fa fa-plus"></i>
 </button>
 <button *ngIf="elementButton1" type="button" class="btn btn-success btn-circle cover-xl edit-layout first">Add aditional item

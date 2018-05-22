@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, Renderer, Inject,Input,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../user/auth.service';
 import { IUser } from '../../user/user.model';
 import { ChangeImages } from '../../change-images/index';
@@ -33,13 +34,15 @@ export class BlogPostInstanceComponent implements OnInit {
      filteredItemList:any = {};
      itemList:any;
     @ViewChild('changeImg') changeImg:ChangeImages;
+    @ViewChild('uploadImages') modal:any;
     
 constructor(private auth:AuthService,
 			@Inject(JQUERY_TOKEN) private $,
 			private route:ActivatedRoute,
 			private objectService:SaveObjectService,
 			private arrayUtil:ArrayUtilityService,
-            private medium:MediumEditorService
+            private medium:MediumEditorService,
+            private router:Router
 			){}
 
 //form
@@ -221,6 +224,65 @@ constructor(private auth:AuthService,
                 }
 
 }
+
+    background(){
+       this.modal.openModal();
+   }
+   add(){
+       
+   }
+   removePost(){
+       
+       
+       
+        swal({
+          title: "Are you sure?",
+          text: "Remove Post?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes",
+          cancelButtonText: "Cancel",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        (isConfirm)=>{
+          if (isConfirm) {
+            //removing.....
+            this.blogPost.isDeleted = true;
+            
+            
+            this.objectService.editBlogPost(this.blogPost).subscribe(res => {
+            
+            
+            this.lastStateBlogPost =  this.arrayUtil.deepCopy(this.blogPost);
+            
+            //console.log(res)
+           this.router.navigate(['/blog-posts']);
+                
+            }
+            );
+            
+            
+            
+            
+          } else {
+          }
+        });
+       
+       
+       
+       
+       
+       
+       console.log('remove clicked...');
+       
+       
+       
+       
+   }
+
+   
 
 }
 

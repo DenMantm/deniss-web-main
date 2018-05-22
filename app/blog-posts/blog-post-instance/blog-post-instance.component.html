@@ -4,7 +4,9 @@
 
 <!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
-<header class="intro-header" style="background-image: url('app/assets/bootstrap-templates/blog-template/post-bg.jpg')">
+<content-edit-option-nav [removeItem]="false" [addItem]="false"  [modal]="modal" *ngIf="showElementTools" (removeClick)="removePost()" (backgroundClick)="background()" (styleClick)="style()" (addClick)="add()" ></content-edit-option-nav>
+<view-uploaded-images *ngIf="showElementTools" [filteredItemList]="filteredItemList" [pageData]="blogPost"  #uploadImages (changeImage)="changeImage($event)" ></view-uploaded-images>
+<header class="intro-header" [ngStyle]="{'background-image': 'url(' + blogPost?.background.image + ')','background-color':blogPost?.background.color}">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -16,6 +18,11 @@
       </div>
     </div>
   </div>
+  
+<div *ngIf="showElementTools">
+<button (click)="removePost()" type="button" class="btn btn-warning btn-circle cover-xl edit-layout">Remove Post
+</button>
+</div>
 </header>
 
 

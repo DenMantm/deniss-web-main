@@ -35,6 +35,7 @@ exports.createNewBlogPost = function(req, res) {
     newBlogPost.blogElements = req.body.blogElements;
     newBlogPost.isPosted = false;
     newBlogPost.isDeleted = false;
+    newBlogPost.background = {"color":"","image":"app/assets/bootstrap-templates/blog-template/post-bg.jpg"}
 
     newBlogPost.save(function(err, blog) {
         if (err)
