@@ -17,7 +17,7 @@ exports.authenticate = function(req, res, next) {
       
       //currentContainer = 'oK0ZWPNB';
       //if undefined, all good...
-      if(currentContainer == undefined) return res.send({status:'success', user: user});
+      if(currentContainer == undefined) return res.send({status:'success-xxx', user: user});
       
       docker.findOne({'identificationId': currentContainer.trim() }, function(err, p) {
         if (err) {
@@ -28,22 +28,29 @@ exports.authenticate = function(req, res, next) {
         }
         else{
           
-          
-        docker.findOne({ 'belongsToUser':user.username }, function(err, pp) {
-        if (err) {
-            return res.send({ error: err });
-        }
-        else if (!pp) {
-          //res.json({status:'failed2',debug1:currentContainer,debug2:user.username});
+          if(p.belongsToUser == user.username ){
+             res.send({status:'success', user: user});
+          }
+          else{
             res.json({status:'failed'});
-        }
-        else{
+          }
           
-          return res.send({status:'success', user: user});
           
-        }
+    //     docker.findOne({ 'belongsToUser':user.username }, function(err, pp) {
+    //     if (err) {
+    //         return res.send({ error: err });
+    //     }
+    //     else if (!pp) {
+    //       //res.json({status:'failed2',debug1:currentContainer,debug2:user.username});
+    //         res.json({status:'failed'});
+    //     }
+    //     else{
+          
+    //       return res.send({status:'success', user: user});
+          
+    //     }
         
-    });
+    // });
           
 
           
