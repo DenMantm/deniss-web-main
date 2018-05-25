@@ -16,6 +16,8 @@ Add additional features:
 
 * Widen text in the blog-body
 * add video element where video insertion from youtube is possible
+* add video element where video insertion from youtube is possible with text from left or right..
+* add option for the image in the blog section to go from left or right, control style
 * multi paragraph text addition
 * In about section enable media link addition
 * implement forver module
