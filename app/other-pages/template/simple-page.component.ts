@@ -50,33 +50,33 @@ onWindowScroll(event) {
       combinedArray:any;
       itemGroupList:any;
       filteredItemList:any = {};
-      titleNav:any;
-      titleFooter:any;
+      titlePageModel:any;
     
 		ngOnInit(): void {
 			this.user = this.route.snapshot.data['user'];
 			
 		   this.route.data.subscribe((res:any)=>{
 		              //loading custom navbar here...
-           this.titleNav = JSON.parse(res['titleNav']._body);
-           this.titleFooter = JSON.parse(res['titleFooter']._body);
+           this.titlePageModel = JSON.parse(res['titlePageModel']._body);
 		   
            this.pageData =  JSON.parse(res['pageModel']._body);
-           this.pageData.navbarElement = this.titleNav;
-           this.pageData.footer = this.titleFooter;
+           this.pageData.navbarElement = this.titlePageModel.navbarElement;
+           this.pageData.footer = this.titlePageModel.footer;
+           this.pageData.blog = this.titlePageModel.blog;
+           
            this.lastStateTitlePageModel = JSON.parse(res['pageModel']._body);
-           this.lastStateTitlePageModel.navbarElement = this.titleNav;
-           this.lastStateTitlePageModel.footer = this.titleFooter;
+           this.lastStateTitlePageModel.navbarElement = this.titlePageModel.navbarElement;
+           this.lastStateTitlePageModel.footer = this.titlePageModel.footer;
+           this.lastStateTitlePageModel.blog = this.titlePageModel.blog;
+           
            this.clonedPageData = JSON.parse(res['pageModel']._body);
-           this.clonedPageData.navbarElement = this.titleNav;
-           this.clonedPageData.footer = this.titleFooter;
+           this.clonedPageData.navbarElement = this.titlePageModel.navbarElement;
+           this.clonedPageData.footer = this.titlePageModel.footer;
+           this.clonedPageData.blog = this.titlePageModel.blog;
            
+
             console.log(this.pageData);
-           
-           
-           
-           
-           
+
            
            this.userImageList = JSON.parse(res['userImageList']._body);
            

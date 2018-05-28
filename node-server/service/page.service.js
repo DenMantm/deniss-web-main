@@ -188,7 +188,7 @@ exports.addSimplePage = function(req, res) {
             writeFile(path + '/../app.module.ts', appModule);
             //5. Add module to routes
 
-            let routeAddition = `{path:'pages/${newname}',component:pages.${newname} ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titleNav:pages.SimplePageNavResolverService,titleFooter:pages.SimplePageFooterResolverService}},`
+            let routeAddition = `{path:'pages/${newname}',component:pages.${newname} ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titlePageModel:TitlePageResolverService}},`
 
             let routeFile = readFile(path + '/../routes.ts');
             routeFile = routeFile.replace('];', '');
