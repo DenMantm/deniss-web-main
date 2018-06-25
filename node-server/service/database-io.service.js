@@ -258,6 +258,24 @@ exports.saveBlogSection = function(req, res) {
 
 }
 
+exports.saveSnippetSection = function(req, res) {
+
+    page.findOneAndUpdate({ "pageType": "titlepage" }, { "snippet": req.body }, { upsert: true }, function(err, p) {
+        if (err)
+            return res.send({ error: err });
+        else if (!p) {
+            res.send('Error, no title page found');
+        }
+        else {
+            //assemble page from the model
+            p.blog = req.body;
+
+            res.json(p);
+        };
+    });
+
+}
+
 
 
 exports.getNavBar = function(req, res) {

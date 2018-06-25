@@ -9,7 +9,7 @@ var app = express();
 //database connection
 
 var mongoose = require('mongoose');
-var configDB = 'mongodb://personal-blog-page:personal-blog-pageqwerty@ds145303.mlab.com:45303/personal-blog-page'
+var configDB = 'mongodb://deniss-web-user:diamond1987@ds217138.mlab.com:17138/deniss-web'
 mongoose.connect(configDB); // connect to our database
 
 

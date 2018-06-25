@@ -27,17 +27,21 @@ export const appRoutes:Routes = [
         component:SnippetRepository,
         resolve:{SNIPPETS:SnippetListResolverService,
                  currentSgroup:SnippetRepResolverService,
-                 User:UserLoggedInResolver
+                 User:UserLoggedInResolver,
+                 titlePageModel:TitlePageResolverService,
+                 userImageList:ImageResolverService
     }},
     {path:'snippet-repository/:sGroup',
         component:SnippetRepository,
         canDeactivate: [CanDeactivateGuard],
         resolve:{SNIPPETS:SnippetListResolverService,
                  currentSgroup:SnippetRepResolverService,
-                 User:UserLoggedInResolver
+                 User:UserLoggedInResolver,
+                 titlePageModel:TitlePageResolverService,
+                 userImageList:ImageResolverService
     }},
     {path:'title-page',component:TitlePageComponent,
     canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,titlePageModel:TitlePageResolverService}},
     { path: '404', component: Error404Component },
     {path:'', redirectTo:'/title-page', pathMatch:'full'},
-    ];
+    {path:'pages/AboutDeniss',component:pages.AboutDeniss ,canActivate:[LoggedInGuard],resolve:{userImageList:ImageResolverService,User:UserLoggedInResolver,pageModel:pages.SimplePageResolverService,titlePageModel:TitlePageResolverService}},];

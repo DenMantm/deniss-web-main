@@ -3,8 +3,8 @@ https://www.momentumonup.com/
 USed Quickstart For Node.js and Angular2 to create this
 ========================
 Status: Under Development
-link: https://nci-project-cms-denamntm.c9users.io
-mongolab: personal-blog-page
+link: https://deniss-web-denamntm.c9users.io
+mongolab: deniss-web
 
 Known bugs:
 * (Fixed) When editing content and after saving it, and going into layout editor and changing layout previously saved content is not persisting...

@@ -1,101 +1,91 @@
-import {Component, Inject, ViewChild, Renderer, NgZone}  from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { ActivatedRoute, Router } from '@angular/router';
+import {HostListener, Component, ViewChild, ElementRef, AfterViewInit,OnInit, Inject,ComponentRef, ComponentFactory, ComponentFactoryResolver,ViewContainerRef} from '@angular/core';
+import { AuthService } from '../../user/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import {JQUERY_TOKEN,
         SaveObjectService,
         ArrayUtilityService,
         ContenteditableModelText,
-        ContenteditableModelHtml, 
-        MediumEditorService 
-        } from '../common/index';
-import { SnippetInstanceObj,SnippetInstanceObjGroup } from './common/snippet-rep.snippet-object';
-import { AuthService } from '../user/index';
+        ContenteditableModelHtml,
+        MediumEditorService
+        } from '../../common/index';
+        
+        
+//components to import here....
+import {
+        AgencyService,
+        AgencyPortfolio,
+        AgencyHeadder,
+        AgencyAmazingTeam,
+        AgencyAbout,
+        CreativeHeadder,
+        CreativeService,
+        CreativePortfolio
+        } from '../../title-page/index';
+
 declare var PR;
 declare var swal;
 
+//configuration with the templates..
+import {componentData} from './configuration';
+//var componentData = require('json!./templates/configuration.json');
 
-@Component({
-    templateUrl:'app/snippet-rep/snippet-rep.component.html',
-    styles:[`.switcher-background{background-color: #f6f8fa;}
-            .controls button {float:right;margin-bottom:10px}
-            .controls {height: 0px;
-    position: absolute;
-    z-index: 100;
-    width: 94%;}`]
-})
+@Component(componentData)
 
-export class SnippetRepository{
-    sGroup: string;
-    currentUser:any;
-    SNIPPETS:SnippetInstanceObjGroup[];
-    currentSgroup:SnippetInstanceObjGroup;
-    lastStateCurrentSgroup:SnippetInstanceObjGroup;
-    menuIsSelected:boolean;
-    showElementTools:boolean;
-    editor:any;
+
+export class AboutDeniss implements OnInit {
     
-    
-        lastStateTitlePageModel:any;
-    clonedPageData:any;
-    userImageList:any;
-        pageData:any;
         
-        
-        
+        @HostListener("window:scroll", ['$event'])
+onWindowScroll(event) {
+   let scrollPos = document.body.scrollTop;
+    console.log(scrollPos);
+}
+
+      @ViewChild('placeholder', {read: ViewContainerRef}) viewContainerRef;
+      private componentFactory: ComponentFactory<any>;
+      pageData:any;
+      clonedPageData:any
+      userImageList:any
       itemList:any;
       combinedArray:any;
       itemGroupList:any;
       filteredItemList:any = {};
+      titlePageModel:any;
     
-    @ViewChild('titleText') titleText;
-    constructor(@Inject(JQUERY_TOKEN) private $,
-                private objectService:SaveObjectService,
-                private route:ActivatedRoute,
-                private router:Router,
-                private renderer:Renderer,
-                private auth:AuthService,
-                private zone:NgZone,
-                private arrayUtil:ArrayUtilityService,
-                private medium:MediumEditorService){
-
-         //this.isIn = false;
-    }
-    //refreshing the code pretify
-      ngAfterViewChecked(){
-      PR.prettyPrint();
-      
-     } 
-  ngAfterViewInit(){
-    // this.renderer.invokeElementMethod(this.titleText.nativeElement, 'addEventListener', ['transitionend', (e) => {
-    //     console.log(e);
-    // }]);
-  }
-
-  ngOnDestroy() {
-  }
-    ngOnInit() {
-        
-    //   this.SNIPPETS = this.route.snapshot.data['SNIPPETS'];
-       this.currentUser = this.route.snapshot.data['User'];
-       this.route.data.subscribe((res:any)=>{ 
-           this.currentSgroup =  JSON.parse(res['currentSgroup']._body);
-           this.lastStateCurrentSgroup = JSON.parse(res['currentSgroup']._body);
-           this.SNIPPETS = JSON.parse(res['SNIPPETS']._body);
+		ngOnInit(): void {
+			this.user = this.route.snapshot.data['user'];
+			
+		   this.route.data.subscribe((res:any)=>{
+		              //loading custom navbar here...
+           this.titlePageModel = JSON.parse(res['titlePageModel']._body);
+		   
+           this.pageData =  JSON.parse(res['pageModel']._body);
+           this.pageData.navbarElement = this.titlePageModel.navbarElement;
+           this.pageData.footer = this.titlePageModel.footer;
+           this.pageData.blog = this.titlePageModel.blog;
            
-           this.pageData =  JSON.parse(res['titlePageModel']._body);
-           this.lastStateTitlePageModel = JSON.parse(res['titlePageModel']._body);
-           this.clonedPageData = JSON.parse(res['titlePageModel']._body);
+           this.lastStateTitlePageModel = JSON.parse(res['pageModel']._body);
+           this.lastStateTitlePageModel.navbarElement = this.titlePageModel.navbarElement;
+           this.lastStateTitlePageModel.footer = this.titlePageModel.footer;
+           this.lastStateTitlePageModel.blog = this.titlePageModel.blog;
+           
+           this.clonedPageData = JSON.parse(res['pageModel']._body);
+           this.clonedPageData.navbarElement = this.titlePageModel.navbarElement;
+           this.clonedPageData.footer = this.titlePageModel.footer;
+           this.clonedPageData.blog = this.titlePageModel.blog;
+           
+
+            console.log(this.pageData);
+
+           
            this.userImageList = JSON.parse(res['userImageList']._body);
            
-           
-           
-           
-       })
-        
-        
-        
-        
-                            this.itemList = [{"itemName":"app/assets/bootstrap-templates/img-tmp1/header.jpg","itemGroup":"Backgrounds"},
+            console.log('checkThis');
+            console.log(this.userImageList);
+            
+            //generating the list of sorted images
+            
+             this.itemList = [{"itemName":"app/assets/bootstrap-templates/img-tmp1/header.jpg","itemGroup":"Backgrounds"},
                       {"itemName":"app/assets/bootstrap-templates/img-tmp2/header-bg.jpg","itemGroup":"Backgrounds"},
                       {"itemName":"app/assets/bootstrap-templates/blog-template/about-bg.jpg","itemGroup":"Backgrounds"},
                       {"itemName":"app/assets/bootstrap-templates/blog-template/contact-bg.jpg","itemGroup":"Backgrounds"},
@@ -134,49 +124,42 @@ export class SnippetRepository{
                 this.filteredItemList.obj2 = this.itemGroupList;
                 this.filteredItemList.obj3 = this.combinedArray;
                 this.filteredItemList.obj4 = this;
-        
-        
-        
-        
-   }
-   
-   select(value){
-       this.menuIsSelected = true;
-       this.currentSgroup = this.SNIPPETS.filter(e => e.groupName == value)[0];
-       
-        this.renderer.invokeElementMethod(this.titleText.nativeElement, 'addEventListener', ['animationend', (e) => {
-        this.menuIsSelected=false; }]);
-       
-   }
+            
+            
+
+      })
+
+		}
+	user:any;
+	menuIsSelected:boolean;
+    showElementTools:boolean;
+    editor:any;
+    lastStateTitlePageModel:any;
+    
+	constructor(
+				private route:ActivatedRoute,	
+				private auth:AuthService,
+				@Inject(JQUERY_TOKEN) private $,
+	            private objectService:SaveObjectService,
+                private arrayUtil:ArrayUtilityService,
+                private medium:MediumEditorService){
+	}
+  ngAfterViewInit() {
+    
+  }
+  
+// 	ngOnChanges(){
+// 		this.user = this.auth.getCurrentUser();
+// 	}
+	
    loginCheck(){
+       //console.log(this.auth.isAuthenticated());
        return this.auth.isAuthenticated();
    }
-   remove(item,itemList){
-        this.arrayUtil.removeItem(item,itemList);
-   }
-   moveDown(item,itemList){
-       
-      this.arrayUtil.moveItemDown(item,itemList); 
-   }
-   moveUp(item,itemList){
-       
-       this.arrayUtil.moveItemUp(item,itemList); 
-   }
-   addSnippet(){
-       this.arrayUtil.addNewSnippet(this.currentSgroup.snippets);
-
-        setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
-   }
-   addElementDiv(list){
-        this.arrayUtil.addNewElementDiv(list);
-        setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
-   }
-   addElementPre(list){
-        this.arrayUtil.addNewElementPre(list);
-        setTimeout(()=>{ this.editor = this.medium.createInstance() }, 500);
-   }
    
-   editClick(){
+   
+      editClick(){
+        console.log('edit click')
        //Extra variable here
        this.showElementTools = true;
         this.editor = this.medium.createInstance()
@@ -187,10 +170,10 @@ export class SnippetRepository{
             
         }
         saveClick(){
-            
-            
-            
-                    	if (JSON.stringify(this.pageData) !== JSON.stringify(this.lastStateTitlePageModel) ) {
+        	
+        	//same as the current model
+        	
+        	if (JSON.stringify(this.pageData) !== JSON.stringify(this.lastStateTitlePageModel) ) {
         	    
         	    this.lastStateTitlePageModel =  JSON.parse(JSON.stringify(this.pageData));
             
@@ -209,12 +192,10 @@ export class SnippetRepository{
                       if (isConfirm) {
                         //swal("Deleted!", "Your imaginary file has been deleted.", "success");
                         //userResponse = true;
-
                         
-                        this.objectService.saveSnippetSection(this.pageData.snippet).subscribe((res:any)=>{
+                        this.objectService.savePageModel(this.pageData.pageType,this.pageData.pageData).subscribe((res:any)=>{
                                                 
                         });
-                        
                         //notify user that everything was saved here...
 
                       } else {
@@ -224,33 +205,27 @@ export class SnippetRepository{
                     });
         	    
         	    
+        	    
+        	    
+        	    
+        	    
+        	    
         	}
         	else{
         	    swal("There is nothin to save, no schema changes made", "error");
         	}
+
             
-            
-            
-            
-            
-            
-            
-             this.objectService.editSnippetGroup(this.currentSgroup).subscribe((res:any) => {
-                 //this.lastStateCurrentSgroup = JSON.parse(res._body)
-                this.lastStateCurrentSgroup =  this.arrayUtil.deepCopy(this.currentSgroup);
-             }   );
-            PR.prettyPrint();
         }
+
         
-        canDeactivate():any {
-    if (JSON.stringify(this.currentSgroup) !== JSON.stringify(this.lastStateCurrentSgroup) ) {
-        
-        let obs;
-        
-        let promise = new Promise<any>( subsc => obs = subsc );
+    canDeactivate():any {
+         	
+    //perform if statement to compare two data structures...            	
+    if (JSON.stringify(this.pageData) !== JSON.stringify(this.lastStateTitlePageModel) ) {
         
         // let userResponse = false;
-        
+        let can;
         swal({
           title: "Are you sure?",
           text: "Discard changes?",
@@ -262,21 +237,21 @@ export class SnippetRepository{
           closeOnConfirm: true,
           closeOnCancel: true
         },
-        function(isConfirm){
+        (isConfirm)=> {
           if (isConfirm) {
             //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            obs(true);
+            can = true;
             //userResponse = true;
           } else {
             //swal("Cancelled", "Your imaginary file is safe :)", "error");
             //userResponse = false;
-            obs(false);
+            can = false;
           }
         });
         //console.log(userResponse);
         
         
-        return promise.then(res => res)
+        return can
         
            // if(userResponse) this.showElementTools = false;
         
@@ -290,5 +265,11 @@ export class SnippetRepository{
     }
 
 }
+   
+   
+   
+   
+	
+	
 
 }

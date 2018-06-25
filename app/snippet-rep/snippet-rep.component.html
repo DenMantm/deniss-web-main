@@ -1,11 +1,31 @@
 <!--snippet edit navigation here-->
 
 <content-edit-nav *ngIf="loginCheck()" [editPressed]="showElementTools" (editClick)="editClick()" (disableClick)="disableClick()" (saveClick)="saveClick()"></content-edit-nav>
+<agency-nav [pageData]="pageData"></agency-nav>
 
-<div class="container main-container">
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <!--<header class="intro-header" style="background-image: url('app/assets/bootstrap-templates/blog-template/home-bg.jpg')">-->
+    <!--    <div class="container">-->
+    <!--        <div class="row">-->
+    <!--            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="margin:auto;">-->
+    <!--                <div class="site-heading">-->
+    <!--                    <h1>Blog</h1>-->
+    <!--                    <hr class="small">-->
+                        <!--<span class="subheading">A Clean Blog Theme by Start Bootstrap</span>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</header>-->
+   <blog-headder [filteredItemList]="filteredItemList" [showElementTools]="showElementTools" [pageData]="pageData.snippet"></blog-headder> 
+
+
+
+<div class="container main-container" id='top_of_page'>
   <div class="row">
     <div class="col">
-    <h1 #titleText [ngClass]='{"animated fadeIn":menuIsSelected, "border": loginCheck()&&showElementTools}' class="title text-center">Snippet Repository / <span class='editable' [(contenteditableModelText)]="currentSgroup.groupName"></span></h1>
+    <h1 #titleText [ngClass]='{"animated fadeIn":menuIsSelected, "border": loginCheck()&&showElementTools}' class="title text-center"><span class='editable' [(contenteditableModelText)]="currentSgroup.groupName"></span></h1>
     <h5 [ngClass]='{"animated fadeIn":menuIsSelected, "border": loginCheck()&&showElementTools}' class="title text-center editable"[(contenteditableModelText)]="currentSgroup.shortDescription" ></h5>
     <hr class='style-one'/>
     <br/>
@@ -67,3 +87,4 @@
   </div>
 </div>
 
+<agency-footer [pageData]="pageData"></agency-footer>

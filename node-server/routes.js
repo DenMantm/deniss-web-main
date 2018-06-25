@@ -46,6 +46,8 @@ module.exports = function(app) {
   //blog section model save
   app.post('/api/saveBlogSection', dbIO.saveBlogSection);
   
+  //snippet section model save saveSnippetSection
+  app.post('/api/saveSnippetSection', dbIO.saveSnippetSection);
   
   
   //app.post('/api/getSimplePage',dbIO.getSimplePage);

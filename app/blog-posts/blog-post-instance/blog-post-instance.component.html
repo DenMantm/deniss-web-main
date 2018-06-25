@@ -73,9 +73,6 @@
 
 <!--</div>-->
 
-
-
-
 <!-- Post Content -->
 <article>
   <div class="container">
@@ -112,6 +109,9 @@
     </div>
   </div>
 </article>
+<disqus-thread [page-identifier]="blogPost._id" [page-url]="'https://deniss-web-denamntm.c9users.io/blog-posts/'+blogPost._id"></disqus-thread>
+ 
+ 
  
  <change-images style="z-index:1041" #changeImg [noIcons]="true" [filteredItemList]="filteredItemList" *ngIf="showElementTools" ></change-images>
 <agency-footer [pageData]="pageData"></agency-footer>

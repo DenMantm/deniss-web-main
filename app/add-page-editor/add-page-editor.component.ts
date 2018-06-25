@@ -26,6 +26,7 @@ export class AddPageEditor {
     
     navForm:FormGroup;
     isInNav:FormControl;
+    isInNavSnip:FormControl;
     
         constructor(private auth:AuthService,private saveObject:SaveObjectService){
         //this.currentImage = 'app/assets/images/templates/Page-elements/agency-about.PNG';
@@ -42,8 +43,10 @@ export class AddPageEditor {
         
         
         this.isInNav = new FormControl(this.pageData.navbarElement.enableBlog)
+        this.isInNavSnip = new FormControl(this.pageData.navbarElement.enableSnippet)
         this.navForm = new FormGroup({
-            isInNav:this.isInNav
+            isInNav:this.isInNav,
+            isInNavSnip:this.isInNavSnip
         })
         
         
@@ -83,7 +86,7 @@ export class AddPageEditor {
         
         
         this.pageData.navbarElement.enableBlog = values.isInNav;
-        
+        this.pageData.navbarElement.enableSnippet = values.isInNavSnip;
                         this.saveObject.saveNavBar(this.pageData.navbarElement).subscribe((res:any)=>{
                                     window.location.reload();            
                         });

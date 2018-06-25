@@ -48,6 +48,14 @@
                 <a class="nav-link js-scroll-trigger" [routerLink]="['/blog-posts']" pageScroll  href="#top_of_page">{{pageData.blog.title.title}}</a>
               </li>
             </ul>
+            
+            <ul *ngIf="pageData.navbarElement.enableSnippet" class="navbar-nav text-uppercase">
+              <li  class="nav-item">
+                <a class="nav-link js-scroll-trigger" [routerLink]="['/snippet-repository']" pageScroll  href="#top_of_page">Snippets</a>
+              </li>
+            </ul>
+            
+            
         </div>
       </div>
     </nav>

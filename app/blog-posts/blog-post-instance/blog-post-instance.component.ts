@@ -113,6 +113,12 @@ constructor(private auth:AuthService,
     }
     ngAfterViewInit(){
     	   PR.prettyPrint();
+    	   
+    	   
+    	   
+    	   
+    	   
+    	   
     }
 
    loginCheck(){

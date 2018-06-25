@@ -11,7 +11,7 @@
     <header class="intro-header" [ngStyle]="{'background-image': 'url(' + pageData?.background.image + ')','background-color':pageData?.background.color}">
     <!-- Post Content -->
 <article>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="margin: auto;">
         <div class="animated fadeIn" *ngFor="let element of blogPost?.blogElements" [ngClass]="{'control-margin': loginCheck()&&showElementTools}">

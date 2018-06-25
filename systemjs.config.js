@@ -28,6 +28,7 @@
       'sortablejs/Sortable.min': 'node_modules/sortablejs/Sortable.min.js',
       // 'angular2-image-upload': 'npm:angular2-image-upload/index.js',
       'ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
+      'angular2-disqus': 'node_modules/angular2-disqus/lib',
       // other libraries
       'rxjs':                       'npm:rxjs',
     },
@@ -38,6 +39,7 @@
         defaultExtension: 'js'
       },
       'angular-sortablejs': { main: 'index.js', defaultExtension: 'js' },
+      'angular2-disqus': { main: 'disqus.module.js', defaultExtension: 'js' },
       rxjs: {
         defaultExtension: 'js'
       }

@@ -1,4 +1,5 @@
 import {Ng2PageScrollModule,PageScrollService} from 'ng2-page-scroll';
+import { DisqusModule } from 'angular2-disqus';
 import './rxjs-extemtions';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -87,8 +88,10 @@ enableProdMode();
             FormsModule,
             ReactiveFormsModule,
             HttpModule,
-            Ng2PageScrollModule.forRoot()],
-    declarations:[LayoutEditor,
+            Ng2PageScrollModule.forRoot(),
+            DisqusModule],
+    declarations:[pages.AboutDeniss,
+LayoutEditor,
                     AgencyNavComponent,
                     Error404Component,
                     TitlePageComponent,

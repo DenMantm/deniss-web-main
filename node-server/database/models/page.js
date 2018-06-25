@@ -18,6 +18,7 @@ var pageData = mongoose.Schema({
 
 var Page = mongoose.Schema({
     blog:Object,
+    snippet:Object,
     title:String,
     includeInNav:Boolean,
     pageName : String,
