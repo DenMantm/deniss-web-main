@@ -2,12 +2,12 @@
   "name": "node-angular2-start",
   "version": "1.0.0",
   "scripts": {
-    "start": "node node-server/server.js",
+    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run server\" ",
     "server": "node node-server/server.js",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "s": "tsc && concurrently \"npm run tsc:w\" \"npm run server\" ",
-    "postinstall": "npm run tsc",
+    "postinstall": "tsc",
     "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\"",
     "test-once": "tsc && karma start karma.conf.js --single-run"
   },
